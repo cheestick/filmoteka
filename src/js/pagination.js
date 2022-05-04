@@ -25,10 +25,3 @@ const optionsPagination = {
 export const buildPagination = new Pagination('pagination-container', optionsPagination);
 instance.getCurrentPage();
 
-// pagination.on('beforeMove', function(eventData) {
-//     return confirm('Go to page ' + eventData.page + '?');
-// });
-
-// pagination.on('afterMove', function(eventData) {
-//     alert('The current page is ' + eventData.page);
-// });
