@@ -39,3 +39,29 @@ color: #FFFFFF;
     color: #000000;
    list-style-type: none;
 }
+.tui-page-btn .tui-ico-first, 
+.tui-page-btn .tui-ico-last {
+    display: none;
+    width: 0px;
+    height: 0px; 
+}
+.tui-ico-prev, 
+.tui-ico-first {
+    overflow: hidden;
+  }
+.pagination .tui-ico-prev {
+    width: 16px;
+    height: 16px;
+    background: url('../images/pagination/arrow-left.svg') center;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0px;
+  }
+  .pagination .tui-ico-next {
+    width: 16px;
+    height: 16px;
+    background: url('../images/pagination/arrow-right.svg') center;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0px;
+  }
