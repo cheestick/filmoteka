@@ -9,6 +9,16 @@ const filmsApiService = new FilmsApiService();
 
 refs.homeButton.addEventListener('click', onClick);
 
+// window.onload = () => {
+//     filmsApiService
+//     .fetchArticles()
+//     .then(renderFilms)
+//     .catch(error => {
+//       console.log(error);
+//       return;
+//     });
+// };
+
 function onClick(event) {
   event.preventDefault();
   filmsApiService
