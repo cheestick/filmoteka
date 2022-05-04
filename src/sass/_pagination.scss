@@ -4,7 +4,7 @@ a {
 
 .pagination {
   display: flex;
-  width: 400px;
+  width: 374px;
   align-items: center;
   justify-content: space-between;
   margin-top: 60px;
@@ -42,17 +42,30 @@ color: #FFFFFF;
     color: #000000;
    list-style-type: none;
 }
-.tui-page-btn .tui-ico-first, 
-.tui-page-btn .tui-ico-last {
+.tui-ico-first, 
+ .tui-ico-last {
     display: none;
     width: 0px;
     height: 0px; 
 }
+.tui-first,
+.tui-last {
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    margin: -1px;
+  }
 .tui-ico-prev, 
 .tui-ico-first {
     overflow: hidden;
   }
-.pagination .tui-ico-prev {
+.tui-ico-prev {
     width: 16px;
     height: 16px;
     background: url('../images/pagination/arrow-left.svg') center;
@@ -60,7 +73,7 @@ color: #FFFFFF;
     vertical-align: middle;
     font-size: 0px;
   }
-  .pagination .tui-ico-next {
+.tui-ico-next {
     width: 16px;
     height: 16px;
     background: url('../images/pagination/arrow-right.svg') center;
