@@ -1,14 +1,14 @@
-%img {
-    display: block;
-}
-
-
-img:hover {
-    @extend %img;
+%hover-effects {
     transform: scale(1.1);
     transition-duration: $time;
     transition-timing-function: $cubic;
 }
+
+
+img:hover {
+    @extend %hover-effects
+}
+
 
 
 .visually-hidden {
@@ -25,16 +25,8 @@ img:hover {
 }
 
 
-%hoover {
-    display: block;
-}
-
-
 .hoover:hover {
-    @extend %hoover;
-        transform: scale(1.1);
-        transition-duration: $time;
-        transition-timing-function: $cubic;
+    @extend %hover-effects;
 }
 
         
