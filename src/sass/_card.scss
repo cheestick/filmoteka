@@ -1,0 +1,64 @@
+.main-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: $modal-window-background-color;
+}
+
+.main-gallery-lisnichyi {
+   display: flex;
+   flex-wrap: wrap;
+   margin: -8px;
+}
+.card__container {
+    height: 489px;
+    width: 309px;
+    margin: 8px;
+    
+    // width: calc((100% - 64px - 2*16.5px) /3 );
+    border-radius: 5px;
+
+    @media screen and (max-width: 767px) {
+        height: 443px;
+        width: 280px;
+    }
+
+    @media screen and (max-width: 1023px) {
+    height: 494px;
+    width: 336px;
+    }
+}
+
+.card__picture {
+    width: 309px;
+    height: 449px;
+    border-radius: 5px;
+
+    @media screen and (max-width: 767px) {
+        width: 280px;
+        height: 402px;
+    }
+
+    @media screen and (max-width: 1023px) {
+        width: 336px;
+        height: 455px;
+    }
+
+}
+
+.card__title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+
+    color: #000000;
+
+    &--name {
+        text-transform: uppercase;
+    }
+
+    &--genres {
+        color: #FF6B08;
+    }
+}
