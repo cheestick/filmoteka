@@ -89,4 +89,4 @@ module.exports=require("./lib/axios");
 },{"tui-pagination":"jPMh","axios":"dZBD"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/pagination");
 },{"./sass/main.scss":"clu1","./js/pagination":"o8lo"}]},{},["Focm"], null)
-//# sourceMappingURL=/filmoteka/src.8cadcce6.js.map
+//# sourceMappingURL=/filmoteka/src.013aca86.js.map
