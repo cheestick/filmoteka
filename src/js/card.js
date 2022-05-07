@@ -1,6 +1,7 @@
 //  backdrop_path  original_title release_date   genres (array[objects])
+import Pagination from 'tui-pagination';
 import FilmsApiService from './fetch';
-
+import {buildPagination, totalPages} from './pagination'
 const refs = {
   buildFilmGallery: document.querySelector('.buildFilmGallery'),
   filmsGalleyDiv: document.querySelector('.main-gallery-lisnichyi'),
@@ -13,7 +14,9 @@ refs.buildFilmGallery.addEventListener('click', onClick);
 window.onload = () => {
   filmsApiService
     .fetchArticles()
-    .then(makeFilmCard)
+    .then(res=> 
+      {makeFilmCard(res);
+      totalPages(res);})
     .catch(error => {
       console.log(error);
       return;
@@ -25,14 +28,16 @@ function onClick(event) {
   // window.location.href = '/';
   filmsApiService
     .fetchArticles()
-    .then(makeFilmCard)
+    .then(res=> 
+      {makeFilmCard(res);
+      totalPages(res);})
     .catch(error => {
       console.log(error);
       return;
     });
 }
 
-function makeFilmCard(films) {
+export function makeFilmCard(films) {
   const markup = films.data.results
     .map(({ poster_path, original_title, release_date, genre_ids }) => {
       if (genre_ids.length <= 2) {
