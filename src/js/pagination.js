@@ -1,31 +1,10 @@
 import Pagination from 'tui-pagination';
-// import { refs , renderFilms } from './main-raduka';
+import { refs , makeFilmCard } from './card';
 import axios from 'axios';
 
-const refs = {
-  homeButton: document.querySelector('.submitHomeButton'),
-  filmsGalleyDiv: document.querySelector('.main_filmsGallery-raduka'),
-};
-function renderFilms(films) {
-  const markup = films.data.results
-    .map(({ poster_path, original_title, release_date, genre_ids }) => {
-      console.log(original_title, poster_path, release_date, genre_ids);
-      return `
-        <div class="film__container">
-    <img class="gallery__image" src="https://image.tmdb.org/t/p/h100/${poster_path}" alt="${original_title}" />
-    <span>${original_title}</span>
-    <span>${release_date}</span>
-    <span>${genre_ids}</span>
-    </div>
-        `;
-    })
-    .join('');
-
-  refs.filmsGalleyDiv.insertAdjacentHTML('beforeend', markup);
-}
 // построение пагинации
 const optionsPagination = {
-  totalItems: 500,
+  totalItems: 0,
   itemsPerPage: 20,
   visiblePages: 5,
   page: 1,
@@ -46,7 +25,7 @@ const optionsPagination = {
       '</a>',
   },
 };
-// buildPagination.reset(100);
+
 const buildPagination = new Pagination('pagination-container', optionsPagination);
 
 // const paginationPage = buildPagination.getCurrentPage();
@@ -64,9 +43,9 @@ export function totalPages(total) {
 export function currentNextPagePagination() {
   buildPagination.on('afterMove', event => {
     const nextCurrentPage = event.page;
-    document.querySelector('.main_filmsGallery-raduka').innerHTML = '';
+    document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
     raitingFilms(nextCurrentPage)
-      .then(renderFilms)
+      .then(makeFilmCard)
       .catch(error => {
         console.log(error);
         return;
