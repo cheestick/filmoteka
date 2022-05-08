@@ -1,55 +1,60 @@
 import Pagination from 'tui-pagination';
-// import { refs , renderFilms } from './main-raduka';
+import { refs, makeFilmCard } from './card';
 import axios from 'axios';
-
-const refs = {
-  homeButton: document.querySelector('.submitHomeButton'),
-  filmsGalleyDiv: document.querySelector('.main_filmsGallery-raduka'),
-};
-function renderFilms(films) {
-  const markup = films.data.results
-    .map(({ poster_path, original_title, release_date, genre_ids }) => {
-      console.log(original_title, poster_path, release_date, genre_ids);
-      return `
-        <div class="film__container">
-    <img class="gallery__image" src="https://image.tmdb.org/t/p/h100/${poster_path}" alt="${original_title}" />
-    <span>${original_title}</span>
-    <span>${release_date}</span>
-    <span>${genre_ids}</span>
-    </div>
-        `;
-    })
-    .join('');
-
-  refs.filmsGalleyDiv.insertAdjacentHTML('beforeend', markup);
-}
+let lastPage;
+let totalPagesOn;
 // построение пагинации
-const optionsPagination = {
-  totalItems: 500,
-  itemsPerPage: 20,
-  visiblePages: 5,
-  page: 1,
-  template: {
-    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-    moveButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</a>',
-    disabledMoveButton:
-      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</span>',
-    moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-      '<span class="tui-ico-ellip">...</span>' +
-      '</a>',
-  },
-};
-// buildPagination.reset(100);
-const buildPagination = new Pagination('pagination-container', optionsPagination);
 
-// const paginationPage = buildPagination.getCurrentPage();
+export function formPagination(last, totalPagesOn) {
+  let buildPagination = new Pagination('pagination-container', {
+    totalItems: totalPagesOn,
+    itemsPerPage: 20,
+    visiblePages: 5,
+    centerAlign: true,
+    lastItemClassName: 'last-child-tui',
+    template: {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage: '<span class="tui-page-btn tui-is-selected">{{page}}</span>',
+      moveButton: ({ type }) => {
+        lastPage = last;
+
+        let template = ' ';
+
+        if (type === 'next') {
+          template =
+            '<a href="#" id="next" data-type="next" class="arrow-btn"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.333 8h9.334M8 12.667 12.667 8 8 3.333" stroke="#000" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"/></svg></a>';
+        }
+
+        if (type === 'prev') {
+          template =
+            '<a href="#" data-type="prev" class="arrow-btn"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.667 8H3.333M8 12.667 3.333 8 8 3.333" stroke="#000" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"/></svg></a>';
+        }
+
+        if (type === 'last') {
+          template = `<a data-type="last" class="inner-page-number">${lastPage}</a>`;
+        }
+        if (type === 'first') {
+          if (true) {
+          }
+          template = `<a data-type="first" class="inner-page-number">1</a>`;
+        }
+        return template;
+      },
+    },
+  });
+
+  buildPagination.on('afterMove', event => {
+    const nextCurrentPage = event.page;
+    document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+    raitingFilms(nextCurrentPage)
+      .then(makeFilmCard)
+      .catch(error => {
+        console.log(error);
+        return;
+      });
+  });
+}
+
 function raitingFilms(nextCurrentPage) {
   return axios.get(
     `https://api.themoviedb.org/3/trending/movie/day?api_key=ad8c6c4dd7f8a685c9c739255442ccd5&page=${nextCurrentPage}`,
@@ -57,20 +62,8 @@ function raitingFilms(nextCurrentPage) {
 }
 
 // получения тотал обьектов
-export function totalPages(total) {
-  buildPagination.reset(total.data.total_results);
+export function buildPaginationSection(total) {
+  totalPagesOn = total.data.total_results;
+  lastPage = total.data.total_pages;
+  formPagination(lastPage, totalPagesOn);
 }
-// передача следующего номера страницы + рендер страницы
-export function currentNextPagePagination() {
-  buildPagination.on('afterMove', event => {
-    const nextCurrentPage = event.page;
-    document.querySelector('.main_filmsGallery-raduka').innerHTML = '';
-    raitingFilms(nextCurrentPage)
-      .then(renderFilms)
-      .catch(error => {
-        console.log(error);
-        return;
-      });
-  });
-}
-currentNextPagePagination();

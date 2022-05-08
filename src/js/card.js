@@ -1,7 +1,8 @@
 //  backdrop_path  original_title release_date   genres (array[objects])
-import FilmsApiService from './fetch-raduka';
-import GetGenres from './getGenres';
+import Pagination from 'tui-pagination';
+import FilmsApiService from './fetch';
 
+import { buildPagination, buildPaginationSection, firstPage } from './pagination';
 const refs = {
   buildFilmGallery: document.querySelector('.buildFilmGallery'),
   filmsGalleyDiv: document.querySelector('.main-gallery-lisnichyi'),
@@ -9,28 +10,46 @@ const refs = {
 };
 
 const filmsApiService = new FilmsApiService();
-const getGenres = new GetGenres();
+const getGenres = filmsApiService.Genres().then(res => console.log('results', res));
 
-getGenres.Genres().then(res => console.log('results', res));
+// getGenres.then(res => console.log('results', res));
 
 refs.buildFilmGallery.addEventListener('click', onClick);
 
-function onClick(event) {
-  event.preventDefault();
+window.onload = () => {
   filmsApiService
     .fetchArticles()
-    .then(makeFilmCard)
+    .then(res => {
+      makeFilmCard(res);
+      buildPaginationSection(res);
+    })
+    .catch(error => {
+      console.log(error);
+      return;
+    });
+};
+
+function onClick(event) {
+  event.preventDefault();
+  // window.location.href = '/';
+  document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+  filmsApiService
+    .fetchArticles()
+    .then(res => {
+      makeFilmCard(res);
+      buildPaginationSection(res);
+    })
     .catch(error => {
       console.log(error);
       return;
     });
 }
 
-function makeFilmCard(films) {
-  const markup = films.data.results.map(
-    ({ poster_path, original_title, release_date, genre_ids, id, vote_average }) => {
-        if (genre_ids.length <=2) {
-                 return `
+export function makeFilmCard(films) {
+  const markup = films.data.results
+    .map(({ poster_path, original_title, release_date, genre_ids, id, vote_average }) => {
+      if (genre_ids.length <= 2) {
+        return `
         <li class="card__container">
     <img
       class="card__picture"
@@ -39,13 +58,11 @@ function makeFilmCard(films) {
       alt="${original_title}"
     />
       <p class="card__title"><span class="card__title--name"> ${original_title}</span>
-     <span class="card__title--genres">${genre_ids[0]},${genre_ids[1]}| ${release_date}  <span class="card__filmRaiting"> ${vote_average }</span></span>
-      
+     <span class="card__title--genres">${genre_ids[0]},${genre_ids[1]}&nbsp|&nbsp${release_date}  <span class="card__filmRaiting">${vote_average}</span></span>
      </p>
-        </li>`
-        }
-        else {
-                return `
+        </li>`;
+      } else {
+        return `
         <li class="card__container">
     <img
       class="card__picture"
@@ -54,11 +71,11 @@ function makeFilmCard(films) {
       alt="${original_title}"
     /> 
     <p class="card__title"><span class="card__title--name"> ${original_title}</span>
-     <span class="card__title--genres">${genre_ids[0]},${genre_ids[1]}, Other | ${release_date}  <span class="card__filmRaiting"> ${vote_average }</span></span>
-    
+     <span class="card__title--genres">${genre_ids[0]},${genre_ids[1]}, Other | ${release_date}  <span class="card__filmRaiting"> ${vote_average}</span></span>
      </p>
-        </li>`
-        }
-      }).join(" ");
-    refs.filmsGalleyDiv.insertAdjacentHTML('beforeend', markup);
+        </li>`;
+      }
+    })
+    .join(' ');
+  refs.filmsGalleyDiv.insertAdjacentHTML('beforeend', markup);
 }
