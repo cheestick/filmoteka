@@ -1,9 +1,13 @@
 export default class LocalStorageApi {
   setStorage() {
-    localStorage.setItem('watched', JSON.stringify([]));
-    localStorage.setItem('queue', JSON.stringify([]));
-    localStorage.setItem('all', JSON.stringify([]));
+    if (localStorage.getItem('watched') == null) {
+      localStorage.setItem('watched', JSON.stringify([]));
+    }
+    if (localStorage.getItem('queue') == null) {
+      localStorage.setItem('queue', JSON.stringify([]));
+    }
     localStorage.setItem('modalFilmInfo', JSON.stringify([]));
+    localStorage.setItem('all', JSON.stringify([]));
   }
 
   saveToAll(value) {
