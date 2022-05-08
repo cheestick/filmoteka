@@ -6,28 +6,28 @@
     font-family: 'Roboto', sans-serif;
 
     @media screen and (max-width:480px) {
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
         url(../images/bg-header/background_mobile@1x.png);
         
         @media screen and (max-width:480px) and (min-device-pixel-ratio:2), (min-resolution: 2dppx) {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
             url(../images/bg-header/background_mobile@2x.png);
         }
     }
     @media screen and (min-width: 768px) and (max-width: 1280px) {
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
         url(../images/bg-header/background@1x.png);
     
         @media screen and (min-device-pixel-ratio:2), (min-resolution: 2dppx) {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
             url(../images/bg-header/background@2x.png);
         }
     }
     @media screen and (min-width: 321px) and (max-width: 769px) {
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
             url(../images/bg-header/background_tablet@1x.png);
         @media screen and (min-device-pixel-ratio:2) {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
             url(../images/bg-header/background_tablet@2x.png)
         }
 }
@@ -103,3 +103,4 @@
 // }
 // .btn-search-icon {
 // }
+}
