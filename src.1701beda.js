@@ -93,4 +93,4 @@ module.exports=require("./lib/axios");
 },{"tui-pagination":"jPMh","./card":"efGe","axios":"dZBD"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/pagination");
 },{"./sass/main.scss":"clu1","./js/pagination":"o8lo"}]},{},["Focm"], null)
-//# sourceMappingURL=/filmoteka/src.d5506fa1.js.map
+//# sourceMappingURL=/filmoteka/src.1701beda.js.map
