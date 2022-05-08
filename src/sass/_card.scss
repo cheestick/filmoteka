@@ -5,44 +5,57 @@
 }
 
 .main-gallery-lisnichyi {
-   display: flex;
-   flex-wrap: wrap;
-   margin: -8px;
+    @media screen and(max-width: 767px){
+       
+    }
+    @media screen and (min-width: 768px) {
+        display: flex;
+            flex-wrap: wrap;
+            margin: -16px;
+        }
+    @media screen and (min-width: 1024px){
+             display: flex;
+            flex-wrap: wrap;
+            margin: -8px;
+    }
 }
 .card__container {
-    height: 489px;
-    width: 309px;
-    margin: 8px;
-    
-    // width: calc((100% - 64px - 2*16.5px) /3 );
     border-radius: 5px;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (min-width: 320px) {
         height: 443px;
         width: 280px;
+        margin-bottom: 20px;
     }
-
-    @media screen and (max-width: 1023px) {
-    height: 494px;
+    @media screen and (min-width: 768px) {
+    height: 495px;
     width: 336px;
+    margin: 16px;
+    }
+    @media screen and (min-width: 1024px){
+             height: 489px;
+            width: 309px;
+            margin: 8px;
+            margin-bottom: 16px;
     }
 }
 
 .card__picture {
-    width: 309px;
-    height: 449px;
+   
     border-radius: 5px;
-
-    @media screen and (max-width: 767px) {
+    margin-bottom: 8px;
+    @media screen and (min-width: 320px) {
         width: 280px;
         height: 402px;
     }
-
-    @media screen and (max-width: 1023px) {
+    @media screen and (min-width: 768px) {
         width: 336px;
         height: 455px;
     }
-
+    @media screen and (min-width: 1024px){
+        width: 309px;
+            height: 449px;    
+    }
 }
 
 .card__title {
@@ -52,13 +65,29 @@
     font-size: 12px;
     line-height: 1.33;
 
-    color: #000000;
-
+    color: $body-text-color;
+    display: inline-block;
+    height: 32px;
+    display: flex;
+    flex-direction: column;
     &--name {
         text-transform: uppercase;
     }
 
     &--genres {
-        color: #FF6B08;
+        color: $accent-background;
     }
+    // @media screen and (min-width: 320px){
+    //     margin-bottom: 20px;
+    // }
+}
+.card__filmRaiting{
+color: $header-text-color;
+background-color: $accent-background;
+display: inline-block;
+text-align: center;
+height: 16px;
+width: 36px;
+border-radius: 5px;
+margin-left: 8px;
 }
