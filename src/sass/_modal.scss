@@ -1,0 +1,325 @@
+.backdrop {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 0.3s all;
+}
+
+.modal {
+  opacity: 0;
+  visibility: hidden;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+
+  background-color: #fff;
+  box-shadow: 0 3px 10px -0.5px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  border-radius: 3px;
+  transition: 0.3s all;
+
+  @media (min-width: 320px) {
+    width: 280px;
+  }
+  @media (min-width: 768px) and(max-width:1023px) {
+    width: 704px;
+    height: 552px;
+  }
+  @media (min-width: 1024px) {
+    width: 814px;
+    height: 558px;
+  }
+
+  // animation: animate75 3000ms;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.close-modal {
+  width: 25px;
+  height: 25px;
+
+  fill: #444;
+  cursor: pointer;
+}
+
+.modal.active,
+.backdrop.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.pictureThumb {
+  //   height: 478px;
+  //   width: 375px;
+  @media (min-width: 320px) {
+    width: 240px;
+  }
+  @media (min-width: 768px) and(max-width:1023px) {
+    width: 264px;
+    max-height: 375px;
+  }
+  @media (min-width: 1024px) {
+    max-height: 478px;
+    width: 375px;
+  }
+}
+.film-picture {
+  margin-top: 24px;
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.film-info {
+  //   @media (min-width: 320px) {
+  //     width: 240px;
+  //   }
+  @media (min-width: 768px) {
+    display: flex;
+  }
+}
+.infoThumb {
+  margin-left: 16px;
+  margin-top: 24px;
+  @media (min-width: 768px) and(max-width:1023px) {
+    width: 50%;
+    margin-left: auto;
+  }
+}
+.infoStatistic {
+  display: flex;
+  padding-top: 20px;
+}
+.filmTitle {
+  font-weight: 500;
+  //   @media (min-width: 320px) {
+  //   }(min-width: 768px) and
+  @media (max-width: 1023px) {
+    font-size: 20px;
+    line-height: 1.15;
+  }
+  @media (min-width: 1024px) {
+    font-size: 30px;
+    line-height: 1.67;
+  }
+}
+.statTitle {
+  line-height: 1.33;
+  color: #8c8c8c;
+  margin-bottom: 8px;
+}
+.statDataThumb {
+  margin-left: 80px;
+}
+.statData {
+  line-height: 1.33;
+  margin-bottom: 8px;
+}
+.spanAccent {
+  background: #ff6b01;
+  color: #fff;
+  border-radius: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.span {
+  padding-left: 7px;
+}
+.aboutTitle {
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+.aboutText {
+  line-height: 1.67;
+}
+.buttonThumb {
+  margin-top: 20px;
+}
+.modalButton {
+  margin-left: 16px;
+  height: 44px;
+  width: 136px;
+  outline: none;
+  border-radius: 5px;
+  font-weight: 500;
+  line-height: 1.33;
+  text-transform: uppercase;
+  background-color: #fff;
+}
+.accentBtn {
+  color: #ffffff;
+  background-color: #ff6b01;
+  border: #ff6b01;
+}
+
+// @keyframes animate75 {
+//     50% {
+//         transform: scale(0.75);
+//     }
+
+//     0% {
+//         transform: scale(1);
+//     }
+// }
+
+// .menu__close-menu {
+//     width: 15px;
+//     height: 15px;
+//     position: absolute;
+//     top: 20px;
+//     right: 20px;
+//     fill: #444;
+//     cursor: pointer;
+//     z-index: 35;
+// }
+
+/* Стили для активных классов подложки и окна */
+
+/* Стили для кнопки закрытия */
+
+// .modal-window__message {
+//     font-family: 'DM Sans', sans-serif;
+//     color: var(--white-background-color);
+//     text-align: center;
+//     font-size: 20px;
+//     font-weight: 700;
+//     line-height: 1.15;
+//     margin-bottom: 10px;
+// }
+
+// @media screen and(max-width:480px) {
+//     .modal-window__content {
+//         padding: 8.3vw;
+//     }
+
+//     .modal-window__message {
+//         text-align: center;
+//         font-size: 4.2vw;
+//         line-height: 1.15;
+//         margin-bottom: 2.5vw;
+//     }
+// }
+
+// .modal-window__form {
+//     color: var(--light-text-color);
+//     font-size: 14px;
+//     font-weight: 700;
+//     position: relative;
+//     display: flex;
+//     flex-direction: column;
+//     margin-bottom: 10px;
+// }
+
+// .modal-window__form+.modal-window__form {
+//     margin-top: 10px;
+// }
+
+// .modal-window__input {
+//     background-color: var(--pink-background-color);
+//     height: 40px;
+//     border: 1px solid rgba(33, 33, 33, 0.2);
+//     border-radius: 4px;
+//     padding-left: 42px;
+//     outline: none;
+//     transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+//     &:focus,
+//     &:hover {
+//         border: 1px solid var(--brand-color);
+//     }
+
+//     &:focus~.modal-window__input-icon,
+//     &:hover~.modal-window__input-icon {
+//         fill: var(--brand-color);
+//     }
+// }
+
+// .modal-window__input-icon {
+//     position: absolute;
+//     bottom: 11px;
+//     left: 12px;
+//     fill: var(--light-text-color);
+// }
+
+// .modal-window__agree {
+//     color: var(--light-text-color);
+//     font-size: 12px;
+//     font-weight: 400;
+// }
+
+// .modal-window__link {
+//     color: var(--brand-color);
+//     text-decoration: underline;
+// }
+
+// .modal-window__agreement {
+//     margin-bottom: 30px;
+//     margin-top: 10px;
+// }
+
+// .menu__button-submit {
+//     display: block;
+//     margin: 0 auto 0 auto;
+// }
+
+// .modal-window__call {
+//     display: block;
+//     margin-bottom: 40px;
+//     font-size: 1.5rem;
+//     color: var(--brand-color);
+//     font-family: 'DM Sans', sans-serif;
+//     text-align: center;
+//     font-weight: 700;
+// }
+
+// .modal-window__choose-products {
+//     margin: 20px auto 0 auto;
+//     width: 200px;
+//     display: block;
+//     font-size: 18px;
+//     font-weight: 700;
+//     line-height: 1.15;
+//     text-align: center;
+//     color: var(--dark-text-color);
+
+//     border: 1px solid var(--light-text-color);
+//     border-radius: 11px;
+
+//     &:hover,
+//     &:focus {
+//         cursor: pointer;
+//     }
+// }
+
+// .modal-window__item {
+//     font-size: 16px;
+// }
+
+// .modal-window__price {
+//     color: var(--brand-color);
+// }
+
+// .modal-window__form-name {
+//     font-size: 12px;
+//     font-weight: 400;
+//     margin-bottom: 5px;
+// }

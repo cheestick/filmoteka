@@ -1,4 +1,3 @@
-
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 @import './utils/variables';
 @import './utils/_reset';
@@ -6,6 +5,7 @@
 @import './utils/aux-effects';
 @import './utils/button';
 @import './pagination';
-@import "./card";
+@import './card';
 @import './footer';
 @import './render-my-lib';
+@import './modal';
