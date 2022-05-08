@@ -1,5 +1,5 @@
 a {
-    text-decoration: none; 
+  text-decoration: none;
 }
 
 .pagination {
@@ -11,73 +11,64 @@ a {
   margin-bottom: 60px;
   margin-left: auto;
   margin-right: auto;
-  padding-left:0;
+  padding-left: 0;
   padding-right: 0;
 }
 
 .tui-is-selected {
   background: #ff6b08;
   border-radius: 5px;
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 16px;
-display: flex;
-align-items: center;
-justify-content: center;
-color: #FFFFFF;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
 }
-.tui-page-btn {
-    display: inline-flex;
-    width: 40px;
-    height: 40px;    
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;    
-    align-items: center;
-    justify-content: center;
-    color: #000000;
-   list-style-type: none;
-}
-.tui-ico-first, 
- .tui-ico-last {
-    display: none;
-    width: 0px;
-    height: 0px; 
+.tui-page-btn,
+.inner-page-number {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  list-style-type: none;
 }
 .tui-first,
 .tui-last {
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    border: 0;
-    padding: 0;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    margin: -1px;
-  }
-.tui-ico-prev, 
-.tui-ico-first {
-    overflow: hidden;
-  }
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+}
 .tui-ico-prev {
-    width: 16px;
-    height: 16px;
-    background: url('../images/pagination/arrow-left.svg') center;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0px;
-  }
+  width: 16px;
+  height: 16px;
+  background: url('../images/pagination/arrow-left.svg') center;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0px;
+}
 .tui-ico-next {
-    width: 16px;
-    height: 16px;
-    background: url('../images/pagination/arrow-right.svg') center;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0px;
-  }
+  width: 16px;
+  height: 16px;
+  background: url('../images/pagination/arrow-right.svg') center;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0px;
+}

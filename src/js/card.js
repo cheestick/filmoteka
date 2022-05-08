@@ -1,7 +1,7 @@
 //  backdrop_path  original_title release_date   genres (array[objects])
 import Pagination from 'tui-pagination';
 import FilmsApiService from './fetch';
-import {buildPagination, totalPages} from './pagination'
+import { buildPagination, buildPaginationSection, firstPage } from './pagination';
 const refs = {
   buildFilmGallery: document.querySelector('.buildFilmGallery'),
   filmsGalleyDiv: document.querySelector('.main-gallery-lisnichyi'),
@@ -14,9 +14,10 @@ refs.buildFilmGallery.addEventListener('click', onClick);
 window.onload = () => {
   filmsApiService
     .fetchArticles()
-    .then(res=> 
-      {makeFilmCard(res);
-      totalPages(res);})
+    .then(res => {
+      makeFilmCard(res);
+      buildPaginationSection(res);
+    })
     .catch(error => {
       console.log(error);
       return;
@@ -26,11 +27,13 @@ window.onload = () => {
 function onClick(event) {
   event.preventDefault();
   // window.location.href = '/';
+  document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
   filmsApiService
     .fetchArticles()
-    .then(res=> 
-      {makeFilmCard(res);
-      totalPages(res);})
+    .then(res => {
+      makeFilmCard(res);
+      buildPaginationSection(res);
+    })
     .catch(error => {
       console.log(error);
       return;
