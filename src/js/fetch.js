@@ -9,7 +9,6 @@ export default class FilmsApiService {
 
     if (!filmName) {
       return await axios.get(urlTrending).then(res => {
-        // console.log(res.data.total_results);
         if (!(res.status >= 200 && res.status < 300)) {
           throw Error(res.statusText);
         }
@@ -21,7 +20,6 @@ export default class FilmsApiService {
       const urlQuery = `${BASE_URL}search/movie${API_KEY}&query=${QUERY_VALUE}&page=1`;
 
       return await axios.get(urlQuery).then(res => {
-        // console.log(res.data.total_results);
         if (!(res.status >= 200 && res.status < 300)) {
           throw Error(res.statusText);
         }
@@ -42,14 +40,10 @@ export default class FilmsApiService {
   }
 
   async Genres() {
-    axios
-      .get(
-        'https://api.themoviedb.org/3/genre/movie/list?api_key=ad8c6c4dd7f8a685c9c739255442ccd5&language=en-US',
-      )
-      .then(res => {
-        const GENRES = res.data;
-        console.log(GENRES);
-        return GENRES;
-      });
+    axios.get(`${BASE_URL}genre/movie/list${API_KEY}&language=en-US`).then(res => {
+      const GENRES = res.data;
+      console.log(GENRES);
+      return GENRES;
+    });
   }
 }
