@@ -95,4 +95,4 @@ module.exports=require("./lib/axios");
 },{"./fetch":"spyz"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/pagination"),require("./js/modal");
 },{"./sass/main.scss":"clu1","./js/pagination":"o8lo","./js/modal":"RSqK"}]},{},["Focm"], null)
-//# sourceMappingURL=/filmoteka/src.0b854647.js.map
+//# sourceMappingURL=/filmoteka/src.ad3d17c4.js.map
