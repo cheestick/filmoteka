@@ -22,12 +22,16 @@ export function formPagination(last, totalPagesOn) {
 
         if (type === 'next') {
           template =
-            '<a href="#" id="next" data-type="next" class="arrow-btn"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.333 8h9.334M8 12.667 12.667 8 8 3.333" stroke="#000" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"/></svg></a>';
+            '<a href="#" class="tui-page-btn tui-next">' +
+            '<span class="tui-ico-next"></span>' +
+            '</a>';
         }
 
         if (type === 'prev') {
           template =
-            '<a href="#" data-type="prev" class="arrow-btn"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.667 8H3.333M8 12.667 3.333 8 8 3.333" stroke="#000" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"/></svg></a>';
+            '<a href="#" class="tui-page-btn tui-prev">' +
+            '<span class="tui-ico-prev"></span>' +
+            '</a>';
         }
 
         if (type === 'last') {

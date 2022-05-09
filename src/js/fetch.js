@@ -1,27 +1,38 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = '?api_key=ad8c6c4dd7f8a685c9c739255442ccd5';
 
+const axiosRequest = axios.create({
+  baseURL: 'https://api.themoviedb.org/3/',
+});
+
 export default class FilmsApiService {
+  async testFetch() {
+    return fetchTest(`trending/movie/day${API_KEY}&page=1`).then(res => {
+      if (!(res.status >= 200 && res.status < 300)) {
+        console.log(res);
+        throw Error(res.statusText);
+      }
+      return res;
+    });
+  }
+
   async fetchArticles(filmName) {
-    const urlTrending = `${BASE_URL}trending/movie/day${API_KEY}&page=1`;
+    const urlTrending = `trending/movie/day${API_KEY}&page=1`;
 
     if (!filmName) {
-      return await axios.get(urlTrending).then(res => {
-        // console.log(res.data.total_results);
+      return await axiosRequest(urlTrending).then(res => {
         if (!(res.status >= 200 && res.status < 300)) {
           throw Error(res.statusText);
         }
         return res;
       });
     } else {
-      console.log(filmName);
+      // console.log(filmName);
       const QUERY_VALUE = filmName;
-      const urlQuery = `${BASE_URL}search/movie${API_KEY}&query=${QUERY_VALUE}&page=1`;
+      const urlQuery = `search/movie${API_KEY}&query=${QUERY_VALUE}&page=1`;
 
-      return await axios.get(urlQuery).then(res => {
-        // console.log(res.data.total_results);
+      return await axiosRequest(urlQuery).then(res => {
         if (!(res.status >= 200 && res.status < 300)) {
           throw Error(res.statusText);
         }
@@ -31,9 +42,9 @@ export default class FilmsApiService {
   }
 
   async fetchFilmInfo(filmId) {
-    const urlQuery = `${BASE_URL}movie/${filmId}${API_KEY}&language=en-US`;
+    const urlQuery = `movie/${filmId}${API_KEY}&language=en-US`;
 
-    return await axios.get(urlQuery).then(res => {
+    return await axiosRequest(urlQuery).then(res => {
       if (!(res.status >= 200 && res.status < 300)) {
         throw Error(res.statusText);
       }
@@ -42,14 +53,9 @@ export default class FilmsApiService {
   }
 
   async Genres() {
-    return axios
-      .get(
-        'https://api.themoviedb.org/3/genre/movie/list?api_key=ad8c6c4dd7f8a685c9c739255442ccd5&language=en-US',
-      )
-      .then(res => {
-        const GENRES = res.data;
-        console.log(GENRES);
-        return GENRES;
-      });
+    axiosRequest(`genre/movie/list${API_KEY}&language=en-US`).then(res => {
+      const GENRES = res.data.genres;
+      localStorage.setItem('GenresArray', JSON.stringify(GENRES));
+    });
   }
 }
