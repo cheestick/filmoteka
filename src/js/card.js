@@ -5,13 +5,20 @@ import { buildPagination, buildPaginationSection, firstPage } from './pagination
 const refs = {
   buildFilmGallery: document.querySelector('.buildFilmGallery'),
   filmsGalleyDiv: document.querySelector('.main-gallery-lisnichyi'),
+  GenresArray: [],
 };
+
+localStorage.setItem('GenresArray', JSON.stringify(refs.GenresArray));
 
 const filmsApiService = new FilmsApiService();
 
 refs.buildFilmGallery.addEventListener('click', onClick);
 
 window.onload = () => {
+  if ((refs.GenresArray = [])) {
+    filmsApiService.Genres();
+  }
+
   filmsApiService
     .fetchArticles()
     .then(res => {
