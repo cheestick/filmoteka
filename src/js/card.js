@@ -6,8 +6,10 @@ import { buildPagination, buildPaginationSection, firstPage } from './pagination
 const refs = {
   buildFilmGallery: document.querySelector('.buildFilmGallery'),
   filmsGalleyDiv: document.querySelector('.main-gallery-lisnichyi'),
-  // input:document.querySelector("#search-box")
+  GenresArray: [],
 };
+
+localStorage.setItem('GenresArray', JSON.stringify(refs.GenresArray));
 
 const filmsApiService = new FilmsApiService();
 const getGenres = filmsApiService.Genres().then(res => console.log('results', res));
@@ -17,6 +19,10 @@ const getGenres = filmsApiService.Genres().then(res => console.log('results', re
 refs.buildFilmGallery.addEventListener('click', onClick);
 
 window.onload = () => {
+  if ((refs.GenresArray = [])) {
+    filmsApiService.Genres();
+  }
+
   filmsApiService
     .fetchArticles()
     .then(res => {
