@@ -87,7 +87,7 @@
   width: 100%;
   object-fit: cover;
 }
-.film-info {
+.modal-thumb {
   //   @media (min-width: 320px) {
   //     width: 240px;
   //   }
@@ -98,7 +98,7 @@
 .infoThumb {
   margin-left: 16px;
   margin-top: 24px;
-  @media (min-width: 768px) and(max-width:1023px) {
+  @media (min-width: 768px) {
     width: 50%;
     margin-left: auto;
   }
@@ -171,155 +171,43 @@
   border: #ff6b01;
 }
 
-// @keyframes animate75 {
-//     50% {
-//         transform: scale(0.75);
-//     }
+.test {
+  outline: red solid 1px;
+  width: 300px;
+  height: 300px;
+}
+.team-member-photo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  // height: 100%;
+}
+.team-member-name {
+  margin-bottom: 10px;
+}
+.team-member-position {
+  margin-bottom: 10px;
+}
 
-//     0% {
-//         transform: scale(1);
-//     }
-// }
-
-// .menu__close-menu {
-//     width: 15px;
-//     height: 15px;
-//     position: absolute;
-//     top: 20px;
-//     right: 20px;
-//     fill: #444;
-//     cursor: pointer;
-//     z-index: 35;
-// }
-
-/* Стили для активных классов подложки и окна */
-
-/* Стили для кнопки закрытия */
-
-// .modal-window__message {
-//     font-family: 'DM Sans', sans-serif;
-//     color: var(--white-background-color);
-//     text-align: center;
-//     font-size: 20px;
-//     font-weight: 700;
-//     line-height: 1.15;
-//     margin-bottom: 10px;
-// }
-
-// @media screen and(max-width:480px) {
-//     .modal-window__content {
-//         padding: 8.3vw;
-//     }
-
-//     .modal-window__message {
-//         text-align: center;
-//         font-size: 4.2vw;
-//         line-height: 1.15;
-//         margin-bottom: 2.5vw;
-//     }
-// }
-
-// .modal-window__form {
-//     color: var(--light-text-color);
-//     font-size: 14px;
-//     font-weight: 700;
-//     position: relative;
-//     display: flex;
-//     flex-direction: column;
-//     margin-bottom: 10px;
-// }
-
-// .modal-window__form+.modal-window__form {
-//     margin-top: 10px;
-// }
-
-// .modal-window__input {
-//     background-color: var(--pink-background-color);
-//     height: 40px;
-//     border: 1px solid rgba(33, 33, 33, 0.2);
-//     border-radius: 4px;
-//     padding-left: 42px;
-//     outline: none;
-//     transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-//     &:focus,
-//     &:hover {
-//         border: 1px solid var(--brand-color);
-//     }
-
-//     &:focus~.modal-window__input-icon,
-//     &:hover~.modal-window__input-icon {
-//         fill: var(--brand-color);
-//     }
-// }
-
-// .modal-window__input-icon {
-//     position: absolute;
-//     bottom: 11px;
-//     left: 12px;
-//     fill: var(--light-text-color);
-// }
-
-// .modal-window__agree {
-//     color: var(--light-text-color);
-//     font-size: 12px;
-//     font-weight: 400;
-// }
-
-// .modal-window__link {
-//     color: var(--brand-color);
-//     text-decoration: underline;
-// }
-
-// .modal-window__agreement {
-//     margin-bottom: 30px;
-//     margin-top: 10px;
-// }
-
-// .menu__button-submit {
-//     display: block;
-//     margin: 0 auto 0 auto;
-// }
-
-// .modal-window__call {
-//     display: block;
-//     margin-bottom: 40px;
-//     font-size: 1.5rem;
-//     color: var(--brand-color);
-//     font-family: 'DM Sans', sans-serif;
-//     text-align: center;
-//     font-weight: 700;
-// }
-
-// .modal-window__choose-products {
-//     margin: 20px auto 0 auto;
-//     width: 200px;
-//     display: block;
-//     font-size: 18px;
-//     font-weight: 700;
-//     line-height: 1.15;
-//     text-align: center;
-//     color: var(--dark-text-color);
-
-//     border: 1px solid var(--light-text-color);
-//     border-radius: 11px;
-
-//     &:hover,
-//     &:focus {
-//         cursor: pointer;
-//     }
-// }
-
-// .modal-window__item {
-//     font-size: 16px;
-// }
-
-// .modal-window__price {
-//     color: var(--brand-color);
-// }
-
-// .modal-window__form-name {
-//     font-size: 12px;
-//     font-weight: 400;
-//     margin-bottom: 5px;
-// }
+.team-cards-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.team-cards-item {
+  // height: 150px;
+  width: 150px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  text-align: center;
+}
+.link-icon-list {
+  display: flex;
+  // width: 100%;
+  justify-content: space-evenly;
+}
+.link-icon {
+  width: 15px;
+  height: 15px;
+  fill: #444;
+}
