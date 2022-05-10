@@ -13,15 +13,13 @@ function newOptionsPagination(last, totalPagesOn, itemsPages) {
     itemsPerPage: itemsPages,
     visiblePages: 5,
     centerAlign: true,
-    lastItemClassName: 'last-child-tui',
+    // lastItemClassName: 'last-child-tui',
     template: {
       page: '<a href="#" class="tui-page-btn">{{page}}</a>',
       currentPage: '<span class="tui-page-btn tui-is-selected">{{page}}</span>',
       moveButton: ({ type }) => {
         lastPage = last;
-
         let template = ' ';
-
         if (type === 'next') {
           template =
             '<a href="#" class="tui-page-btn tui-next">' +
@@ -40,8 +38,6 @@ function newOptionsPagination(last, totalPagesOn, itemsPages) {
           template = `<a data-type="last" class="inner-page-number">${lastPage}</a>`;
         }
         if (type === 'first') {
-          if (true) {
-          }
           template = `<a data-type="first" class="inner-page-number">1</a>`;
         }
         return template;
