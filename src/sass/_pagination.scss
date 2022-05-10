@@ -55,8 +55,7 @@ a {
   cursor: pointer;
 }
 .tui-page-btn + .tui-is-selected,
-.tui-page-btn,
-.inner-page-number {
+.tui-next, .tui-prev {
   &:hover,
   &:focus {
     border: 1px solid #ff6b08;
