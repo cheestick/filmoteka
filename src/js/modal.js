@@ -1,11 +1,21 @@
 import FilmsApiService from './fetch';
+import ourTeam from '../data/team.json';
+import svg from '../images/sprite.svg';
 
 const filmsApiService = new FilmsApiService();
 
-document.querySelector('.main-section').addEventListener('click', onCardClick);
+
+const cardContainer = document.querySelector('.main-gallery-lisnichyi');
+cardContainer.addEventListener('click', onCardClick);
+
 function onCardClick(e) {
+  if (!e) {
+    showModal();
+    return;
+  }
   if (e.target !== e.currentTarget) {
     showModal(e.target.getAttribute('filmId'));
+    // showModal(e.target.closest('.card__container').getAttribute('filmId'));
   }
 }
 
@@ -15,6 +25,10 @@ function showModal(filmId) {
   document.querySelector('.modal-close-btn').addEventListener('click', closeModal);
   document.querySelector('.backdrop').addEventListener('click', closeModal);
   document.addEventListener('keydown', onKeyPress);
+  if (!filmId) {
+    showTeamInfo();
+    return;
+  }
   filmsApiService
     .fetchFilmInfo(filmId)
     .then(showFilmInfo)
@@ -23,8 +37,12 @@ function showModal(filmId) {
       return;
     });
 }
-function closeModal() {
-  document.querySelector('.film-info').innerHTML = '';
+
+function onCloseBtnClick() {
+  document.querySelector('.modal-thumb').innerHTML = '';
+
+
+
   document.querySelector('.modal').classList.remove('active');
   document.querySelector('.backdrop').classList.remove('active');
   document.querySelector('.modal-close-btn').removeEventListener('click', closeModal);
@@ -91,5 +109,48 @@ function showFilmInfo(filmInfo) {
         </div>
     </div>`;
 
-  document.querySelector('.film-info').innerHTML = markup;
+  document.querySelector('.modal-thumb').innerHTML = markup;
 }
+
+document.querySelector('.students-ref').addEventListener('click', () => onCardClick());
+function showTeamInfo() {
+  const m = ourTeam
+    .map(({ name, position, photo, fb, tg, ld }) => {
+      return `<li class='team-cards-item'>
+      <img class='team-member-photo' src='${photo}' alt='${name}' />
+      <h2 class="team-member-name">${name}</h2>
+      <p class="team-member-position">${position}</p>
+          <ul class="link-icon-list">
+        <li>
+          <a href='${fb}'>
+            <svg class='link-icon'>
+              <use href='${svg}#facebook'></use>
+            </svg>
+          </a></li>
+        <li>
+          <a href='${ld}'>
+            <svg class='link-icon'>
+              <use href='${svg}#linkedin'></use>
+            </svg>
+          </a></li>
+        <li>
+          <a href='${ld}'>
+            <svg class='link-icon'>
+              <use href='${svg}#telegram'></use>
+            </svg>
+          </a></li>
+        <li><a href='${tg}'>
+            <svg class='link-icon'>
+              <use href='${svg}#github'></use>
+            </svg>
+          </a></li>
+      </ul>
+    </li>`;
+    })
+    .join('');
+
+  document.querySelector('.modal-thumb').innerHTML = '<ul class="team-cards-list">' + m + '</ul>';
+  console.dir(svg);
+}
+
+// // <a href="${fb}">FB</a><a href="${ld}">LD</a><a href="${tg}">TG</a>
