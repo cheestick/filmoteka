@@ -15,7 +15,7 @@ a {
   padding-left: 0;
   padding-right: 0;
   @media screen and (min-width: 768px) {
-    width: 374px;
+    width: 374px+40px;
     padding-bottom: 60px;
   }
 }
@@ -54,17 +54,19 @@ a {
   list-style-type: none;
   cursor: pointer;
 }
-.tui-page-btn + .tui-is-selected {
+.tui-page-btn + .tui-is-selected,
+.tui-page-btn,
+.inner-page-number {
   &:hover,
   &:focus {
+    border: 1px solid #ff6b08;
+    border-radius: 5px;
+    width: 40px;
     animation: animate 3000ms infinite 250ms;
   }
 }
 
 @keyframes animate {
-  0% {
-    transform: scale(1);
-  }
   50% {
     transform: scale(1.25);
   }
