@@ -9,7 +9,6 @@ a {
   width: 280px;
   align-items: center;
   justify-content: center;
-  padding-top: 40px;
   padding-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
@@ -17,7 +16,6 @@ a {
   padding-right: 0;
   @media screen and (min-width: 768px) {
     width: 374px;
-    padding-top: 60px;
     padding-bottom: 60px;
   }
 }
