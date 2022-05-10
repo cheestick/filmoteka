@@ -4,7 +4,6 @@ import svg from '../images/sprite.svg';
 
 const filmsApiService = new FilmsApiService();
 
-
 const cardContainer = document.querySelector('.main-gallery-lisnichyi');
 cardContainer.addEventListener('click', onCardClick);
 
@@ -38,11 +37,8 @@ function showModal(filmId) {
     });
 }
 
-function onCloseBtnClick() {
+function closeModal() {
   document.querySelector('.modal-thumb').innerHTML = '';
-
-
-
   document.querySelector('.modal').classList.remove('active');
   document.querySelector('.backdrop').classList.remove('active');
   document.querySelector('.modal-close-btn').removeEventListener('click', closeModal);
@@ -150,7 +146,4 @@ function showTeamInfo() {
     .join('');
 
   document.querySelector('.modal-thumb').innerHTML = '<ul class="team-cards-list">' + m + '</ul>';
-  console.dir(svg);
 }
-
-// // <a href="${fb}">FB</a><a href="${ld}">LD</a><a href="${tg}">TG</a>
