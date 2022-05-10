@@ -1,14 +1,16 @@
 import Pagination from 'tui-pagination';
+import { API_KEY, QUERY_VALUE } from './fetch';
 import { refs, makeFilmCard } from './card';
 import axios from 'axios';
 let lastPage;
 let totalPagesOn;
+let itemsPages;
 // построение пагинации
-
-export function formPagination(last, totalPagesOn) {
-  let buildPagination = new Pagination('pagination-container', {
+let buildPagination;
+function newOptionsPagination(last, totalPagesOn, itemsPages) {
+  buildPagination = new Pagination('pagination-container', {
     totalItems: totalPagesOn,
-    itemsPerPage: 20,
+    itemsPerPage: itemsPages,
     visiblePages: 5,
     centerAlign: true,
     lastItemClassName: 'last-child-tui',
@@ -46,7 +48,33 @@ export function formPagination(last, totalPagesOn) {
       },
     },
   });
+}
 
+function afterMovePaginationTranding(buildPagination) {
+  buildPagination.on('afterMove', event => {
+    const nextCurrentPage = event.page;
+    document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+    raitingFilms(nextCurrentPage)
+      .then(makeFilmCard)
+      .catch(error => {
+        console.log(error);
+        return;
+      });
+  });
+}
+function afterMovePaginationSearch(buildPagination) {
+  buildPagination.on('afterMove', event => {
+    const nextCurrentPage = event.page;
+    document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+    searchFilms(nextCurrentPage)
+      .then(makeFilmCard)
+      .catch(error => {
+        console.log(error);
+        return;
+      });
+  });
+}
+function afterMovePaginationLibrary(buildPagination) {
   buildPagination.on('afterMove', event => {
     const nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
@@ -61,13 +89,41 @@ export function formPagination(last, totalPagesOn) {
 
 function raitingFilms(nextCurrentPage) {
   return axios.get(
-    `https://api.themoviedb.org/3/trending/movie/day?api_key=ad8c6c4dd7f8a685c9c739255442ccd5&page=${nextCurrentPage}`,
+    `https://api.themoviedb.org/3/trending/movie/day${API_KEY}&page=${nextCurrentPage}`,
   );
 }
+function searchFilms(nextCurrentPage) {
+  const searchFilmsName = 'batman';
+  return axios.get(
+    `https://api.themoviedb.org/3/search/movie${API_KEY}&query=${searchFilmsName}&page=${nextCurrentPage}`,
+  );
+}
+function libraryItem(nextCurrentPage) {
+  // data.page=nextCurrentPage;
+}
 
-// получения тотал обьектов
+// получения обьектов
 export function buildPaginationSection(total) {
   totalPagesOn = total.data.total_results;
   lastPage = total.data.total_pages;
-  formPagination(lastPage, totalPagesOn);
+  itemsPages = 20;
+  newOptionsPagination(lastPage, totalPagesOn, itemsPages);
+  // formPagination(lastPage, totalPagesOn, itemsPages);
+  afterMovePaginationTranding(buildPagination);
+}
+export function buildPaginationSearch(total) {
+  totalPagesOn = total.data.total_results;
+  lastPage = total.data.total_pages;
+  itemsPages = 20;
+  newOptionsPagination(lastPage, totalPagesOn, itemsPages);
+  // formPagination(lastPage, totalPagesOn, itemsPages);
+  afterMovePaginationSearch(buildPagination);
+}
+export function buildPaginationLibrary(total) {
+  totalPagesOn = total.data.total_results;
+  lastPage = total.data.total_pages;
+  itemsPages = 9;
+  newOptionsPagination(lastPage, totalPagesOn, itemsPages);
+  // formPagination(lastPage, totalPagesOn, itemsPages);
+  afterMovePaginationLibrary(buildPagination);
 }

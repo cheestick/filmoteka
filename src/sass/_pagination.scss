@@ -1,23 +1,30 @@
 a {
   text-decoration: none;
 }
-
+.pagination-main {
+  background-color: #ffffff;
+}
 .pagination {
   display: flex;
-  width: 374px;
+  width: 280px;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  justify-content: center;
+  padding-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 0;
   padding-right: 0;
+  @media screen and (min-width: 768px) {
+    width: 374px;
+    padding-bottom: 60px;
+  }
 }
 
-.tui-is-selected {
+.tui-page-btn + .tui-is-selected {
   background: #ff6b08;
   border-radius: 5px;
+  width: 40px;
+  margin: 0;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
@@ -27,11 +34,12 @@ a {
   align-items: center;
   justify-content: center;
   color: #ffffff;
+  transition: background-color 0.3s;
 }
+
 .tui-page-btn,
 .inner-page-number {
   display: inline-flex;
-  width: 40px;
   height: 40px;
   font-family: 'Roboto';
   font-style: normal;
@@ -40,9 +48,46 @@ a {
   line-height: 16px;
   align-items: center;
   justify-content: center;
+  margin-left: 8px;
+  margin-right: 8px;
   color: #000000;
   list-style-type: none;
+  cursor: pointer;
 }
+.tui-page-btn + .tui-is-selected {
+  &:hover,
+  &:focus {
+    animation: animate 3000ms infinite 250ms;
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.inner-page-number {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+}
+.tui-prev-is-ellip,
+.tui-next-is-ellip {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+}
+
 .tui-first,
 .tui-last {
   position: absolute;
@@ -71,4 +116,11 @@ a {
   display: inline-block;
   vertical-align: middle;
   font-size: 0px;
+}
+.tui-prev,
+.tui-next {
+  width: 40px;
+  height: 40px;
+  background: #f7f7f7;
+  border-radius: 5px;
 }
