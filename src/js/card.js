@@ -1,5 +1,5 @@
 //  backdrop_path  original_title release_date   genres (array[objects])
-import Pagination from './Pagination/dist/tui-pagination';
+import Pagination from './Pagination/dist_p/tui-pagination';
 import FilmsApiService from './fetch';
 
 import { buildPagination, buildPaginationSection, firstPage } from './pagination';
