@@ -1,4 +1,4 @@
-import Pagination from 'tui-pagination';
+import Pagination from './Pagination/dist/tui-pagination';
 import { API_KEY, QUERY_VALUE } from './fetch';
 import { refs, makeFilmCard } from './card';
 import axios from 'axios';
