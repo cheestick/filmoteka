@@ -1,35 +1,32 @@
-import * as HeaderHandlers from './HeaderEventHandlers';
-import { isTheSameControl } from './HeaderEventHandlers';
+import { isTheSameReferenceElement, onSearchSubmit } from './HeaderEventHandlers';
 import { searchForm } from './HeaderMarkup';
 import { REF } from './HeaderRefs';
 
 // const SEARCH_REF = document.querySelector('#search-form');
 
 class SearchController {
-  constructor(parent) {
-    this.parent = parent;
-    this.init();
+  constructor(parentContainer) {
+    this.parentContainer = parentContainer;
+    this.headerPageElement = REF.HOME;
+    this.controllerMarkup = searchForm;
+    this.onSearchSubmit = onSearchSubmit.bind(this);
   }
 
-  init() {
-    this.page = REF.HOME;
-    this.markup = searchForm;
-    this.render();
+  getVisibleReferences() {
     this.searchForm = document.querySelector('#search-form');
-    this.onSearchSubmit = HeaderHandlers.onSearchSubmit.bind(this);
-    this.addSubmitHandler();
   }
 
-  render() {
-    this.parent.insertAdjacentHTML('afterbegin', this.markup());
+  showInParentContainer() {
+    this.parentContainer.insertAdjacentHTML('afterbegin', this.controllerMarkup());
   }
 
-  remove() {
+  removeFromParentContainer() {
     this.removeSubmitHandler();
     this.searchForm = null;
+    this.onSearchSubmit = null;
   }
 
-  addSubmitHandler() {
+  addControllerHandlers() {
     this.searchForm.addEventListener('submit', this.onSearchSubmit);
   }
 

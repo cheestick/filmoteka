@@ -1,5 +1,5 @@
 import { onSwitchTab } from './HeaderEventHandlers';
-import { isTheSameControl } from './HeaderEventHandlers';
+import { isTheSameReferenceElement } from './HeaderEventHandlers';
 import { LocalStorageApi as LS } from '../localStorageAPI';
 import { libraryTabs } from './HeaderMarkup';
 import { REF } from './HeaderRefs';
@@ -8,50 +8,44 @@ import { REF } from './HeaderRefs';
 // const QUEUE_REF = document.querySelector('.tab-queue');
 
 class TabController {
-  constructor(parent) {
-    this.parent = parent;
-    this.init();
-  }
-
-  init() {
-    this.page = REF.LIBRARY;
-    this.markup = libraryTabs;
-    this.render();
-    this.watched = document.querySelector('.tab-watched');
-    this.queue = document.querySelector('.tab-queue');
-    console.log(this.watched);
-    console.log(this.queue);
-    this.activeTab = this.queue;
+  constructor(parentContainer) {
+    this.parentContainer = parentContainer;
+    this.headerPageElement = REF.LIBRARY;
+    this.controllerMarkup = libraryTabs;
     this.onSwitchTab = onSwitchTab.bind(this);
-    console.log(this.onSwitchTab);
-    this.addSwitchTabHandlers();
   }
 
-  render() {
-    this.parent.insertAdjacentHTML('afterbegin', this.markup());
+  getVisibleReferences() {
+    this.watchedTab = document.querySelector('.tab-watched');
+    this.queueTab = document.querySelector('.tab-queue');
+    this.activeTab = this.queueTab;
   }
 
-  remove() {
+  showInParentContainer() {
+    this.parentContainer.insertAdjacentHTML('afterbegin', this.controllerMarkup());
+  }
+
+  removeFromParentContainer() {
     this.removeSwitchTabHandlers();
-    this.watched = null;
-    this.queue = null;
+    this.watchedTab = null;
+    this.queueTab = null;
     this.activeTab = null;
     this.onSwitchTab = null;
   }
 
-  addSwitchTabHandlers() {
-    console.log(this);
-    this.watched.addEventListener('click', this.onSwitchTab);
-    this.queue.addEventListener('click', this.onSwitchTab);
+  addControllerHandlers() {
+    this.watchedTab.addEventListener('click', this.onSwitchTab);
+    this.queueTab.addEventListener('click', this.onSwitchTab);
   }
 
   removeSwitchTabHandlers() {
-    this.watched.removeEventListener('click', this.onSwitchTab);
-    this.queue.removeEventListener('click', this.onSwitchTab);
+    this.watchedTab.removeEventListener('click', this.onSwitchTab);
+    this.queueTab.removeEventListener('click', this.onSwitchTab);
   }
 
-  switchToTab(tab) {
-    !isTheSameControl(this.activeTab, tab) && this.setActiveTab(tab);
+  switchToActiveTab(tab) {
+    // !isTheSameReferenceElement(this.activeTab, tab) && this.setActiveTab(tab);
+    this.setActiveTab(tab);
   }
 
   setActiveTab(tab) {

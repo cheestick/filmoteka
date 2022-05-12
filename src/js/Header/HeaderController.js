@@ -1,57 +1,56 @@
 import { searchForm, libraryTabs, controlsError } from './HeaderMarkup';
 import * as HeaderHandlers from './HeaderEventHandlers';
-import { isTheSameControl as isTheSamePage } from './HeaderEventHandlers';
+import { isTheSameReferenceElement } from './HeaderEventHandlers';
 import TabController from './TabContorller';
 import SearchController from './SearchController';
 import { REF } from './HeaderRefs';
 
-console.log(REF);
+// console.log(REF);
 
 class HeaderController {
   constructor() {
-    this.initStaticContent();
+    this.logoButton = REF.LOGO;
+    this.homeButton = REF.HOME;
+    this.myLibraryButton = REF.LIBRARY;
+    this.formAndTabsContainer = REF.CONTAINER;
     this.addNavigationHandlers();
+    this.controller = new TabController(this.formAndTabsContainer);
+    this.showAndUpdateCurrentHeaderLook();
   }
 
-  initStaticContent() {
-    this.logo = REF.LOGO;
-    this.home = REF.HOME;
-    this.lib = REF.LIBRARY;
-    this.container = REF.CONTAINER;
-    this.controls = new TabController(this.container);
-    this.currentPage = this.controls.page;
+  showAndUpdateCurrentHeaderLook() {
+    this.controller.showInParentContainer();
+    this.controller.getVisibleReferences();
+    this.controller.addControllerHandlers();
   }
 
-  loadLibraryControls() {
-    !isTheSamePage(this.controls.page, this.lib) &&
-      this.updateControls(new TabController(this.container));
+  updateToMyLibraryControls() {
+    !isTheSameReferenceElement(this.controller.headerPageElement, this.myLibraryButton) &&
+      this.updateControls(new TabController(this.formAndTabsContainer));
   }
 
-  loadHomeControls() {
-    !isTheSamePage(this.controls.page, this.home) &&
-      this.updateControls(new SearchController(this.container));
+  updateToSearchControls() {
+    !isTheSameReferenceElement(this.controller.headerPageElement, this.homeButton) &&
+      this.updateControls(new SearchController(this.formAndTabsContainer));
   }
 
   updateControls(controller) {
-    this.controls.remove();
     this.clearPageControls();
-    console.log(controller);
-    this.controls = controller;
-    this.controls.render();
-    this.currentPage = this.controls.page;
+    this.controller.removeFromParentContainer();
+    this.controller = controller;
+    this.showAndUpdateCurrentHeaderLook();
   }
 
   clearPageControls() {
-    console.log('-> ', this.container);
     // this.container?.firstElementChild?.remove();
-    this.container.innerHTML = ``;
+    this.formAndTabsContainer.innerHTML = ``;
   }
 
   addNavigationHandlers() {
     this.onClickStatic = HeaderHandlers.onClickStatic.bind(this);
-    this.logo.addEventListener('click', this.onClickStatic);
-    this.home.addEventListener('click', this.onClickStatic);
-    this.lib.addEventListener('click', this.onClickStatic);
+    this.logoButton.addEventListener('click', this.onClickStatic);
+    this.homeButton.addEventListener('click', this.onClickStatic);
+    this.myLibraryButton.addEventListener('click', this.onClickStatic);
   }
 }
 

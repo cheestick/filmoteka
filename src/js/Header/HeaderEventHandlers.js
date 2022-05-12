@@ -1,15 +1,16 @@
 export function onClickStatic(event) {
-  const { currentTarget: ref } = event;
+  const { currentTarget: clickedButton } = event;
   console.log(event);
-  isTheSameControl(this.home, ref) && this.loadHomeControls();
-  isTheSameControl(this.lib, ref) && this.loadLibraryControls();
-  isTheSameControl(this.logo, ref) && console.log('LOGO CLICKED');
+  isTheSameReferenceElement(this.homeButton, clickedButton) && this.updateToSearchControls();
+  isTheSameReferenceElement(this.myLibraryButton, clickedButton) &&
+    this.updateToMyLibraryControls();
+  isTheSameReferenceElement(this.logoButton, clickedButton) && console.log('LOGO CLICKED');
 }
 
 export function onSwitchTab(event) {
-  const { currentTarget: ref } = event;
-  !isTheSameControl(this.watched, ref) && this.switchToTab(this.queue);
-  !isTheSameControl(this.queue, ref) && this.switchToTab(this.watched);
+  const { currentTarget: clickedTab } = event;
+  !isTheSameReferenceElement(this.watchedTab, clickedTab) && this.switchToActiveTab(this.queueTab);
+  !isTheSameReferenceElement(this.queueTab, clickedTab) && this.switchToActiveTab(this.watchedTab);
 }
 
 export function onSearchSubmit(event) {
@@ -17,4 +18,6 @@ export function onSearchSubmit(event) {
   console.log(event);
 }
 
-export const isTheSameControl = (control, ref) => (ref === control ? true : false);
+export function isTheSameReferenceElement(reference, incomingReference) {
+  return reference === incomingReference ? true : false;
+}
