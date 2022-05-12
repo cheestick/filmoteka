@@ -1,4 +1,4 @@
-import * as HeaderHandlers from './HeaderEventHandlers';
+import { onSwitchTab } from './HeaderEventHandlers';
 import { isTheSameControl } from './HeaderEventHandlers';
 import { LocalStorageApi as LS } from '../localStorageAPI';
 import { libraryTabs } from './HeaderMarkup';
@@ -19,7 +19,11 @@ class TabController {
     this.render();
     this.watched = document.querySelector('.tab-watched');
     this.queue = document.querySelector('.tab-queue');
+    console.log(this.watched);
+    console.log(this.queue);
     this.activeTab = this.queue;
+    this.onSwitchTab = onSwitchTab.bind(this);
+    console.log(this.onSwitchTab);
     this.addSwitchTabHandlers();
   }
 
@@ -27,14 +31,16 @@ class TabController {
     this.parent.insertAdjacentHTML('afterbegin', this.markup());
   }
 
-  destroy() {
+  remove() {
     this.removeSwitchTabHandlers();
     this.watched = null;
     this.queue = null;
+    this.activeTab = null;
+    this.onSwitchTab = null;
   }
 
   addSwitchTabHandlers() {
-    this.onSwitchTab = HeaderHandlers.onSwitchTab.bind(this);
+    console.log(this);
     this.watched.addEventListener('click', this.onSwitchTab);
     this.queue.addEventListener('click', this.onSwitchTab);
   }

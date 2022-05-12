@@ -16,6 +16,7 @@ class SearchController {
     this.markup = searchForm;
     this.render();
     this.searchForm = document.querySelector('#search-form');
+    this.onSearchSubmit = HeaderHandlers.onSearchSubmit.bind(this);
     this.addSubmitHandler();
   }
 
@@ -23,18 +24,17 @@ class SearchController {
     this.parent.insertAdjacentHTML('afterbegin', this.markup());
   }
 
-  destroy() {
+  remove() {
     this.removeSubmitHandler();
     this.searchForm = null;
   }
 
   addSubmitHandler() {
-    this.onSubmit = HeaderHandlers.onSubmit.bind(this);
-    this.searchForm.addEventListener('submit', this.onSubmit);
+    this.searchForm.addEventListener('submit', this.onSearchSubmit);
   }
 
   removeSubmitHandler() {
-    this.searchForm.removeEventListener('submit', this.onSubmit);
+    this.searchForm.removeEventListener('submit', this.onSearchSubmit);
     this.onSubmit = null;
   }
 }

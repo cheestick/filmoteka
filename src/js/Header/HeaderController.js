@@ -22,34 +22,29 @@ class HeaderController {
     this.currentPage = this.controls.page;
   }
 
-  //   refreshHeaderMarkup() {
-  //     this.clearPageControls();
-  //     this.controls.render();
-  //   }
-
   loadLibraryControls() {
-    !isTheSamePage(this.currentPage, this.lib) &&
+    !isTheSamePage(this.controls.page, this.lib) &&
       this.updateControls(new TabController(this.container));
   }
 
   loadHomeControls() {
-    !isTheSamePage(this.currentPage, this.home) &&
+    !isTheSamePage(this.controls.page, this.home) &&
       this.updateControls(new SearchController(this.container));
   }
 
   updateControls(controller) {
+    this.controls.remove();
     this.clearPageControls();
-    this.controls.destroy();
+    console.log(controller);
     this.controls = controller;
     this.controls.render();
-    this.markup = this.controls.markup;
     this.currentPage = this.controls.page;
-    // this.refreshHeaderMarkup();
   }
 
   clearPageControls() {
-    this.container?.firstElementChild?.remove();
-    this.markup = controlsError;
+    console.log('-> ', this.container);
+    // this.container?.firstElementChild?.remove();
+    this.container.innerHTML = ``;
   }
 
   addNavigationHandlers() {
