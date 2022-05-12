@@ -101,4 +101,4 @@ module.exports="/filmoteka/sprite.452742e7.svg";
 },{"./fetch":"spyz","../data/team.json":"Lvv1","../images/sprite.svg":"QAGW","./localStorageAPI.js":"Lspp"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/pagination"),require("./js/modal");
 },{"./sass/main.scss":"clu1","./js/pagination":"o8lo","./js/modal":"RSqK"}]},{},["Focm"], null)
-//# sourceMappingURL=/filmoteka/src.50a5320e.js.map
+//# sourceMappingURL=/filmoteka/src.79a3b223.js.map
