@@ -44,8 +44,7 @@ class TabController {
   }
 
   switchToActiveTab(tab) {
-    // !isTheSameReferenceElement(this.activeTab, tab) && this.setActiveTab(tab);
-    this.setActiveTab(tab);
+    !isTheSameReferenceElement(this.activeTab, tab) && this.setActiveTab(tab);
   }
 
   setActiveTab(tab) {
