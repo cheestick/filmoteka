@@ -25,12 +25,14 @@ class HeaderController {
     this.controls.insertAdjacentHTML('afterbegin', this.markup);
   }
 
+  // code repetition. it has the same load logic
   loadLibraryControls() {
     this.clearPageControls();
     this.markup = libraryTabs();
     this.refreshPageMarkup();
   }
 
+  //code repetition. it has the same load logic
   loadHomeControls() {
     this.clearPageControls();
     this.markup = searchForm();
