@@ -16,8 +16,8 @@ function onCardClick(e) {
     return;
   }
   if (e.target !== e.currentTarget) {
-    showModal(e.target.getAttribute('filmId'));
-    // showModal(e.target.closest('.card__container').getAttribute('filmId'));
+    // showModal(e.target.getAttribute('filmId'));
+    showModal(e.target.closest('.card__container').getAttribute('filmId'));
   }
 }
 
@@ -45,7 +45,6 @@ function closeModal() {
   document.querySelector('.modal').classList.remove('active');
   document.querySelector('.backdrop').classList.remove('active');
   document.querySelector('.modal-close-btn').removeEventListener('click', closeModal);
-  document.querySelector('buttonThumb').removeEventListener('click', onModalButtonsClick);
   document.querySelector('.backdrop').removeEventListener('click', closeModal);
   document.removeEventListener('keydown', onKeyPress);
 }
@@ -143,7 +142,7 @@ function showTeamInfo() {
           <ul class="link-icon-list">
        ${
          fb &&
-         ` <li>
+         ` <li class="link-item">
              <a href="${fb}" rel="noreferrer noopener" target="_blank">
                <svg class="link-icon">
                  <use href="${svg}#facebook"></use>
@@ -153,7 +152,7 @@ function showTeamInfo() {
        }
         ${
           ld &&
-          `<li>
+          `<li class="link-item">
           <a href='${ld}' rel="noreferrer noopener" target="_blank">
             <svg class='link-icon'>
               <use href='${svg}#linkedin'></use>
@@ -162,7 +161,7 @@ function showTeamInfo() {
         }
        ${
          gh &&
-         ` <li>
+         ` <li class="link-item">
           <a href='${gh}' rel="noreferrer noopener" target="_blank">
             <svg class='link-icon'>
               <use href='${svg}#github'></use>
@@ -171,7 +170,7 @@ function showTeamInfo() {
        }
         ${
           tg &&
-          `<li><a href='${tg}' rel="noreferrer noopener" target="_blank">
+          `<li class="link-item"><a href='${tg}' rel="noreferrer noopener" target="_blank">
             <svg class='link-icon'>
               <use href='${svg}#telegram'></use>
             </svg>

@@ -67,6 +67,7 @@
   @media (min-width: 768px) {
     display: flex;
     justify-content: space-between;
+    height: 100%;
   }
 }
 
@@ -208,7 +209,7 @@
   margin-bottom: 10px;
 }
 .team-member-position {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .team-cards-list {
@@ -219,7 +220,7 @@
 
 .team-cards-item {
   height: 225px;
-  width: 150px;
+  width: 110px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   text-align: center;
   display: flex;
@@ -227,16 +228,14 @@
   justify-content: space-between;
   justify-content: space-between;
   margin-bottom: 20px;
-  ////////////
-  @media (max-width: 768px) {
-    width: 110px;
+  @media (min-width: 768px) {
+    width: 130px;
+  }
+  @media (min-width: 1024px) {
+    width: 150px;
   }
 }
-.team-cards-item:nth-child(-n + 2) {
-  @media (min-width: 768px) and (max-width: 1024px) {
-    margin: 0 13% 20px 13%;
-  }
-}
+
 .link-icon-list {
   display: flex;
   // width: 100%;
@@ -245,5 +244,15 @@
 .link-icon {
   width: 15px;
   height: 15px;
+  margin-top: 5px;
   fill: #444;
+}
+.link-item {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  &:focus,
+  &:hover {
+    background-color: #ff6b01;
+  }
 }
