@@ -2,7 +2,8 @@
     background-color: rgba(0, 0, 0, 0.56);
     background-size: cover;
     background-repeat: no-repeat;
-    // background-position: ;
+    // background-position: center;
+    // background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
 
     @media screen and (max-width:480px) {
@@ -30,7 +31,7 @@
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
             url(../images/bg-header/background_tablet@2x.png)
         }
-}
+    }
 }
 
 .header-box {
@@ -60,6 +61,7 @@
 }
 .nav-hd {
     display: flex;
+    // column-gap: 30px;
 }
 .nav-item {
     &:not(:last-child) {
