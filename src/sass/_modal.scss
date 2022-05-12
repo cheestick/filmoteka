@@ -89,9 +89,18 @@
 }
 
 .modal-thumb {
+  @media (max-width: 768px) {
+    overflow: auto;
+    height: 100vh;
+  }
+  height: 100%;
+  overflow: scroll;
+
   //   @media (min-width: 320px) {
   //     width: 240px;
   //   }
+}
+.film-card-thumb {
   @media (min-width: 768px) {
     display: flex;
   }
@@ -157,10 +166,12 @@
 .buttonThumb {
   display: flex;
   margin-top: 20px;
+  @media (max-width: 768px) {
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
 }
 .modalButton {
-  margin-left: 16px;
-
   outline: none;
   border-radius: 5px;
   font-weight: 500;
@@ -170,9 +181,10 @@
   cursor: pointer;
 
   height: 44px;
-  width: 110px;
+  width: 95px;
   @media (min-width: 768px) {
     width: 125px;
+    margin-left: 16px;
   }
   @media (min-width: 1024px) {
     width: 136px;
@@ -188,9 +200,14 @@
   width: 300px;
   height: 300px;
 }
+.team-title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
 .team-member-photo {
-  width: 140px;
-  height: 140px;
+  // width: 140px;
+  height: 120px;
   object-fit: contain;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -206,12 +223,28 @@
 .team-cards-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
+
 .team-cards-item {
-  // height: 150px;
+  height: 225px;
   width: 150px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  ////////////
+  @media (max-width: 768px) {
+    width: 110px;
+  }
+}
+.team-cards-item:nth-child(-n + 2) {
+  @media (min-width: 768px) and (max-width: 1024px) {
+    margin: 0 13% 20px 13%;
+  }
 }
 .link-icon-list {
   display: flex;
@@ -223,4 +256,3 @@
   height: 15px;
   fill: #444;
 }
-
