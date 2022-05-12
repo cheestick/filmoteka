@@ -21,3 +21,7 @@ export function searchForm() {
     </form>
     `;
 }
+
+export function controlsError() {
+  return '<h2 style="color: tomato; text-align: center">OOPS! Controls should be there.</h2>';
+}

@@ -1,4 +1,4 @@
-import { searchForm, libraryTabs } from './HeaderMarkup';
+import { searchForm, libraryTabs, controlsError } from './HeaderMarkup';
 import * as HeaderHandlers from './HeaderEventHandlers';
 import { REF } from './HeaderRefs';
 
@@ -39,7 +39,7 @@ class HeaderController {
 
   clearPageControls() {
     this.controls?.firstElementChild?.remove();
-    this.markup = '<h2 style="color: tomato">OOPS!</h2>';
+    this.markup = controlsError();
   }
 
   addNavigationHandlers() {
