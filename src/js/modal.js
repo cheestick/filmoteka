@@ -66,9 +66,9 @@ function showFilmInfo(filmInfo) {
     overview,
     poster_path,
   } = filmInfo.data;
-  
+
   localApiStorageInstance.saveToModal(filmInfo.data);
-  
+
   const markup = `<div class="pictureThumb">
     <img
       class="film-picture"
@@ -182,6 +182,6 @@ function showTeamInfo() {
     })
     .join('');
 
-  document.querySelector('.modal-thumb').innerHTML = `<h2 class="team-title">Our team</h2> 
-<ul class="team-cards-list" >${m}</ul>`;
+  document.querySelector('.modal-thumb').innerHTML = `<div><h2 class="team-title">Our team</h2> 
+<ul class="team-cards-list" >${m}</ul></div>`;
 }
