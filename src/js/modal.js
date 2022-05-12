@@ -1,8 +1,11 @@
 import FilmsApiService from './fetch';
 import ourTeam from '../data/team.json';
 import svg from '../images/sprite.svg';
+import LocalStorageApi from './localStorageAPI.js';
 
 const filmsApiService = new FilmsApiService();
+const localApiStorageInstance = new LocalStorageApi();
+localApiStorageInstance.setStorage();
 
 const cardContainer = document.querySelector('.main-gallery-lisnichyi');
 cardContainer.addEventListener('click', onCardClick);
@@ -42,6 +45,7 @@ function closeModal() {
   document.querySelector('.modal').classList.remove('active');
   document.querySelector('.backdrop').classList.remove('active');
   document.querySelector('.modal-close-btn').removeEventListener('click', closeModal);
+  document.querySelector('buttonThumb').removeEventListener('click', onModalButtonsClick);
   document.querySelector('.backdrop').removeEventListener('click', closeModal);
   document.removeEventListener('keydown', onKeyPress);
 }
@@ -62,8 +66,10 @@ function showFilmInfo(filmInfo) {
     overview,
     poster_path,
   } = filmInfo.data;
-
-  const markup = `<div class="film-card-thumb"><div class="pictureThumb">
+  
+  localApiStorageInstance.saveToModal(filmInfo.data);
+  
+  const markup = `<div class="pictureThumb">
     <img
       class="film-picture"
       src="https://image.tmdb.org/t/p/w500${poster_path}"
@@ -100,12 +106,30 @@ function showFilmInfo(filmInfo) {
       <h3 class="aboutTitle">ABOUT</h3>
       <p class="aboutText">${overview}</p>
        <div class="buttonThumb">
-         <button type="button" class="modalButton accentBtn">add to Watched</button>
-          <button type="button" class="modalButton">add to queue</button>
+         <button type="button" class="modalButton accentBtn" data-button="watched">add to Watched</button>
+          <button type="button" class="modalButton" data-button="queu">add to queue</button>
         </div>
     </div></div>`;
 
   document.querySelector('.modal-thumb').innerHTML = markup;
+  const modalButtons = document
+    .querySelector('.buttonThumb')
+    .addEventListener('click', onModalButtonsClick);
+}
+
+function onModalButtonsClick(e) {
+  const filmFromModal = localApiStorageInstance.getFromModal();
+  if (e.target.dataset.button === 'watched') {
+    localApiStorageInstance.filmIsPresentInWatched(filmFromModal)
+      ? localApiStorageInstance.deleteFromWatched(filmFromModal)
+      : localApiStorageInstance.saveToWatched(filmFromModal);
+  }
+
+  if (e.target.dataset.button === 'queu') {
+    localApiStorageInstance.filmIsPresentQueu(filmFromModal)
+      ? localApiStorageInstance.deleteFromQueu(filmFromModal)
+      : localApiStorageInstance.saveToQueu(filmFromModal);
+  }
 }
 
 document.querySelector('.students-ref').addEventListener('click', () => onCardClick());
