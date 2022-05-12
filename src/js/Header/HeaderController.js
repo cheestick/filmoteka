@@ -1,5 +1,8 @@
 import { searchForm, libraryTabs, controlsError } from './HeaderMarkup';
 import * as HeaderHandlers from './HeaderEventHandlers';
+import { isTheSameControl as isTheSamePage } from './HeaderEventHandlers';
+import TabController from './TabContorller';
+import SearchController from './SearchController';
 import { REF } from './HeaderRefs';
 
 console.log(REF);
@@ -8,40 +11,45 @@ class HeaderController {
   constructor() {
     this.initStaticContent();
     this.addNavigationHandlers();
-    this.refreshPageMarkup();
   }
 
   initStaticContent() {
     this.logo = REF.LOGO;
     this.home = REF.HOME;
     this.lib = REF.LIBRARY;
-    this.controls = REF.CONTAINER;
-    this.markup = libraryTabs();
+    this.container = REF.CONTAINER;
+    this.controls = new TabController(this.container);
+    this.currentPage = this.controls.page;
   }
 
-  initDynamicContent() {}
+  //   refreshHeaderMarkup() {
+  //     this.clearPageControls();
+  //     this.controls.render();
+  //   }
 
-  refreshPageMarkup() {
-    this.controls.insertAdjacentHTML('afterbegin', this.markup);
-  }
-
-  // code repetition. it has the same load logic
   loadLibraryControls() {
-    this.clearPageControls();
-    this.markup = libraryTabs();
-    this.refreshPageMarkup();
+    !isTheSamePage(this.currentPage, this.lib) &&
+      this.updateControls(new TabController(this.container));
   }
 
-  //code repetition. it has the same load logic
   loadHomeControls() {
+    !isTheSamePage(this.currentPage, this.home) &&
+      this.updateControls(new SearchController(this.container));
+  }
+
+  updateControls(controller) {
     this.clearPageControls();
-    this.markup = searchForm();
-    this.refreshPageMarkup();
+    this.controls.destroy();
+    this.controls = controller;
+    this.controls.render();
+    this.markup = this.controls.markup;
+    this.currentPage = this.controls.page;
+    // this.refreshHeaderMarkup();
   }
 
   clearPageControls() {
-    this.controls?.firstElementChild?.remove();
-    this.markup = controlsError();
+    this.container?.firstElementChild?.remove();
+    this.markup = controlsError;
   }
 
   addNavigationHandlers() {
@@ -50,14 +58,6 @@ class HeaderController {
     this.home.addEventListener('click', this.onClickStatic);
     this.lib.addEventListener('click', this.onClickStatic);
   }
-
-  addTabsHandlers() {}
-
-  removeTabsHandlers() {}
-
-  addSubmitHandler() {}
-
-  removeSubmitHandler() {}
 }
 
 export default new HeaderController();

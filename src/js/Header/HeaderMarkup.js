@@ -11,7 +11,7 @@ export function libraryTabs() {
 
 export function searchForm() {
   return `
-    <form class="search-form" id="search-form">
+    <form class="search-form" id="search-form" autocomplete="off">
       <input class="search-input" type="text" name="searchFilm" placeholder="Пошук фільмів" />
       <button class="btn-search" type="submit" width="12" height="12">
         <svg class="btn-search-icon" width="12" height="12">

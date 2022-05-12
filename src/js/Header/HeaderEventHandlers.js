@@ -5,4 +5,12 @@ export function onClickStatic(event) {
   isTheSameControl(this.logo, ref) && console.log('LOGO CLICKED');
 }
 
-const isTheSameControl = (control, ref) => (ref === control ? true : false);
+export function onSwitchTab(event) {
+  const { currentTarget: ref } = event;
+  !isTheSameControl(this.watched, ref) && this.switchToTab(this.queue);
+  !isTheSameControl(this.queue, ref) && this.switchToTab(this.watched);
+}
+
+export function onSubmit(event) {}
+
+export const isTheSameControl = (control, ref) => (ref === control ? true : false);

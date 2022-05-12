@@ -3,7 +3,4 @@ export const REF = {
   HOME: document.querySelector('#home'),
   LIBRARY: document.querySelector('#library'),
   CONTAINER: document.querySelector('.page-container'),
-  SEARCH: document.querySelector('#search-form'),
-  WATCHED: document.querySelector('.tab-watched'),
-  QUEUE: document.querySelector('.tab-queue'),
 };
