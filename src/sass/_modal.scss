@@ -28,6 +28,8 @@
   transition: 0.3s all;
 
   width: 280px;
+  height: 100vh;
+  overflow-y: auto;
   @media (min-width: 768px) {
     width: 704px;
     height: 552px;
@@ -61,12 +63,13 @@
   pointer-events: auto;
 }
 
-.film-info {
+.modal-thumb {
   @media (min-width: 768px) {
     display: flex;
     justify-content: space-between;
   }
 }
+
 .pictureThumb {
   margin-top: 24px;
   margin-right: auto;
@@ -88,17 +91,6 @@
   object-fit: cover;
 }
 
-.modal-thumb {
-  @media (max-width: 768px) {
-    overflow: auto;
-    height: 100vh;
-  }
-  height: 100%;
- @media (max-width: 1023px) {
-    overflow: scroll;
-  }
-
-}
 .film-card-thumb {
   @media (min-width: 768px) {
     display: flex;
