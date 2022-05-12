@@ -16,8 +16,8 @@ function onCardClick(e) {
     return;
   }
   if (e.target !== e.currentTarget) {
-    showModal(e.target.getAttribute('filmId'));
-    // showModal(e.target.closest('.card__container').getAttribute('filmId'));
+    // showModal(e.target.getAttribute('filmId'));
+    showModal(e.target.closest('.card__container').getAttribute('filmId'));
   }
 }
 
@@ -45,7 +45,6 @@ function closeModal() {
   document.querySelector('.modal').classList.remove('active');
   document.querySelector('.backdrop').classList.remove('active');
   document.querySelector('.modal-close-btn').removeEventListener('click', closeModal);
-  document.querySelector('buttonThumb').removeEventListener('click', onModalButtonsClick);
   document.querySelector('.backdrop').removeEventListener('click', closeModal);
   document.removeEventListener('keydown', onKeyPress);
 }
@@ -109,7 +108,7 @@ function showFilmInfo(filmInfo) {
          <button type="button" class="modalButton accentBtn" data-button="watched">add to Watched</button>
           <button type="button" class="modalButton" data-button="queu">add to queue</button>
         </div>
-    </div>`;
+    </div></div>`;
 
   document.querySelector('.modal-thumb').innerHTML = markup;
   const modalButtons = document
@@ -135,39 +134,53 @@ function onModalButtonsClick(e) {
 document.querySelector('.students-ref').addEventListener('click', () => onCardClick());
 function showTeamInfo() {
   const m = ourTeam
-    .map(({ name, position, photo, fb, tg, ld }) => {
+    .map(({ name, position, photo, fb, tg, ld, gh }) => {
       return `<li class='team-cards-item'>
       <img class='team-member-photo' src='${photo}' alt='${name}' />
       <h2 class="team-member-name">${name}</h2>
       <p class="team-member-position">${position}</p>
           <ul class="link-icon-list">
-        <li>
-          <a href='${fb}'>
-            <svg class='link-icon'>
-              <use href='${svg}#facebook'></use>
-            </svg>
-          </a></li>
-        <li>
-          <a href='${ld}'>
+       ${
+         fb &&
+         ` <li class="link-item">
+             <a href="${fb}" rel="noreferrer noopener" target="_blank">
+               <svg class="link-icon">
+                 <use href="${svg}#facebook"></use>
+               </svg>
+             </a>
+           </li>`
+       }
+        ${
+          ld &&
+          `<li class="link-item">
+          <a href='${ld}' rel="noreferrer noopener" target="_blank">
             <svg class='link-icon'>
               <use href='${svg}#linkedin'></use>
             </svg>
-          </a></li>
-        <li>
-          <a href='${ld}'>
-            <svg class='link-icon'>
-              <use href='${svg}#telegram'></use>
-            </svg>
-          </a></li>
-        <li><a href='${tg}'>
+          </a></li>`
+        }
+       ${
+         gh &&
+         ` <li class="link-item">
+          <a href='${gh}' rel="noreferrer noopener" target="_blank">
             <svg class='link-icon'>
               <use href='${svg}#github'></use>
             </svg>
-          </a></li>
+          </a></li>`
+       }
+        ${
+          tg &&
+          `<li class="link-item"><a href='${tg}' rel="noreferrer noopener" target="_blank">
+            <svg class='link-icon'>
+              <use href='${svg}#telegram'></use>
+            </svg>
+          </a></li>`
+        }
       </ul>
     </li>`;
     })
     .join('');
 
-  document.querySelector('.modal-thumb').innerHTML = '<ul class="team-cards-list">' + m + '</ul>';
+  document.querySelector('.modal-thumb').innerHTML = `<div><h2 class="team-title">Our team</h2> 
+<ul class="team-cards-list" >${m}</ul></div>`;
 }

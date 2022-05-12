@@ -15,7 +15,7 @@
             url(../images/bg-header/background_mobile@2x.png);
         }
     }
-    @media screen and (min-width: 768px) and (max-width: 1280px) {
+    @media screen and (min-width: 768px) {
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
         url(../images/bg-header/background@1x.png);
     
@@ -32,8 +32,8 @@
             url(../images/bg-header/background_tablet@2x.png)
         }
     }
-// .container {
-// }
+}
+
 .header-box {
     display: flex;
     justify-content: space-between;
@@ -41,25 +41,39 @@
     align-items: center;
 }
 .logo {
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    color: #818181;
 }
-// .title-logo {
-// }
+.title-logo {
+    color: transparent;
+
+    @media screen and (min-width: 768px) {
+        font-family: inherit;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 1.17;
+        margin-left: 10px;
+        color: #FFFFFF;
+    }
+}
 .nav-hd {
     display: flex;
-    column-gap: 30px;
+    // column-gap: 30px;
 }
-// .nav-item {
-// }
+.nav-item {
+    &:not(:last-child) {
+        margin-right: 15px;
+    }
+}
 .nav-link {
     font-family: inherit;
     // font-style: normal;
     font-weight: 500;
     font-size: 12px;
-    line-height: 1,17;
+    line-height: 1.17;
     display: flex;
     align-items: center;
     text-align: center;
@@ -72,15 +86,15 @@
 .search-form {
     position: relative;
     display: flex;
+    width: 280px;
     padding-top: 60px;
     padding-bottom: 92px;
     align-items: center;
     text-align: center;
-    @media screen {
-        
-    }
-    @media screen {
-        
+    margin-left: auto;
+    margin-right: auto;
+    @media screen and (min-width: 768px) {
+        width: 336px;
     }
 }
 .search-input {
@@ -88,21 +102,20 @@
     width: 100%;
     // padding-right: ;
     background-color: inherit;
-    // color: ;
     border-style: none;
     border-bottom: 0.5px solid #FFFFFF;
     &::placeholder {
     font-family: inherit;
     font-weight: 400;
     font-size: 14px;
-    line-height: 1,14;
+    line-height: 1.14;
     display: flex;
     align-items: center;
     color: #FFFFFF;
     }
 }
-// .btn-search {
-// }
-// .btn-search-icon {
-// }
+.btn-search {
+    position: absolute;
+    background-color: transparent;
+    right: 0;
 }

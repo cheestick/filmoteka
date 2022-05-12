@@ -56,10 +56,9 @@ export function makeFilmCard(films) {
     .map(({ poster_path, original_title, release_date, genre_ids, id, vote_average }) => {
       if (genre_ids.length <= 2) {
         return `
-        <li class="card__container">
+        <li class="card__container" filmId ="${id}">
     <img
       class="card__picture"
-      filmId ="${id}"
       src="https://image.tmdb.org/t/p/w500/${poster_path}"
       alt="${original_title}"
     />
@@ -69,10 +68,9 @@ export function makeFilmCard(films) {
         </li>`;
       } else {
         return `
-        <li class="card__container">
+        <li class="card__container"  filmId ="${id}">
     <img
       class="card__picture"
-      filmId ="${id}"
       src="https://image.tmdb.org/t/p/w500/${poster_path}"
       alt="${original_title}"
     /> 

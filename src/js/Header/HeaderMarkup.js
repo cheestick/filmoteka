@@ -15,7 +15,7 @@ export function searchForm() {
       <input class="search-input" type="text" name="searchFilm" placeholder="Пошук фільмів" />
       <button class="btn-search" type="submit" width="12" height="12">
         <svg class="btn-search-icon" width="12" height="12">
-          <use href="#"></use>
+          <use href="./images/bg-header/search.svg"></use>
         </svg>
       </button>
     </form>
