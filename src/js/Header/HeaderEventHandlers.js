@@ -1,6 +1,5 @@
 export function onClickStatic(event) {
   const { currentTarget: clickedButton } = event;
-  console.log(event);
   isTheSameReferenceElement(this.homeButton, clickedButton) && this.updateToSearchControls();
   isTheSameReferenceElement(this.myLibraryButton, clickedButton) &&
     this.updateToMyLibraryControls();
@@ -15,7 +14,6 @@ export function onSwitchTab(event) {
 
 export function onSearchSubmit(event) {
   event.preventDefault();
-  console.log(event);
 }
 
 export function isTheSameReferenceElement(reference, incomingReference) {

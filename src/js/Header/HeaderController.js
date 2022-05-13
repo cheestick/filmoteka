@@ -15,10 +15,12 @@ class HeaderController {
     this.formAndTabsContainer = REF.CONTAINER;
     this.addNavigationHandlers();
     this.controller = new TabController(this.formAndTabsContainer);
+    this.currentHeaderPage = this.controller.headerPageElement;
     this.showAndUpdateCurrentHeaderLook();
   }
 
   showAndUpdateCurrentHeaderLook() {
+    this.setActiveHeaderPage();
     this.controller.showInParentContainer();
     this.controller.getVisibleReferences();
     this.controller.addControllerHandlers();
@@ -39,6 +41,12 @@ class HeaderController {
     this.controller.removeFromParentContainer();
     this.controller = controller;
     this.showAndUpdateCurrentHeaderLook();
+  }
+
+  setActiveHeaderPage() {
+    this.currentHeaderPage.classList.remove('active');
+    this.currentHeaderPage = this.controller.headerPageElement;
+    this.currentHeaderPage.classList.add('active');
   }
 
   clearPageControls() {
