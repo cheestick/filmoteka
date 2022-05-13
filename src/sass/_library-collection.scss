@@ -11,16 +11,17 @@
     @media screen and (min-width: $tablet-bp) {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 32px;
-        max-width: 704px;
+        gap: 0;
+        margin: -16px;
+        // gap: 32px;
+        max-width: 768px;
     }
 
     @media screen and (min-width: $desktop-bp) {
-        flex-direction: row;
-        flex-wrap: wrap;
-        max-width: 960px;
-        row-gap: 32px;
-        column-gap: 16px;
+        max-width: 991px;
+        margin: -16px -8px;
+        // row-gap: 32px;
+        // column-gap: 16px;
     }
 }
 
@@ -36,11 +37,13 @@
     @media screen and (min-width: $tablet-bp) {
         width: 336px;
         height: 495px;
+        margin: 8px;
     }
 
     @media screen and (min-width: $desktop-bp) {
         width: 309px;
         height: 489px;
+        margin: 16px 8px;
     }
 }
 
