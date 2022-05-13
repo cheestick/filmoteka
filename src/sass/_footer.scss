@@ -6,7 +6,7 @@
     font-weight: 400;
     color: $footer-text-color;
     background-color: $footer-background;
-
+    
     @media screen and (min-width: 768px) {
         height: 79px;
         font-size: 16px;
@@ -39,9 +39,26 @@
     height: 13px;
     margin: 0 10px;
     fill: #ff6B08;
+    animation: heartbeat 1s infinite;
 }
 
 .students-ref {
     text-decoration: underline;
     cursor: pointer;
 }
+
+@keyframes heartbeat {
+    0% {
+      transform: scale( 1 );    
+    }
+    20% {
+      transform: scale( 1.25 ) 
+        translateX(5%) 
+        translateY(5%);
+    } 
+    40% {
+      transform: scale( 1.5 ) 
+        translateX(9%) 
+        translateY(10%);
+    }
+  }
