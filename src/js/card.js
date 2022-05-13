@@ -19,6 +19,7 @@ const getGenres = filmsApiService.Genres().then(res => console.log('results', re
 refs.buildFilmGallery.addEventListener('click', onClick);
 
 window.onload = () => {
+  onLoadSpinner();
   if ((refs.GenresArray = [])) {
     filmsApiService.Genres();
   }
@@ -33,11 +34,12 @@ window.onload = () => {
       console.log(error);
       return;
     })
-    .finally(offLoadSpinner());
+    .finally(setTimeout(offLoadSpinner, 1000));
 };
 
 function onClick(event) {
   event.preventDefault();
+  onLoadSpinner();
   // window.location.href = '/';
   document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
   filmsApiService
@@ -50,11 +52,10 @@ function onClick(event) {
       console.log(error);
       return;
     })
-    .finally(offLoadSpinner());
+    .finally(setTimeout(offLoadSpinner, 1000));
 }
 
 export function makeFilmCard(films) {
-  // onLoadSpinner();
   const markup = films.data.results
     .map(({ poster_path, original_title, release_date, genre_ids, id, vote_average }) => {
       if (genre_ids.length <= 2) {

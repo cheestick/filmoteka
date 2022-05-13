@@ -1,6 +1,6 @@
 import Pagination from './Pagination/dist_p/tui-pagination';
 import { API_KEY, QUERY_VALUE } from './fetch';
-import {onLoadSpinner, offLoadSpinner} from './spinner'
+import { onLoadSpinner, offLoadSpinner } from './spinner';
 import { refs, makeFilmCard } from './card';
 import axios from 'axios';
 let lastPage;
@@ -52,7 +52,11 @@ function afterMovePaginationTranding(buildPagination) {
     const nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
     raitingFilms(nextCurrentPage)
-      .then(makeFilmCard)
+      .then(res => {
+        onLoadSpinner();
+        makeFilmCard(res);
+        setTimeout(offLoadSpinner, 1000);
+      })
       .catch(error => {
         console.log(error);
         return;
@@ -76,7 +80,10 @@ function afterMovePaginationLibrary(buildPagination) {
     const nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
     raitingFilms(nextCurrentPage)
-      .then(makeFilmCard)
+      .then(res => {
+        onLoadSpinner();
+        makeFilmCard(res);
+      })
       .catch(error => {
         console.log(error);
         return;
