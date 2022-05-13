@@ -1,7 +1,7 @@
 //  backdrop_path  original_title release_date   genres (array[objects])
 import Pagination from './Pagination/dist_p/tui-pagination';
 import FilmsApiService from './fetch';
-
+import { onLoadSpinner, offLoadSpinner } from './spinner';
 import { buildPagination, buildPaginationSection, firstPage } from './pagination';
 const refs = {
   buildFilmGallery: document.querySelector('.buildFilmGallery'),
@@ -32,7 +32,8 @@ window.onload = () => {
     .catch(error => {
       console.log(error);
       return;
-    });
+    })
+    .finally(offLoadSpinner());
 };
 
 function onClick(event) {
@@ -48,10 +49,12 @@ function onClick(event) {
     .catch(error => {
       console.log(error);
       return;
-    });
+    })
+    .finally(offLoadSpinner());
 }
 
 export function makeFilmCard(films) {
+  onLoadSpinner();
   const markup = films.data.results
     .map(({ poster_path, original_title, release_date, genre_ids, id, vote_average }) => {
       if (genre_ids.length <= 2) {
