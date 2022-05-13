@@ -6,7 +6,7 @@ function movieCardMarkup(movieInfo) {
   const formattedReleaseYear = formatReleaseYearData(release_date);
   const formattedVoteAverage = formatNumericalToFixed(vote_average);
   return `
-            <li class="movie__card" filmId="${id}">
+            <li class="movie__card js-card" data-movie-id="${id}">
                 <a class="movie__link">
                     <img
                     class="movie__poster"
