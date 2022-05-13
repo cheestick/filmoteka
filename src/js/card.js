@@ -54,7 +54,7 @@ function onClick(event) {
 }
 
 export function makeFilmCard(films) {
-  onLoadSpinner();
+  // onLoadSpinner();
   const markup = films.data.results
     .map(({ poster_path, original_title, release_date, genre_ids, id, vote_average }) => {
       if (genre_ids.length <= 2) {
