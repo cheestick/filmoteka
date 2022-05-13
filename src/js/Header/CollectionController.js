@@ -1,3 +1,4 @@
+import { formatGenresData, formatReleaseYearData, formatNumericalToFixed } from './InfoFormatter';
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 
 function movieCardMarkup(movieInfo) {
@@ -45,40 +46,3 @@ export function showMoievsCollectionOnPage(movieCollection, collectionContainer)
     createMovieCardCollectionMarkup(movieCollection),
   );
 }
-
-function formatGenresData(genres) {
-  const genreNames = genres.map(genre => genre.name);
-  return genreNames.length <= 2
-    ? genreNames.join(', ')
-    : genreNames.slice(0, 2).join(', ').concat(', other');
-}
-
-function formatReleaseYearData(releaseYear) {
-  return releaseYear.slice(0, 4);
-}
-
-function formatNumericalToFixed(number) {
-  return number.toFixed(1);
-}
-
-//
-// `
-//  <li class="card__container" filmId="${id}">
-//      <a class="movie__link">
-//         <img
-//             class="card__picture"
-//             loading="lazy"
-//             src="${ROUT.POSTER}w500${poster_path}"
-//             srcset="${ROUT.POSTER}w342${poster_path} 1x, ${ROUT.POSTER}w500${poster_path} 2x"
-//         alt="${original_title}"
-//         />
-//         <div class="card__title">
-//             <span class="card__title--name"> ${original_title}</span>
-//             <div class="">
-//                 <span class="card__title--genres">${formattedGenres}&nbsp|&nbsp${formattedReleaseYear}</span>
-//                 <span class="card__filmRaiting">${formattedVoteAverage}</span>
-//             </div>
-//         </div>
-//     </a>
-// </li>
-// `.trim();
