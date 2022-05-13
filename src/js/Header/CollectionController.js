@@ -47,14 +47,10 @@ export function showMoievsCollectionOnPage(movieCollection, collectionContainer)
 }
 
 function formatGenresData(genres) {
-  const genreNames = genres
-    .map(genre => genre.name)
-    .slice(0, 2)
-    .join(', ');
-  return genreNames;
-  //   return genreNames.length <= 2
-  //     ? genreNames.join(', ')
-  //     : genreNames.splice(2).push('Other').join(', ');
+  const genreNames = genres.map(genre => genre.name);
+  return genreNames.length <= 2
+    ? genreNames.join(', ')
+    : genreNames.slice(0, 2).join(', ').concat(', other');
 }
 
 function formatReleaseYearData(releaseYear) {
