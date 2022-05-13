@@ -136,6 +136,7 @@
     color: #ffffff;
   }
 }
+
 .btn-search {
   position: absolute;
   background-color: transparent;
@@ -154,3 +155,9 @@
   margin-bottom: 2px;
   cursor: pointer;
 }
+ .btn-search-icon{
+    width: 12px;
+    height: 12px;
+    background: url('../images/bg-header/search.svg') center;
+    margin-bottom: 2px;
+ }
