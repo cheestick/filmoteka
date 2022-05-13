@@ -6,24 +6,31 @@ function movieCardMarkup(movieInfo) {
   const formattedReleaseYear = formatReleaseYearData(release_date);
   const formattedVoteAverage = formatNumericalToFixed(vote_average);
   return `
-     <li class="card__container" filmId ="${id}">
-        <img
-            class="card__picture"
-            src="${ROUT.POSTER}w500${poster_path}"
-            srcset="${ROUT.POSTER}w342${poster_path} 1x, ${ROUT.POSTER}w500${poster_path} 2x"
-           alt="${original_title}"
-        />
-        <p class="card__title">
-            <span class="card__title--name"> ${original_title}</span>
-            <span class="card__title--genres">${formattedGenres}&nbsp|&nbsp${formattedReleaseYear}
-            <span class="card__filmRaiting">${formattedVoteAverage}</span></span>
-        </p>
-    </li>
-    `.trim();
+            <li class="movie__card" filmId="${id}">
+                <a class="movie__link">
+                    <img
+                    class="movie__poster"
+                    loading="lazy"
+                    alt="${original_title} poster"
+                    src="${ROUT.POSTER}w500${poster_path}"
+                    srcset="${ROUT.POSTER}w342${poster_path} 1x, ${ROUT.POSTER}w500${poster_path} 2x"
+                    />
+                    <div class="movie__description">
+                    <h2 class="movie__title">${original_title}</h2>
+                    <p class="movie__briefs">
+                        <span class="movie__genre">${formattedGenres}</span>
+                        <span class="movie__devider">&nbsp|&nbsp</span>
+                        <span class="movie__year">${formattedReleaseYear}</span>
+                        <span class="movie__rating">${formattedVoteAverage}</span>
+                    </p>
+                    </div>
+                </a>
+            </li>
+    `;
 }
 
 function createMovieCardCollectionMarkup(movieCollection) {
-  const movieCardCollectionMarkup = movieCollection.map(movie => movieCardMarkup(movie)).join();
+  const movieCardCollectionMarkup = movieCollection.map(movie => movieCardMarkup(movie)).join('');
   return movieCardCollectionMarkup;
 }
 
@@ -57,3 +64,25 @@ function formatReleaseYearData(releaseYear) {
 function formatNumericalToFixed(number) {
   return number.toFixed(1);
 }
+
+//
+// `
+//  <li class="card__container" filmId="${id}">
+//      <a class="movie__link">
+//         <img
+//             class="card__picture"
+//             loading="lazy"
+//             src="${ROUT.POSTER}w500${poster_path}"
+//             srcset="${ROUT.POSTER}w342${poster_path} 1x, ${ROUT.POSTER}w500${poster_path} 2x"
+//         alt="${original_title}"
+//         />
+//         <div class="card__title">
+//             <span class="card__title--name"> ${original_title}</span>
+//             <div class="">
+//                 <span class="card__title--genres">${formattedGenres}&nbsp|&nbsp${formattedReleaseYear}</span>
+//                 <span class="card__filmRaiting">${formattedVoteAverage}</span>
+//             </div>
+//         </div>
+//     </a>
+// </li>
+// `.trim();
