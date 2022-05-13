@@ -55,7 +55,7 @@ function afterMovePaginationTranding(buildPagination) {
       .then(res => {
         onLoadSpinner();
         makeFilmCard(res);
-        setTimeout(offLoadSpinner, 1000);
+        setTimeout(offLoadSpinner, 2000);
       })
       .catch(error => {
         console.log(error);

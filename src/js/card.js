@@ -34,7 +34,7 @@ window.onload = () => {
       console.log(error);
       return;
     })
-    .finally(setTimeout(offLoadSpinner, 1000));
+    .finally(setTimeout(offLoadSpinner, 2000));
 };
 
 function onClick(event) {
@@ -52,7 +52,7 @@ function onClick(event) {
       console.log(error);
       return;
     })
-    .finally(setTimeout(offLoadSpinner, 1000));
+    .finally(setTimeout(offLoadSpinner, 2000));
 }
 
 export function makeFilmCard(films) {
