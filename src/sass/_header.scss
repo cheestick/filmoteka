@@ -1,132 +1,159 @@
 .header {
-    background-color: rgba(0, 0, 0, 0.56);
-    background-size: cover;
-    background-repeat: no-repeat;
-    // background-position: center;
-    // background-attachment: fixed;
-    font-family: 'Roboto', sans-serif;
+  background-color: rgba(0, 0, 0, 0.56);
+  background-size: cover;
+  background-repeat: no-repeat;
+  // background-position: center;
+  // background-attachment: fixed;
+  font-family: 'Roboto', sans-serif;
 
-    @media screen and (max-width:480px) {
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-        url(../images/bg-header/background_mobile@1x.png);
-        
-        @media screen and (max-width:480px) and (min-device-pixel-ratio:2), (min-resolution: 2dppx) {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-            url(../images/bg-header/background_mobile@2x.png);
-        }
+  @media screen and (max-width: 480px) {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/bg-header/background_mobile@1x.png);
+
+    @media screen and (max-width: 480px) and (min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/bg-header/background_mobile@2x.png);
     }
-    @media screen and (min-width: 768px) {
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-        url(../images/bg-header/background@1x.png);
-    
-        @media screen and (min-device-pixel-ratio:2), (min-resolution: 2dppx) {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-            url(../images/bg-header/background@2x.png);
-        }
+  }
+  @media screen and (min-width: 768px) {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/bg-header/background@1x.png);
+
+    @media screen and (min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/bg-header/background@2x.png);
     }
-    @media screen and (min-width: 321px) and (max-width: 769px) {
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-            url(../images/bg-header/background_tablet@1x.png);
-        @media screen and (min-device-pixel-ratio:2) {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-            url(../images/bg-header/background_tablet@2x.png)
-        }
+  }
+  @media screen and (min-width: 321px) and (max-width: 769px) {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/bg-header/background_tablet@1x.png);
+    @media screen and (min-device-pixel-ratio: 2) {
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/bg-header/background_tablet@2x.png);
     }
+  }
 }
 
 .header-box {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 40px;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 40px;
+  align-items: center;
 }
 .logo {
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #818181;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.title-logo {
-    color: transparent;
+.logo svg {
+  stroke: #818181;
+  &:hover,
+  &:focus {
+    stroke: #ff6b08;
+  }
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation: animates 3000ms infinite 250ms;
+}
 
-    @media screen and (min-width: 768px) {
-        font-family: inherit;
-        font-weight: 500;
-        font-size: 30px;
-        line-height: 1.17;
-        margin-left: 10px;
-        color: #FFFFFF;
-    }
+@keyframes animates {
+  0% {
+    transform: perspective(300px) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(300px) rotateY(60deg);
+  }
+  100% {
+    transform: perspective(300px) rotateY(0deg);
+  }
+}
+
+.title-logo {
+  color: transparent;
+
+  @media screen and (min-width: 768px) {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.17;
+    margin-left: 10px;
+    color: #ffffff;
+  }
 }
 .nav-hd {
-    display: flex;
-    // column-gap: 30px;
+  display: flex;
+  // column-gap: 30px;
 }
 .nav-item {
-    &:not(:last-child) {
-        margin-right: 15px;
-    }
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
 }
 .nav-link {
-    font-family: inherit;
-    // font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.17;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    text-transform: uppercase;
-    color: #FFFFFF;
+  font-family: inherit;
+  // font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
 }
 .nav-link-current {
-    position: relative;
+  position: relative;
 }
 .search-form {
-    position: relative;
-    display: flex;
-    width: 280px;
-    padding-top: 60px;
-    padding-bottom: 92px;
-    align-items: center;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    @media screen and (min-width: 768px) {
-        width: 336px;
-    }
+  position: relative;
+  display: flex;
+  width: 280px;
+  padding-top: 60px;
+  padding-bottom: 92px;
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  @media screen and (min-width: 768px) {
+    width: 336px;
+  }
 }
 .search-input {
-    height: 20px;
-    width: 100%;
-    // padding-right: ;
-    background-color: inherit;
-    border-style: none;
-    border-bottom: 0.5px solid #FFFFFF;
-    outline: none;
-    &::placeholder {
+  height: 20px;
+  width: 100%;
+  // padding-right: ;
+  background-color: inherit;
+  border-style: none;
+  border-bottom: 0.5px solid #ffffff;
+  outline: none;
+  &::placeholder {
     font-family: inherit;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.14;
     display: flex;
     align-items: center;
-    color: #FFFFFF;
-    }
-    padding-bottom: 4px;
+    color: #ffffff;
+  }
 }
 
 .btn-search {
-    position: absolute;
-    background-color: transparent;
-    right: 0;
-    border: none;
-    display: flex;
-    text-align: center;
-    justify-content:flex-end;
-    margin-right: 0;
-    padding: 0;
+  position: absolute;
+  background-color: transparent;
+  right: 0;
+  border: none;
+  display: flex;
+  text-align: center;
+  justify-content: flex-end;
+  margin-right: 0;
+  padding: 0;
+}
+.btn-search-icon {
+  width: 12px;
+  height: 12px;
+  background: url(../images/bg-header/search.svg);
+  margin-bottom: 2px;
+  cursor: pointer;
 }
  .btn-search-icon{
     width: 12px;
