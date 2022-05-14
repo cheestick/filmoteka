@@ -1,13 +1,27 @@
 .spinner-wrapper {
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px 0;
+    background: #e0e0e0;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
 }
-
+.is-hidden {
+    display: none;
+  }
+  
 .orbit-spinner,
 .orbit-spinner * {
     display: flex;
+    position: fixed;
+    z-index: 1004;
+    opacity: 1;
 }
 
 .orbit-spinner {
@@ -76,6 +90,6 @@
     }
 }
 
-.hidden {
-    display: none
-}
+// .hidden {
+//     display: none
+// }

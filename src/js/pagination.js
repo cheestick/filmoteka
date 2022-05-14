@@ -1,5 +1,6 @@
 import Pagination from './Pagination/dist_p/tui-pagination';
 import { API_KEY, QUERY_VALUE } from './fetch';
+import {onLoadSpinner, offLoadSpinner} from './spinner'
 import { refs, makeFilmCard } from './card';
 import axios from 'axios';
 let lastPage;
