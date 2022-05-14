@@ -118,21 +118,13 @@ const copyObject = object => JSON.parse(JSON.stringify(object));
 
 const dataForPagination = (data, numPagesFromBack) => {
   const pagData = [];
-  let page = 1;
-
-  const obj = {
-    page: null,
-    total_results: data.length,
-    total_pages: Math.ceil(data.length / numPagesFromBack),
-    results: [],
-  };
-
   for (let i = 0; i < data.length; i += numPagesFromBack) {
-    obj.page = page;
-    obj.results = data.slice(i, i + numPagesFromBack);
-    pagData.push({ ...copyObject(obj) });
-    page += 1;
+    pagData.push({
+      page: 1 + i / numPagesFromBack,
+      total_results: data.length,
+      total_pages: Math.ceil(data.length / numPagesFromBack),
+      results: data.slice(i, i + numPagesFromBack),
+    });
   }
-  console.log(pagData);
   return pagData;
 };
