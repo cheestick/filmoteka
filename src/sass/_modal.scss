@@ -220,10 +220,26 @@
   font-weight: 500;
   line-height: 1.33;
   text-transform: uppercase;
-  background-color: #fff;
+  background-color: transparent;
   border-radius: 5px;
-  outline: none;
+  border-style: solid ;
   cursor: pointer;
+  
+  &:focus {
+    color: #ff6b01;
+    border-color: #ff6b01;
+    outline: none;
+  }
+
+  &:hover {
+    color: #ffffff;
+    background-color: #ff6b01;
+    border-color: #ff6b01;
+  }
+
+  &:active{
+    transform: scale(0.97);
+  }
 
   @media screen and  (min-width: 768px) {
     width: 125px;
@@ -231,12 +247,6 @@
   @media screen and (min-width: 1024px) {
     width: 136px;
   }
-}
-
-.accentBtn {
-  color: #ffffff;
-  background-color: #ff6b01;
-  border: #ff6b01;
 }
 
 .test {

@@ -130,7 +130,7 @@ function showFilmInfo(filmInfo) {
       <h3 class="aboutTitle">ABOUT</h3>
       <p class="aboutText">${overview}</p>
       <div class="buttonThumb">
-        <button type="button" class="modalButton accentBtn" data-button="watched">add to Watched</button>
+        <button type="button" class="modalButton" data-button="watched">add to Watched</button>
         <button type="button" class="modalButton" data-button="queu">add to queue</button>
       </div>
     </div>`;
