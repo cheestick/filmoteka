@@ -20,37 +20,43 @@ const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 localStorage.setItem('GenresArray', JSON.stringify(refs.GenresArray));
 
 const filmsApiService = new FilmsApiService();
-const getGenres = filmsApiService.Genres().then(res => console.log('results', res));
-
-// getGenres.then(res => console.log('results', res));
-
-refs.buildFilmGallery.addEventListener('click', onClick);
 
 window.onload = () => {
   if ((refs.GenresArray = [])) {
     filmsApiService.Genres();
   }
-  onLoadSpinner();
-  filmsApiService
-    .fetchArticles()
-    .then(res => {
-      makeFilmCard(res);
-      buildPaginationSection(res);
-    })
-    .catch(error => {
-      console.log(error);
-      return;
-    })
-    .finally(offLoadSpinner());
+
+  if (document.querySelector('.main-gallery-lisnichyi').textContent === '') {
+    console.log('FIRST');
+    onLoadSpinner();
+
+    filmsApiService
+      .fetchArticles()
+      .then(res => {
+        makeFilmCard(res);
+        buildPaginationSection(res);
+      })
+      .catch(error => {
+        console.log(error);
+        return;
+      })
+      .finally(offLoadSpinner());
+  }
 };
 
-function onClick(event) {
+export function onClick(event) {
   event.preventDefault();
-  // window.location.href = '/';
+  let stringToSend = '';
+  // console.log(event.type);
+  if (event.type === 'submit') {
+    stringToSend = event.currentTarget.elements.searchFilm.value;
+    // console.log('Проверяем', stringToSend);
+  }
+
   document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
   onLoadSpinner();
   filmsApiService
-    .fetchArticles()
+    .fetchArticles(stringToSend)
     .then(res => {
       makeFilmCard(res);
       buildPaginationSection(res);
