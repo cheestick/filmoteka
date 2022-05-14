@@ -51,6 +51,17 @@ class TabController {
     this.activeTab.classList.remove('tab-active');
     this.activeTab = tab;
     this.activeTab.classList.add('tab-active');
+<<<<<<< Updated upstream
+=======
+    this.fetchMyLibraryDataAndRender();
+  }
+
+  fetchMyLibraryDataAndRender() {
+    const myLibraryData =
+      this.activeTab.dataset.tab === 'queue' ? LS.getFromQueu() : LS.getFromWatched();
+    console.log(myLibraryData);
+    showMoievsCollectionOnPage(myLibraryData, MOVIE_GALLERY_REF);
+>>>>>>> Stashed changes
   }
 }
 
