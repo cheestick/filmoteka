@@ -1,7 +1,10 @@
 import { formatGenresData, formatReleaseYearData, formatNumericalToFixed } from './InfoFormatter';
-import {buildPaginationLibrary, libraryFilms, buildPagination} from '../pagination'
+import { buildPaginationLibrary, libraryFilms, buildPagination } from '../pagination';
+
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
-let paginationApp= {};
+
+let paginationApp = {};
+
 function movieCardMarkup(movieInfo) {
   const { id, genres, poster_path, original_title, release_date, vote_average } = movieInfo;
   const formattedGenres = formatGenresData(genres);
@@ -47,8 +50,16 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
     'afterbegin',
     createMovieCardCollectionMarkup(movieCollectionData),
   );
-  console.log(movieCollectionData)
-   paginationApp = {
+  myLibraryPagination(movieCollectionData);
+}
+
+function myLibraryPagination(movieCollectionData) {
+  console.log('>>>---', movieCollectionData);
+  const numPages = 20;
+  const collectionData = dataForPagination(movieCollectionData, 20);
+  console.log('---<<<', collectionData);
+
+  paginationApp = {
     data: {
       page: 1,
       perPage: 9,
@@ -58,47 +69,56 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
       pages: [],
     },
     methods: {
-      getCardFilm () {
-        this.results=movieCollectionData;
+      getCardFilm() {
+        this.results = movieCollectionData;
       },
-      setPages () {
+      setPages() {
         let numberOfPages = Math.ceil(movieCollectionData.length / this.perPage);
         for (let index = 1; index <= total_pages; index++) {
           this.pages.push(index);
         }
       },
-      paginate (results) {
+      paginate(results) {
         let page = this.page;
         let perPage = this.perPage;
-        let from = (page * perPage) - perPage;
-        let to = (page * perPage);
-        return  results.slice(from, to);
-      }
+        let from = page * perPage - perPage;
+        let to = page * perPage;
+        return results.slice(from, to);
+      },
     },
-    created () {
+    created() {
       this.getCardFilm();
     },
     watch: {
-      results () {
+      results() {
         this.setPages();
-      }
+      },
     },
     computed: {
       displayedCardFilm() {
         return this.paginate(this.results);
-      }
+      },
     },
   };
-  console.log("paginationApp",paginationApp)
-  buildPaginationLibrary(movieCollectionData)
-  libraryFilms(movieCollectionData)
+  console.log('paginationApp', paginationApp);
+  buildPaginationLibrary(movieCollectionData);
+  libraryFilms(movieCollectionData);
   buildPagination.on('afterMove', event => {
     const nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
-      //   onLoadSpinner();
-      libraryFilms(movieCollectionData)
-      //  setTimeout(offLoadSpinner, 2000);
+    //   onLoadSpinner();
+    libraryFilms(movieCollectionData);
+    //  setTimeout(offLoadSpinner, 2000);
   });
 }
 
 export const shownMovieCollectionData = movieCollectionData => movieCollectionData;
+
+const copyObject = object => JSON.parse(JSON.stringify(object));
+
+const dataForPagination = (data, numPagesFromBack) => ({
+  pages: 1,
+  total_results: data.length,
+  total_pages: Math.ceil(data.length / numPagesFromBack),
+  results: copyObject(data),
+});
