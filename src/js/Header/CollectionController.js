@@ -39,10 +39,13 @@ function clearMovieCollectionContainer(collectionContainer) {
   collectionContainer.innerHTML = null;
 }
 
-export function showMoievsCollectionOnPage(movieCollection, collectionContainer) {
+export function showMoievsCollectionOnPage(movieCollectionData, collectionContainer) {
+  shownMovieCollectionData(movieCollectionData);
   clearMovieCollectionContainer(collectionContainer);
   collectionContainer.insertAdjacentHTML(
     'afterbegin',
-    createMovieCardCollectionMarkup(movieCollection),
+    createMovieCardCollectionMarkup(movieCollectionData),
   );
 }
+
+export const shownMovieCollectionData = movieCollectionData => movieCollectionData;
