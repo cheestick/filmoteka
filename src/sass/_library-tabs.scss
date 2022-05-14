@@ -17,17 +17,10 @@
     display: flex;
     flex-direction: column;
     row-gap: 60px;
+    height: 100%;
 
     @media screen and (min-width: $tablet-bp) {
         row-gap: 40px;
-    }
-}
-
-.page-container {
-    margin-bottom: 62px;
-
-    @media screen and (min-width: $tablet-bp) {
-        margin-bottom: 60px;
     }
 }
 
