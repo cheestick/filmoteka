@@ -20,6 +20,7 @@ export default class FilmsApiService {
   async fetchArticles(filmName) {
     const urlTrending = `trending/movie/day${API_KEY}&page=1`;
 
+    // console.log('Что нам передалось? ', filmName);
     if (!filmName) {
       return await axiosRequest(urlTrending).then(res => {
         if (!(res.status >= 200 && res.status < 300)) {

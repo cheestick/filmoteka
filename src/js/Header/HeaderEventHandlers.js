@@ -1,9 +1,17 @@
+import { onClick } from '../card.js';
+
 export function onClickStatic(event) {
   const { currentTarget: clickedButton } = event;
-  isTheSameReferenceElement(this.homeButton, clickedButton) && this.updateToSearchControls();
+  if (isTheSameReferenceElement(this.homeButton, clickedButton)) {
+    this.updateToSearchControls();
+    onClick(event);
+  }
   isTheSameReferenceElement(this.myLibraryButton, clickedButton) &&
     this.updateToMyLibraryControls();
-  isTheSameReferenceElement(this.logoButton, clickedButton) && console.log('LOGO CLICKED');
+
+  if (isTheSameReferenceElement(this.logoButton, clickedButton)) {
+    onClick(event);
+  }
 }
 
 export function onSwitchTab(event) {
@@ -13,7 +21,12 @@ export function onSwitchTab(event) {
 }
 
 export function onSearchSubmit(event) {
-  event.preventDefault();
+  if (event.currentTarget.elements.searchFilm.value.trim() === '') {
+    // event.preventDefault();
+    window.alert('Введите значение');
+    return;
+  }
+  onClick(event);
 }
 
 export function isTheSameReferenceElement(reference, incomingReference) {
