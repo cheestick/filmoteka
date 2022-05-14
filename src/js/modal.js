@@ -3,6 +3,7 @@ import ourTeam from '../data/team.json';
 import svg from '../images/sprite.svg';
 import LocalStorageApi from './localStorageAPI.js';
 import { formatGenresData } from './Header/InfoFormatter';
+import defaultImage from '../images/defaultImage.jpg';
 
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 
@@ -85,15 +86,18 @@ function showFilmInfo(filmInfo) {
     poster_path,
   } = filmInfo.data;
 
+  const pathToSmallerImage = poster_path ? ROUT.POSTER + 'w342' + poster_path : defaultImage;
+  const pathToLargerImage = poster_path ? ROUT.POSTER + 'w500' + poster_path : defaultImage;
+
   localApiStorageInstance.saveToModal(filmInfo.data);
 
   const markup = `
     <div class="pictureThumb">
       <img
         class="film-picture"
-        src="${ROUT.POSTER}w500${poster_path}"
-        srcset="${ROUT.POSTER}w342${poster_path} 1x, ${ROUT.POSTER}w500${poster_path} 2x"
-        alt="${original_title}"
+         src="${pathToSmallerImage}"
+         srcset="${pathToSmallerImage} 1x,
+                 ${pathToLargerImage} 2x"
         loading="lazy"
       />
     </div>
