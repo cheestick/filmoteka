@@ -127,7 +127,7 @@ const dataForPagination = (data, numPagesFromBack) => {
     results: [],
   };
 
-  for (let i = 0; i <= data.length; i += numPagesFromBack) {
+  for (let i = 0; i < data.length; i += numPagesFromBack) {
     obj.page = page;
     obj.results = data.slice(i, i + numPagesFromBack);
     pagData.push({ ...copyObject(obj) });
