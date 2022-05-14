@@ -54,10 +54,10 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
 }
 
 function myLibraryPagination(movieCollectionData) {
-  console.log('>>>---', movieCollectionData);
-  const numPages = 20;
-  const collectionData = dataForPagination(movieCollectionData, 20);
-  console.log('---<<<', collectionData);
+  // console.log('>>>---', movieCollectionData);
+  const perPage = 4;
+  const collectionData = dataForPagination(movieCollectionData, perPage);
+  // console.log('---<<<', collectionData);
 
   paginationApp = {
     data: {
@@ -102,12 +102,12 @@ function myLibraryPagination(movieCollectionData) {
   };
   console.log('paginationApp', paginationApp);
   buildPaginationLibrary(movieCollectionData);
-  libraryFilms(movieCollectionData);
+  // libraryFilms(movieCollectionData);
   buildPagination.on('afterMove', event => {
     const nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
     //   onLoadSpinner();
-    libraryFilms(movieCollectionData);
+    // libraryFilms(movieCollectionData);
     //  setTimeout(offLoadSpinner, 2000);
   });
 }
@@ -116,9 +116,23 @@ export const shownMovieCollectionData = movieCollectionData => movieCollectionDa
 
 const copyObject = object => JSON.parse(JSON.stringify(object));
 
-const dataForPagination = (data, numPagesFromBack) => ({
-  pages: 1,
-  total_results: data.length,
-  total_pages: Math.ceil(data.length / numPagesFromBack),
-  results: copyObject(data),
-});
+const dataForPagination = (data, numPagesFromBack) => {
+  const pagData = [];
+  let page = 1;
+
+  const obj = {
+    page: null,
+    total_results: data.length,
+    total_pages: Math.ceil(data.length / numPagesFromBack),
+    results: [],
+  };
+
+  for (let i = 0; i <= data.length; i += numPagesFromBack) {
+    obj.page = page;
+    obj.results = data.slice(i, i + numPagesFromBack);
+    pagData.push({ ...copyObject(obj) });
+    page += 1;
+  }
+  console.log(pagData);
+  return pagData;
+};
