@@ -1,60 +1,68 @@
 .main-section {
-    padding-top: 60px;
-    padding-bottom: 60px;
+    min-width: $mobile-bp;
+    padding: 20px 20px 40px;
+    
     background-color: $modal-window-background-color;
+
+    @media screen and (min-width: $tablet-bp) {
+        padding: 60px 32px;
+    }
+    
+    @media screen and (min-width: $desktop-bp) {
+        padding: 32px 32px 60px;
+    }
 }
 
 .main-gallery-lisnichyi {
-    @media screen and(max-width: 767px){
-       
-    }
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
     @media screen and (min-width: 768px) {
         display: flex;
-            flex-wrap: wrap;
-            margin: -16px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        row-gap: 0;
+        margin: -16px;
         }
     @media screen and (min-width: 1024px){
-             display: flex;
-            flex-wrap: wrap;
-            margin: -8px;
+        margin: -16px -8px;
     }
 }
+
 .card__container {
-    border-radius: 5px;
+    border-radius: $corner-radius;
+    min-height: 443px;
+    width: 280px;
     cursor: pointer;
-    @media screen and (min-width: 320px) {
-        height: 443px;
-        width: 280px;
-        margin-bottom: 20px;
-    }
+   
     @media screen and (min-width: 768px) {
-    height: 495px;
-    width: 336px;
-    margin: 16px;
+        height: 495px;
+        width: 336px;
+        margin: 16px;
     }
     @media screen and (min-width: 1024px){
-             height: 489px;
-            width: 309px;
-            margin: 8px;
-            margin-bottom: 16px;
+        height: 489px;
+        width: 309px;
+        margin: 16px 8px;
     }
 }
 
 .card__picture {
-   
-    border-radius: 5px;
+    border-radius: $corner-radius;
     margin-bottom: 8px;
-    @media screen and (min-width: 320px) {
-        width: 280px;
-        height: 402px;
-    }
+    width: 280px;
+    height: 402px;
+    object-fit: cover;
+    object-position: center;
+
     @media screen and (min-width: 768px) {
         width: 336px;
         height: 455px;
     }
     @media screen and (min-width: 1024px){
         width: 309px;
-            height: 449px;    
+        height: 449px;    
     }
 }
 
@@ -63,24 +71,22 @@
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
-    line-height: 1.33;
-
+    line-height: 16px;
     color: $body-text-color;
-    display: inline-block;
-    height: 32px;
     display: flex;
     flex-direction: column;
+
     &--name {
         text-transform: uppercase;
     }
 
     &--genres {
         color: $accent-background;
+        display: flex;
+        align-content: center;
     }
-    // @media screen and (min-width: 320px){
-    //     margin-bottom: 20px;
-    // }
 }
+
 .card__filmRaiting{
 color: $header-text-color;
 background-color: $accent-background;
@@ -88,6 +94,6 @@ display: inline-block;
 text-align: center;
 height: 16px;
 width: 36px;
-border-radius: 5px;
+border-radius: $corner-radius;
 margin-left: 8px;
 }

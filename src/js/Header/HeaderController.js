@@ -14,7 +14,7 @@ class HeaderController {
     this.myLibraryButton = REF.LIBRARY;
     this.formAndTabsContainer = REF.CONTAINER;
     this.addNavigationHandlers();
-    this.controller = new TabController(this.formAndTabsContainer);
+    this.controller = new SearchController(this.formAndTabsContainer);
     this.currentHeaderPage = this.controller.headerPageElement;
     this.showAndUpdateCurrentHeaderLook();
   }
@@ -51,7 +51,7 @@ class HeaderController {
 
   clearPageControls() {
     // this.container?.firstElementChild?.remove();
-    this.formAndTabsContainer.innerHTML = ``;
+    this.formAndTabsContainer.innerHTML = null;
   }
 
   addNavigationHandlers() {

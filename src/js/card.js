@@ -1,6 +1,12 @@
 //  backdrop_path  original_title release_date   genres (array[objects])
 import Pagination from './Pagination/dist_p/tui-pagination';
 import FilmsApiService from './fetch';
+import {
+  formatGenresData,
+  formatReleaseYearData,
+  formatNumericalToFixed,
+} from './Header/InfoFormatter';
+
 import { onLoadSpinner, offLoadSpinner } from './spinner';
 import { buildPagination, buildPaginationSection, firstPage } from './pagination';
 const refs = {
@@ -8,6 +14,8 @@ const refs = {
   filmsGalleyDiv: document.querySelector('.main-gallery-lisnichyi'),
   GenresArray: [],
 };
+
+const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 
 localStorage.setItem('GenresArray', JSON.stringify(refs.GenresArray));
 
@@ -33,7 +41,7 @@ window.onload = () => {
       console.log(error);
       return;
     })
-    .finally(setTimeout(offLoadSpinner, 2000));
+    .finally(offLoadSpinner());
 };
 
 function onClick(event) {
@@ -51,38 +59,29 @@ function onClick(event) {
       console.log(error);
       return;
     })
-    .finally(setTimeout(offLoadSpinner, 2000));
+    .finally(offLoadSpinner());
 }
 
 export function makeFilmCard(films) {
   const markup = films.data.results
-    .map(({ poster_path, original_title, release_date, genre_ids, id, vote_average }) => {
-      if (genre_ids.length <= 2) {
-        return `
-        <li class="card__container" filmId ="${id}">
-    <img
-      class="card__picture"
-      src="https://image.tmdb.org/t/p/w500/${poster_path}"
-      alt="${original_title}"
-    />
-      <p class="card__title"><span class="card__title--name"> ${original_title}</span>
-     <span class="card__title--genres">${genre_ids[0]},${genre_ids[1]}&nbsp|&nbsp${release_date}  <span class="card__filmRaiting">${vote_average}</span></span>
-     </p>
+    .map(({ poster_path, original_title, title, release_date, genre_ids, id, vote_average }) => {
+      return `
+        <li class="card__container js-card"  data-movie-id ="${id}">
+          <img
+            class="card__picture"
+            src="${ROUT.POSTER}w500${poster_path}"
+            srcset="${ROUT.POSTER}w342${poster_path} 1x, ${ROUT.POSTER}w500${poster_path} 2x"
+            alt="${title} poster"
+          /> 
+          <p class="card__title"><span class="card__title--name"> ${title}</span>
+            <span class="card__title--genres">${formatGenresData(
+              genre_ids,
+            )}&nbsp|&nbsp ${formatReleaseYearData(release_date)}
+              <span class="card__filmRaiting"> ${formatNumericalToFixed(vote_average)}</span>
+            </span>
+          </p>
         </li>`;
-      } else {
-        return `
-        <li class="card__container"  filmId ="${id}">
-    <img
-      class="card__picture"
-      src="https://image.tmdb.org/t/p/w500/${poster_path}"
-      alt="${original_title}"
-    /> 
-    <p class="card__title"><span class="card__title--name"> ${original_title}</span>
-     <span class="card__title--genres">${genre_ids[0]},${genre_ids[1]}, Other | ${release_date}  <span class="card__filmRaiting"> ${vote_average}</span></span>
-     </p>
-        </li>`;
-      }
     })
-    .join(' ');
+    .join('');
   refs.filmsGalleyDiv.insertAdjacentHTML('beforeend', markup);
 }
