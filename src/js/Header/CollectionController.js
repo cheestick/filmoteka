@@ -47,6 +47,7 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
     'afterbegin',
     createMovieCardCollectionMarkup(movieCollectionData),
   );
+  console.log(movieCollectionData)
    paginationApp = {
     data: {
       page: 1,
@@ -58,13 +59,12 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
     },
     methods: {
       getCardFilm () {
-        this.results=movieCollectionData.data;
+        this.results=movieCollectionData;
       },
       setPages () {
         let numberOfPages = Math.ceil(movieCollectionData.length / this.perPage);
         for (let index = 1; index <= total_pages; index++) {
           this.pages.push(index);
-          console.log(numberOfPages)
         }
       },
       paginate (results) {
