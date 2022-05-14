@@ -1,9 +1,10 @@
 export function libraryTabs() {
   return `
      <ul class="library-tabs">
-        <li class="library-tab"><a class="tab-watched" href="#" role="button">watched</a></li>
         <li class="library-tab">
-          <a class="tab-queue tab-active" href="#" role="button">queue</a>
+          <a class="tab-watched" href="#" role="button" data-tab="watched">watched</a></li>
+        <li class="library-tab">
+          <a class="tab-queue tab-active" href="#" role="button" data-tab="queue">queue</a>
         </li>
       </ul>
     `;

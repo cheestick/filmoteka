@@ -39,7 +39,7 @@
     height: 13px;
     margin: 0 10px;
     fill: #ff6B08;
-    animation: heartbeat 1s infinite;
+    animation: heartbeat 650ms infinite;
 }
 
 .students-ref {
@@ -52,12 +52,12 @@
       transform: scale( 1 );    
     }
     20% {
-      transform: scale( 1.25 ) 
+      transform: scale( 1.1 ) 
         translateX(5%) 
         translateY(5%);
     } 
-    40% {
-      transform: scale( 1.5 ) 
+    35% {
+      transform: scale( 1.2 ) 
         translateX(9%) 
         translateY(10%);
     }

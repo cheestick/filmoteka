@@ -1,11 +1,14 @@
 import { onSwitchTab } from './HeaderEventHandlers';
 import { isTheSameReferenceElement } from './HeaderEventHandlers';
-import { LocalStorageApi as LS } from '../localStorageAPI';
+import LocalStorageApi from '../localStorageAPI';
 import { libraryTabs } from './HeaderMarkup';
-import { REF } from './HeaderRefs';
+import { showMoievsCollectionOnPage } from './CollectionController';
+import { MOVIE_GALLERY_REF, REF } from './HeaderRefs';
 
 // const WATCHED_REF = document.querySelector('.tab-watched');
 // const QUEUE_REF = document.querySelector('.tab-queue');
+
+const LS = new LocalStorageApi();
 
 class TabController {
   constructor(parentContainer) {
@@ -19,6 +22,7 @@ class TabController {
     this.watchedTab = document.querySelector('.tab-watched');
     this.queueTab = document.querySelector('.tab-queue');
     this.activeTab = this.queueTab;
+    this.fetchMyLibraryDataAndRender();
   }
 
   showInParentContainer() {
@@ -51,6 +55,14 @@ class TabController {
     this.activeTab.classList.remove('tab-active');
     this.activeTab = tab;
     this.activeTab.classList.add('tab-active');
+    this.fetchMyLibraryDataAndRender();
+  }
+
+  fetchMyLibraryDataAndRender() {
+    const myLibraryData =
+      this.activeTab.dataset.tab === 'queue' ? LS.getFromQueu() : LS.getFromWatched();
+    // console.log(myLibraryData);
+    showMoievsCollectionOnPage(myLibraryData, MOVIE_GALLERY_REF);
   }
 }
 
