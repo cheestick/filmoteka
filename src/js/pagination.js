@@ -51,16 +51,15 @@ function afterMovePaginationTranding(buildPagination) {
   buildPagination.on('afterMove', event => {
     const nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+    onLoadSpinner();
     raitingFilms(nextCurrentPage)
       .then(res => {
-        onLoadSpinner();
         makeFilmCard(res);
-        setTimeout(offLoadSpinner, 2000);
       })
       .catch(error => {
         console.log(error);
         return;
-      });
+      }).finally(setTimeout(offLoadSpinner, 2000));
   });
 }
 function afterMovePaginationSearch(buildPagination) {

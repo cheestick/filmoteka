@@ -19,11 +19,10 @@ const getGenres = filmsApiService.Genres().then(res => console.log('results', re
 refs.buildFilmGallery.addEventListener('click', onClick);
 
 window.onload = () => {
-  onLoadSpinner();
   if ((refs.GenresArray = [])) {
     filmsApiService.Genres();
   }
-
+  onLoadSpinner();
   filmsApiService
     .fetchArticles()
     .then(res => {
@@ -39,9 +38,9 @@ window.onload = () => {
 
 function onClick(event) {
   event.preventDefault();
-  onLoadSpinner();
   // window.location.href = '/';
   document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+  onLoadSpinner();
   filmsApiService
     .fetchArticles()
     .then(res => {
