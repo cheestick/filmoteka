@@ -66,16 +66,17 @@ function afterMovePaginationTranding(buildPagination) {
       }).finally(setTimeout(offLoadSpinner, 2000));
   });
 }
-function afterMovePaginationSearch(buildPagination) {
+function afterMovePaginationSearch(buildPagination, searchFilmsName) {
   buildPagination.on('afterMove', event => {
     const nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
-    searchFilms(nextCurrentPage)
+    onLoadSpinner();
+    searchFilms(nextCurrentPage, searchFilmsName)
       .then(makeFilmCard)
       .catch(error => {
         console.log(error);
         return;
-      });
+      }).finally(setTimeout(offLoadSpinner, 2000));
   });
 }
 
@@ -85,26 +86,31 @@ function raitingFilms(nextCurrentPage) {
     `https://api.themoviedb.org/3/trending/movie/day${API_KEY}&page=${nextCurrentPage}`,
   );
 }
-function searchFilms(nextCurrentPage) {
-  const searchFilmsName = 'batman';
+function searchFilms(nextCurrentPage, searchFilmsName) {
+
   return axios.get(
     `https://api.themoviedb.org/3/search/movie${API_KEY}&query=${searchFilmsName}&page=${nextCurrentPage}`,
   );
 }
-export function libraryFilms(q) {
-  return q;
-}
+// export function libraryFilms(q) {
+//   return q;
+// }
 
 // получения обьектов
-export function buildPaginationSection(total) {
+export function buildPaginationSection(total, stringToSend) {
   console.log("total", total)
   totalPagesOn = total.data.total_results;
   lastPage = total.data.total_pages;
   itemsPages = 20;
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
-  afterMovePaginationTranding(buildPagination);
+  if (stringToSend==="" || stringToSend===null || stringToSend===false) {
+  afterMovePaginationTranding(buildPagination);  
+  }
+  else { afterMovePaginationSearch(buildPagination, stringToSend)}
 }
 export function buildPaginationSearch(total) {
+  console.log(total)
+  document.querySelector('#pagination-container').innerHTML = '';
   totalPagesOn = total.data.total_results;
   lastPage = total.data.total_pages;
   itemsPages = 20;

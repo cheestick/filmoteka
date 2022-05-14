@@ -59,7 +59,7 @@ export function onClick(event) {
     .fetchArticles(stringToSend)
     .then(res => {
       makeFilmCard(res);
-      buildPaginationSection(res);
+      buildPaginationSection(res, stringToSend);
     })
     .catch(error => {
       console.log(error);
