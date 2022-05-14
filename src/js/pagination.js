@@ -11,7 +11,7 @@ let itemsPages;
 
 
 // построение пагинации
-let buildPagination;
+export let buildPagination;
 function newOptionsPagination(last, totalPagesOn, itemsPages) {
   buildPagination = new Pagination('pagination-container', {
     totalItems: totalPagesOn,
@@ -79,18 +79,6 @@ function afterMovePaginationSearch(buildPagination) {
   });
 }
 
-function afterMovePaginationLibrary(buildPagination) {
-  buildPagination.on('afterMove', event => {
-    const nextCurrentPage = event.page;
-    document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
-    libraryFilms()    
-    console.log("dataFilms",dataFilms)
-      //   onLoadSpinner();
-      //   makeFilmCard(res);
-        // console.log(movieCollectionData)
-      //  setTimeout(offLoadSpinner, 2000);
-  });
-}
 
 function raitingFilms(nextCurrentPage) {
   return axios.get(
@@ -104,50 +92,7 @@ function searchFilms(nextCurrentPage) {
   );
 }
 export function libraryFilms(q) {
-  const paginationApp = {
-    data: {
-      page: 1,
-      perPage: 9,
-      results: [],
-      total_results: q.length,
-      total_pages: Math.ceil(q.length / 9),
-      pages: [],
-    },
-    methods: {
-      getCardFilm () {
-        this.results=q.data;
-        console.log("q.data",q.data)
-      },
-      setPages () {
-        let numberOfPages = Math.ceil(q.length / this.perPage);
-        for (let index = 1; index <= total_pages; index++) {
-          this.pages.push(index);
-          console.log(numberOfPages)
-        }
-      },
-      paginate (results) {
-        let page = this.page;
-        let perPage = this.perPage;
-        let from = (page * perPage) - perPage;
-        let to = (page * perPage);
-        return  results.slice(from, to);
-      }
-    },
-    created () {
-      this.getCardFilm();
-    },
-    watch: {
-      results () {
-        this.setPages();
-      }
-    },
-    computed: {
-      displayedCardFilm() {
-        return this.paginate(this.results);
-      }
-    },
-  };
-  console.log("paginationApp",paginationApp)
+  return q;
 }
 
 // получения обьектов
@@ -172,5 +117,4 @@ export function buildPaginationLibrary(total) {
   itemsPages = 9;
   lastPage = Math.ceil(totalPagesOn/itemsPages);
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
-  afterMovePaginationLibrary(buildPagination);
 }
