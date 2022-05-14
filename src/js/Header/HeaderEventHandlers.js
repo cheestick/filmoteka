@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import { onClick } from '../card.js';
 
 export function onClickStatic(event) {
@@ -22,11 +23,14 @@ export function onSwitchTab(event) {
 
 export function onSearchSubmit(event) {
   if (event.currentTarget.elements.searchFilm.value.trim() === '') {
-    // event.preventDefault();
-    window.alert('Введите значение');
+    event.preventDefault();
+    Notiflix.Notify.warning('Пожалуйста введите название фильма');
+
     return;
   }
+
   onClick(event);
+  event.currentTarget.reset();
 }
 
 export function isTheSameReferenceElement(reference, incomingReference) {
