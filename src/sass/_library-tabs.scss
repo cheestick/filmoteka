@@ -24,6 +24,14 @@
     }
 }
 
+.page-container {
+    margin: 0 20px;
+
+    @media screen and (min-width: $tablet-bp) {
+        margin: 0 32px;
+    }
+}
+
 .page-container .search-input {
     color: #ffffff;
 }
