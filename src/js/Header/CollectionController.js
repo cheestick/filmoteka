@@ -59,7 +59,6 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
     methods: {
       getCardFilm () {
         this.results=q.data;
-        console.log("q.data",movieCollectionData.data)
       },
       setPages () {
         let numberOfPages = Math.ceil(movieCollectionData.length / this.perPage);
