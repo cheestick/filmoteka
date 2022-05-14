@@ -30,7 +30,7 @@ window.onload = () => {
   if ((refs.GenresArray = [])) {
     filmsApiService.Genres();
   }
-
+  onLoadSpinner();
   filmsApiService
     .fetchArticles()
     .then(res => {
@@ -47,7 +47,8 @@ window.onload = () => {
 function onClick(event) {
   event.preventDefault();
   // window.location.href = '/';
-  document.querySelector('.main-gallery-lisnichyi').innerHTML = null;
+  document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+  onLoadSpinner();
   filmsApiService
     .fetchArticles()
     .then(res => {
@@ -62,7 +63,6 @@ function onClick(event) {
 }
 
 export function makeFilmCard(films) {
-  // onLoadSpinner();
   const markup = films.data.results
     .map(({ poster_path, original_title, title, release_date, genre_ids, id, vote_average }) => {
       return `
