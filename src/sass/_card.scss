@@ -37,31 +37,32 @@
     cursor: pointer;
    
     @media screen and (min-width: 768px) {
-        height: 495px;
         width: 336px;
+        height: 495px;
         margin: 16px;
     }
     @media screen and (min-width: 1024px){
-        height: 489px;
         width: 309px;
+        height: 489px;
         margin: 16px 8px;
     }
 }
 
 .card__picture {
-    border-radius: $corner-radius;
+    display: flex;
     margin-bottom: 8px;
-    width: 280px;
+    width: 100%;
+    border-radius: $corner-radius;
     height: 402px;
     object-fit: cover;
     object-position: center;
 
     @media screen and (min-width: 768px) {
-        width: 336px;
+        // width: 336px;
         height: 455px;
     }
     @media screen and (min-width: 1024px){
-        width: 309px;
+        // width: 309px;
         height: 449px;    
     }
 }

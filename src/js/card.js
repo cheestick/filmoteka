@@ -6,7 +6,7 @@ import {
   formatReleaseYearData,
   formatNumericalToFixed,
 } from './Header/InfoFormatter';
-
+import defaultImage from '../images/defaultImage.jpg';
 import { onLoadSpinner, offLoadSpinner } from './spinner';
 import { buildPagination, buildPaginationSection, firstPage } from './pagination';
 const refs = {
@@ -71,12 +71,15 @@ export function onClick(event) {
 export function makeFilmCard(films) {
   const markup = films.data.results
     .map(({ poster_path, original_title, title, release_date, genre_ids, id, vote_average }) => {
+      const pathToSmallerImage = poster_path ? ROUT.POSTER + 'w342' + poster_path : defaultImage;
+      const pathToLargerImage = poster_path ? ROUT.POSTER + 'w500' + poster_path : defaultImage;
       return `
         <li class="card__container js-card"  data-movie-id ="${id}">
           <img
             class="card__picture"
-            src="${ROUT.POSTER}w500${poster_path}"
-            srcset="${ROUT.POSTER}w342${poster_path} 1x, ${ROUT.POSTER}w500${poster_path} 2x"
+            src="${pathToSmallerImage}"
+            srcset="${pathToSmallerImage} 1x,
+                    ${pathToLargerImage} 2x"
             alt="${title} poster"
           /> 
           <p class="card__title"><span class="card__title--name"> ${title}</span>
