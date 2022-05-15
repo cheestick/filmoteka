@@ -5,6 +5,7 @@ import {
   formatGenresData,
   formatReleaseYearData,
   formatNumericalToFixed,
+  formatConvertedGenres,
 } from './Header/InfoFormatter';
 import defaultImage from '../images/defaultImage.jpg';
 import { onLoadSpinner, offLoadSpinner } from './spinner';
@@ -27,7 +28,7 @@ window.onload = () => {
   }
 
   if (document.querySelector('.main-gallery-lisnichyi').textContent === '') {
-    console.log('FIRST');
+    console.log('FIRST LOAD');
     onLoadSpinner();
 
     filmsApiService
@@ -83,7 +84,7 @@ export function makeFilmCard(films) {
             alt="${title} poster"
           /> 
           <p class="card__title"><span class="card__title--name"> ${title}</span>
-            <span class="card__title--genres">${formatGenresData(
+            <span class="card__title--genres">${formatConvertedGenres(
               genre_ids,
             )}&nbsp|&nbsp ${formatReleaseYearData(release_date)}
               <span class="card__filmRaiting"> ${formatNumericalToFixed(vote_average)}</span>
@@ -94,3 +95,5 @@ export function makeFilmCard(films) {
     .join('');
   refs.filmsGalleyDiv.insertAdjacentHTML('beforeend', markup);
 }
+
+function convertGenresToText(genres) {}
