@@ -42,6 +42,7 @@
 }
 
 .header-library-background {
+  background-position: center;
   @media screen and (max-width: 480px) {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/bg-header/bg_mob_library@1x.png);
