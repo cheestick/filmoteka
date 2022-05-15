@@ -1,6 +1,6 @@
 import { formatGenresData, formatReleaseYearData, formatNumericalToFixed } from './InfoFormatter';
 import { buildPaginationLibrary, libraryFilms, buildPagination } from '../pagination';
-
+import {makeFilmCard} from '../card'
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 
 function movieCardMarkup(movieInfo) {
@@ -54,18 +54,15 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
 function myLibraryPagination(movieCollectionData) {
 
   console.log('Before paginationApp---', movieCollectionData);
-  let paginationApp = dataForPagination(movieCollectionData, 1);
-  
-  libraryFilms(paginationApp);
-
   buildPaginationLibrary(movieCollectionData);
-
+  let paginationApp = dataForPagination(movieCollectionData, 1);
+  libraryFilms(paginationApp);
   buildPagination.on('afterMove', event => {
     let nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
     onLoadSpinner();
     paginationApp = dataForPagination(movieCollectionData, nextCurrentPage);
-    libraryFilms(movieCollectionData);
+    libraryFilms(paginationApp);
     setTimeout(offLoadSpinner, 2000);
   });
 }
