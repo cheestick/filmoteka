@@ -52,8 +52,6 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
 }
 
 function myLibraryPagination(movieCollectionData) {
-
-  console.log('Before paginationApp---', movieCollectionData);
   buildPaginationLibrary(movieCollectionData);
   let paginationApp = dataForPagination(movieCollectionData, 1);
   libraryFilms(paginationApp);
