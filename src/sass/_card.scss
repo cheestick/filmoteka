@@ -46,8 +46,19 @@
         height: 489px;
         margin: 16px 8px;
     }
+    &:hover{
+        animation: animateCard 3000ms infinite 250ms;
+        box-shadow: 0px 4px 4px 0px #00000040;
+    }
 }
-
+@keyframes animateCard {
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 .card__picture {
     display: flex;
     margin-bottom: 8px;

@@ -8,8 +8,6 @@ let lastPage;
 let totalPagesOn;
 let itemsPages;
 
-
-
 // построение пагинации
 export let buildPagination;
 function newOptionsPagination(last, totalPagesOn, itemsPages) {
@@ -18,7 +16,6 @@ function newOptionsPagination(last, totalPagesOn, itemsPages) {
     itemsPerPage: itemsPages,
     visiblePages: 5,
     centerAlign: true,
-    // lastItemClassName: 'last-child-tui',
     template: {
       page: '<a href="#" class="tui-page-btn">{{page}}</a>',
       currentPage: '<span class="tui-page-btn tui-is-selected">{{page}}</span>',
@@ -92,9 +89,6 @@ function searchFilms(nextCurrentPage, searchFilmsName) {
     `https://api.themoviedb.org/3/search/movie${API_KEY}&query=${searchFilmsName}&page=${nextCurrentPage}`,
   );
 }
-// export function libraryFilms(q) {
-//   return q;
-// }
 
 // получения обьектов
 export function buildPaginationSection(total, stringToSend) {
