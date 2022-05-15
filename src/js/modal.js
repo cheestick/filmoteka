@@ -3,7 +3,7 @@ import ourTeam from '../data/team.json';
 import svg from '../images/sprite.svg';
 import LocalStorageApi from './localStorageAPI.js';
 import { formatGenresData } from './Header/InfoFormatter';
-import { changeButtonText } from './AddToButton';
+import { composeButtonText, changeButtonText, changeQueueText } from './AddToButton';
 import defaultImage from '../images/defaultImage.jpg';
 
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
@@ -11,6 +11,11 @@ const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 const filmsApiService = new FilmsApiService();
 const localApiStorageInstance = new LocalStorageApi();
 localApiStorageInstance.setStorage();
+
+const dbFieldName = {
+  WATCHED: 'watched',
+  QUEUE: 'queue',
+};
 
 const cardContainer = document.querySelector('.main-gallery-lisnichyi');
 cardContainer.addEventListener('click', onCardClick);
@@ -22,7 +27,8 @@ function onCardClick(e) {
   }
   if (e.target !== e.currentTarget) {
     // showModal(e.target.getAttribute('filmId'));
-    showModal(e.target.closest('.js-card').dataset.movieId);
+    const currentMovieID = e.target.closest('.js-card').dataset.movieId;
+    showModal(currentMovieID);
   }
 }
 
@@ -77,6 +83,7 @@ function onKeyPress(e) {
 
 function showFilmInfo(filmInfo) {
   const {
+    id,
     original_title,
     vote_average,
     vote_count,
@@ -87,10 +94,16 @@ function showFilmInfo(filmInfo) {
     poster_path,
   } = filmInfo.data;
 
+  console.log(id);
+
   const pathToSmallerImage = poster_path ? ROUT.POSTER + 'w342' + poster_path : defaultImage;
   const pathToLargerImage = poster_path ? ROUT.POSTER + 'w500' + poster_path : defaultImage;
 
   localApiStorageInstance.saveToModal(filmInfo.data);
+
+  const textQueue = composeButtonText(id, dbFieldName.QUEUE);
+  const textWatched = composeButtonText(id, dbFieldName.WATCHED);
+  // console.log(textWatched, textQueue);
 
   const markup = `
     <div class="pictureThumb">
@@ -131,8 +144,8 @@ function showFilmInfo(filmInfo) {
       <h3 class="aboutTitle">ABOUT</h3>
       <p class="aboutText">${overview}</p>
       <div class="buttonThumb">
-        <button type="button" class="modalButton" data-button="watched">add to Watched</button>
-        <button type="button" class="modalButton" data-button="queue">add to queue</button>
+        <button type="button" class="modalButton" data-button="watched" data-movie-id="${id}">${textWatched}</button>
+        <button type="button" class="modalButton" data-button="queue" data-movie-id="${id}">${textQueue}</button>
       </div>
     </div>`;
 
@@ -144,17 +157,20 @@ function showFilmInfo(filmInfo) {
 
 function onModalButtonsClick(e) {
   e.stopPropagation();
+  // debugger;
   const filmFromModal = localApiStorageInstance.getFromModal();
   if (e.target.dataset.button === 'watched') {
     localApiStorageInstance.filmIsPresentInWatched(filmFromModal)
       ? localApiStorageInstance.deleteFromWatched(filmFromModal)
       : localApiStorageInstance.saveToWatched(filmFromModal);
+    changeButtonText.call(e.target);
   }
 
   if (e.target.dataset.button === 'queue') {
     localApiStorageInstance.filmIsPresentQueue(filmFromModal)
       ? localApiStorageInstance.deleteFromQueue(filmFromModal)
       : localApiStorageInstance.saveToQueue(filmFromModal);
+    changeButtonText.call(e.target);
   }
 }
 
