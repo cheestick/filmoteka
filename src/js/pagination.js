@@ -104,7 +104,6 @@ export function buildPaginationSection(total, stringToSend) {
   itemsPages = 20;
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
   if (stringToSend==="" || stringToSend===null || stringToSend===false || stringToSend===undefined) {
-  console.log("+++++++++")
   afterMovePaginationTranding(buildPagination);  
   }
   else { afterMovePaginationSearch(buildPagination, stringToSend)}

@@ -54,18 +54,19 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
 function myLibraryPagination(movieCollectionData) {
   buildPaginationLibrary(movieCollectionData);
   let paginationApp = dataForPagination(movieCollectionData, 9);
-  document.querySelector('.main-gallery-lisnichyi').insertAdjacentHTML(
-    'afterbegin',
-    createMovieCardCollectionMarkup(paginationApp[0].results),
-  );
+  document
+    .querySelector('.main-gallery-lisnichyi')
+    .insertAdjacentHTML('afterbegin', createMovieCardCollectionMarkup(paginationApp[0].results));
   buildPagination.on('afterMove', event => {
     let nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
     onLoadSpinner();
-    document.querySelector('.main-gallery-lisnichyi').insertAdjacentHTML(
-      'afterbegin',
-      createMovieCardCollectionMarkup(paginationApp[nextCurrentPage-1].results),
-    );
+    document
+      .querySelector('.main-gallery-lisnichyi')
+      .insertAdjacentHTML(
+        'afterbegin',
+        createMovieCardCollectionMarkup(paginationApp[nextCurrentPage - 1].results),
+      );
     setTimeout(offLoadSpinner, 2000);
   });
 }
