@@ -77,7 +77,7 @@ export default class LocalStorageApi {
     }
   }
 
-  getFromQueu() {
+  getFromQueue() {
     try {
       const data = localStorage.getItem('queue');
       return JSON.parse(data);
@@ -86,9 +86,9 @@ export default class LocalStorageApi {
     }
   }
 
-  saveToQueu(value) {
+  saveToQueue(value) {
     try {
-      const tempArr = this.getFromQueu();
+      const tempArr = this.getFromQueue();
       tempArr.push(value);
       localStorage.setItem('queue', JSON.stringify(tempArr));
     } catch (error) {
@@ -96,10 +96,10 @@ export default class LocalStorageApi {
     }
   }
 
-  deleteFromQueu(value) {
+  deleteFromQueue(value) {
     const { id: checkingId } = value;
     try {
-      const tempArr = this.getFromQueu();
+      const tempArr = this.getFromQueue();
       const arrForSave = tempArr.filter(({ id }) => id != checkingId);
       localStorage.setItem('queue', JSON.stringify(arrForSave));
     } catch (error) {
@@ -107,11 +107,11 @@ export default class LocalStorageApi {
     }
   }
 
-  filmIsPresentQueu(value) {
+  filmIsPresentQueue(value) {
     const { id: checkingId } = value;
     try {
-      const filmsFromQueu = this.getFromQueu();
-      const resultOfSearch = filmsFromQueu.find(({ id }) => id == checkingId);
+      const filmsFromQueue = this.getFromQueue();
+      const resultOfSearch = filmsFromQueue.find(({ id }) => id == checkingId);
       return resultOfSearch ? true : false;
     } catch (error) {
       console.error('Set state error: ', error.message);
