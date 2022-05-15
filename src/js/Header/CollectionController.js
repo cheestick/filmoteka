@@ -1,6 +1,6 @@
 import { formatGenresData, formatReleaseYearData, formatNumericalToFixed } from './InfoFormatter';
 import { buildPaginationLibrary, libraryFilms, buildPagination } from '../pagination';
-import {makeFilmCard} from '../card'
+import { makeFilmCard } from '../card';
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 
 function movieCardMarkup(movieInfo) {
@@ -48,7 +48,7 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
     'afterbegin',
     createMovieCardCollectionMarkup(movieCollectionData),
   );
-  myLibraryPagination(movieCollectionData);
+  // myLibraryPagination(movieCollectionData);
 }
 
 function myLibraryPagination(movieCollectionData) {
