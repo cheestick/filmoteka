@@ -3,8 +3,6 @@ import { buildPaginationLibrary, libraryFilms, buildPagination } from '../pagina
 
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 
-let paginationApp = {};
-
 function movieCardMarkup(movieInfo) {
   const { id, genres, poster_path, original_title, release_date, vote_average } = movieInfo;
   const formattedGenres = formatGenresData(genres);
@@ -54,61 +52,21 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
 }
 
 function myLibraryPagination(movieCollectionData) {
-  // console.log('>>>---', movieCollectionData);
-  const perPage = 4;
-  const collectionData = dataForPagination(movieCollectionData, perPage);
-  // console.log('---<<<', collectionData);
 
-  paginationApp = {
-    data: {
-      page: 1,
-      perPage: 9,
-      results: [],
-      total_results: movieCollectionData.length,
-      total_pages: Math.ceil(movieCollectionData.length / 9),
-      pages: [],
-    },
-    methods: {
-      getCardFilm() {
-        this.results = movieCollectionData;
-      },
-      setPages() {
-        let numberOfPages = Math.ceil(movieCollectionData.length / this.perPage);
-        for (let index = 1; index <= total_pages; index++) {
-          this.pages.push(index);
-        }
-      },
-      paginate(results) {
-        let page = this.page;
-        let perPage = this.perPage;
-        let from = page * perPage - perPage;
-        let to = page * perPage;
-        return results.slice(from, to);
-      },
-    },
-    created() {
-      this.getCardFilm();
-    },
-    watch: {
-      results() {
-        this.setPages();
-      },
-    },
-    computed: {
-      displayedCardFilm() {
-        return this.paginate(this.results);
-      },
-    },
-  };
-  console.log('paginationApp', paginationApp);
+  console.log('Before paginationApp---', movieCollectionData);
+  let paginationApp = dataForPagination(movieCollectionData, 1);
+  
+  libraryFilms(paginationApp);
+
   buildPaginationLibrary(movieCollectionData);
-  // libraryFilms(movieCollectionData);
+
   buildPagination.on('afterMove', event => {
-    const nextCurrentPage = event.page;
+    let nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
-    //   onLoadSpinner();
-    // libraryFilms(movieCollectionData);
-    //  setTimeout(offLoadSpinner, 2000);
+    onLoadSpinner();
+    paginationApp = dataForPagination(movieCollectionData, nextCurrentPage);
+    libraryFilms(movieCollectionData);
+    setTimeout(offLoadSpinner, 2000);
   });
 }
 
