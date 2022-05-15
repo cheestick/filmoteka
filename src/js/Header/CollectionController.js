@@ -44,23 +44,28 @@ function clearMovieCollectionContainer(collectionContainer) {
 export function showMoievsCollectionOnPage(movieCollectionData, collectionContainer) {
   shownMovieCollectionData(movieCollectionData);
   clearMovieCollectionContainer(collectionContainer);
-  collectionContainer.insertAdjacentHTML(
-    'afterbegin',
-    createMovieCardCollectionMarkup(movieCollectionData),
-  );
-  // myLibraryPagination(movieCollectionData);
+  // collectionContainer.insertAdjacentHTML(
+  //   'afterbegin',
+  //   createMovieCardCollectionMarkup(movieCollectionData),
+  // );
+  myLibraryPagination(movieCollectionData);
 }
 
 function myLibraryPagination(movieCollectionData) {
   buildPaginationLibrary(movieCollectionData);
-  let paginationApp = dataForPagination(movieCollectionData, 1);
-  libraryFilms(paginationApp);
+  let paginationApp = dataForPagination(movieCollectionData, 9);
+  document.querySelector('.main-gallery-lisnichyi').insertAdjacentHTML(
+    'afterbegin',
+    createMovieCardCollectionMarkup(paginationApp[0].results),
+  );
   buildPagination.on('afterMove', event => {
     let nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
     onLoadSpinner();
-    paginationApp = dataForPagination(movieCollectionData, nextCurrentPage);
-    libraryFilms(paginationApp);
+    document.querySelector('.main-gallery-lisnichyi').insertAdjacentHTML(
+      'afterbegin',
+      createMovieCardCollectionMarkup(paginationApp[nextCurrentPage-1].results),
+    );
     setTimeout(offLoadSpinner, 2000);
   });
 }
