@@ -28,7 +28,7 @@ window.onload = () => {
   }
 
   if (document.querySelector('.main-gallery-lisnichyi').textContent === '') {
-    console.log('FIRST LOAD');
+    // console.log('FIRST LOAD');
     onLoadSpinner();
 
     filmsApiService
@@ -95,5 +95,3 @@ export function makeFilmCard(films) {
     .join('');
   refs.filmsGalleyDiv.insertAdjacentHTML('beforeend', markup);
 }
-
-function convertGenresToText(genres) {}

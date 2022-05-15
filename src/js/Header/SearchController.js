@@ -18,6 +18,8 @@ class SearchController {
 
   showInParentContainer() {
     this.parentContainer.insertAdjacentHTML('afterbegin', this.controllerMarkup());
+    document.querySelector('.header').classList.remove('header-library-background');
+    document.querySelector('.header').classList.add('header-original-background');
   }
 
   removeFromParentContainer() {
