@@ -103,7 +103,8 @@ export function buildPaginationSection(total, stringToSend) {
   lastPage = total.data.total_pages;
   itemsPages = 20;
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
-  if (stringToSend==="" || stringToSend===null || stringToSend===false) {
+  if (stringToSend==="" || stringToSend===null || stringToSend===false || stringToSend===undefined) {
+  console.log("+++++++++")
   afterMovePaginationTranding(buildPagination);  
   }
   else { afterMovePaginationSearch(buildPagination, stringToSend)}
