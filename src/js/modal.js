@@ -3,6 +3,7 @@ import ourTeam from '../data/team.json';
 import svg from '../images/sprite.svg';
 import LocalStorageApi from './localStorageAPI.js';
 import { formatGenresData } from './Header/InfoFormatter';
+import { changeButtonText } from './AddToButton';
 import defaultImage from '../images/defaultImage.jpg';
 
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
@@ -131,7 +132,7 @@ function showFilmInfo(filmInfo) {
       <p class="aboutText">${overview}</p>
       <div class="buttonThumb">
         <button type="button" class="modalButton" data-button="watched">add to Watched</button>
-        <button type="button" class="modalButton" data-button="queu">add to queue</button>
+        <button type="button" class="modalButton" data-button="queue">add to queue</button>
       </div>
     </div>`;
 
@@ -150,10 +151,10 @@ function onModalButtonsClick(e) {
       : localApiStorageInstance.saveToWatched(filmFromModal);
   }
 
-  if (e.target.dataset.button === 'queu') {
-    localApiStorageInstance.filmIsPresentQueu(filmFromModal)
-      ? localApiStorageInstance.deleteFromQueu(filmFromModal)
-      : localApiStorageInstance.saveToQueu(filmFromModal);
+  if (e.target.dataset.button === 'queue') {
+    localApiStorageInstance.filmIsPresentQueue(filmFromModal)
+      ? localApiStorageInstance.deleteFromQueue(filmFromModal)
+      : localApiStorageInstance.saveToQueue(filmFromModal);
   }
 }
 
