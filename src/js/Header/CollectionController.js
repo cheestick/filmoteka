@@ -1,5 +1,6 @@
 import { formatGenresData, formatReleaseYearData, formatNumericalToFixed } from './InfoFormatter';
 import { buildPaginationLibrary, libraryFilms, buildPagination } from '../pagination';
+import {onLoadSpinner, offLoadSpinner} from '../spinner'
 import { makeFilmCard } from '../card';
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 
@@ -62,11 +63,8 @@ function myLibraryPagination(movieCollectionData) {
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
     onLoadSpinner();
     document
-      .querySelector('.main-gallery-lisnichyi')
-      .insertAdjacentHTML(
-        'afterbegin',
-        createMovieCardCollectionMarkup(paginationApp[nextCurrentPage - 1].results),
-      );
+    .querySelector('.main-gallery-lisnichyi')
+    .insertAdjacentHTML('afterbegin', createMovieCardCollectionMarkup(paginationApp[nextCurrentPage-1].results));
     setTimeout(offLoadSpinner, 2000);
   });
 }
