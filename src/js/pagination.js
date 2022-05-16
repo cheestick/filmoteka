@@ -117,11 +117,42 @@ export function buildPaginationSection(total, stringToSend) {
 
 export function buildPaginationLibrary(total) {
   document.querySelector('#pagination-container').innerHTML = '';
+  let cardTotalP;
+  if (window.innerWidth <= 768) {
+    cardTotalP = 4;
+  } else if (window.innerWidth > 769 && window.innerWidth <= 1023) {
+    cardTotalP = 8;
+  } else {
+    cardTotalP = 9;
+  }
+
+  console.log('cardTotalP=', cardTotalP);
   totalPagesOn = total.length;
-  itemsPages = 9;
+  itemsPages = cardTotalP;
   lastPage = Math.ceil(totalPagesOn / itemsPages);
-  if (totalPagesOn <= 9) {
+  if (totalPagesOn <= cardTotalP) {
     return;
   }
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
+  window.addEventListener('resize', function () {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      cardTotalP = 4;
+      lastPage = Math.ceil(totalPagesOn / cardTotalP);
+      newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
+      return cardTotalP;
+    } else if (
+      window.matchMedia('(max-width: 1023px)').matches &&
+      window.matchMedia('(min-width: 769px)').matches
+    ) {
+      cardTotalP = 8;
+      lastPage = Math.ceil(totalPagesOn / cardTotalP);
+      newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
+      return cardTotalP;
+    } else {
+      cardTotalP = 9;
+      lastPage = Math.ceil(totalPagesOn / cardTotalP);
+      newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
+      return cardTotalP;
+    }
+  });
 }
