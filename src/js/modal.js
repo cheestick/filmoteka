@@ -27,7 +27,8 @@ function onCardClick(e) {
   }
   if (e.target !== e.currentTarget) {
     // showModal(e.target.getAttribute('filmId'));
-    const currentMovieID = e.target.closest('.js-card').dataset.movieId;
+    const currentMovieID = e.target?.closest('.js-card')?.dataset?.movieId;
+    if (!currentMovieID) return;
     showModal(currentMovieID);
   }
 }
@@ -103,7 +104,6 @@ function showFilmInfo(filmInfo) {
 
   const textQueue = composeButtonText(id, dbFieldName.QUEUE);
   const textWatched = composeButtonText(id, dbFieldName.WATCHED);
-  // console.log(textWatched, textQueue);
 
   const markup = `
     <div class="pictureThumb">
@@ -157,7 +157,6 @@ function showFilmInfo(filmInfo) {
 
 function onModalButtonsClick(e) {
   e.stopPropagation();
-  // debugger;
   const filmFromModal = localApiStorageInstance.getFromModal();
   if (e.target.dataset.button === 'watched') {
     localApiStorageInstance.filmIsPresentInWatched(filmFromModal)
