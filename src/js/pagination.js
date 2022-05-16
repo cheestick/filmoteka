@@ -135,25 +135,28 @@ export function buildPaginationLibrary(total) {
     return;
   }
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
-  window.addEventListener('resize', debounce(function () {
-    if (window.matchMedia('(max-width: 768px)').matches) {
-      cardTotalP = 4;
-      lastPage = Math.ceil(totalPagesOn / cardTotalP);
-      newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
-      return cardTotalP;
-    } else if (
-      window.matchMedia('(max-width: 1023px)').matches &&
-      window.matchMedia('(min-width: 769px)').matches
-    ) {
-      cardTotalP = 8;
-      lastPage = Math.ceil(totalPagesOn / cardTotalP);
-      newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
-      return cardTotalP;
-    } else {
-      cardTotalP = 9;
-      lastPage = Math.ceil(totalPagesOn / cardTotalP);
-      newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
-      return cardTotalP;
-    }
-  }, 500));
+  window.addEventListener(
+    'resize',
+    debounce(function () {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        cardTotalP = 4;
+        lastPage = Math.ceil(totalPagesOn / cardTotalP);
+        newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
+        return cardTotalP;
+      } else if (
+        window.matchMedia('(max-width: 1023px)').matches &&
+        window.matchMedia('(min-width: 769px)').matches
+      ) {
+        cardTotalP = 8;
+        lastPage = Math.ceil(totalPagesOn / cardTotalP);
+        newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
+        return cardTotalP;
+      } else {
+        cardTotalP = 9;
+        lastPage = Math.ceil(totalPagesOn / cardTotalP);
+        newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
+        return cardTotalP;
+      }
+    }, 100),
+  );
 }
