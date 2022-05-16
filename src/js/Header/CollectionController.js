@@ -67,7 +67,10 @@ function myLibraryPagination(movieCollectionData) {
   let paginationApp = dataForPagination(movieCollectionData, 9);
   document
     .querySelector('.main-gallery-lisnichyi')
-    .insertAdjacentHTML('afterbegin', createMovieCardCollectionMarkup(paginationApp[0]?.results));
+    .insertAdjacentHTML('afterbegin', createMovieCardCollectionMarkup(paginationApp[0].results));
+    if (paginationApp[0].total_results <= 9) {
+      return;
+    }
   buildPagination.on('afterMove', event => {
     let nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
