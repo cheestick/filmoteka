@@ -3,7 +3,7 @@ import { API_KEY, QUERY_VALUE } from './fetch';
 import { onLoadSpinner, offLoadSpinner } from './spinner';
 import { refs, makeFilmCard } from './card';
 import axios from 'axios';
-import {shownMovieCollectionData} from '../js/Header/CollectionController'
+import { shownMovieCollectionData } from '../js/Header/CollectionController';
 let lastPage;
 let totalPagesOn;
 let itemsPages;
@@ -60,7 +60,8 @@ function afterMovePaginationTranding(buildPagination) {
       .catch(error => {
         console.log(error);
         return;
-      }).finally(setTimeout(offLoadSpinner, 2000));
+      })
+      .finally(setTimeout(offLoadSpinner, 2000));
   });
 }
 function afterMovePaginationSearch(buildPagination, searchFilmsName) {
@@ -73,10 +74,10 @@ function afterMovePaginationSearch(buildPagination, searchFilmsName) {
       .catch(error => {
         console.log(error);
         return;
-      }).finally(setTimeout(offLoadSpinner, 2000));
+      })
+      .finally(setTimeout(offLoadSpinner, 2000));
   });
 }
-
 
 function raitingFilms(nextCurrentPage) {
   return axios.get(
@@ -84,7 +85,6 @@ function raitingFilms(nextCurrentPage) {
   );
 }
 function searchFilms(nextCurrentPage, searchFilmsName) {
-
   return axios.get(
     `https://api.themoviedb.org/3/search/movie${API_KEY}&query=${searchFilmsName}&page=${nextCurrentPage}`,
   );
@@ -92,32 +92,33 @@ function searchFilms(nextCurrentPage, searchFilmsName) {
 
 // получения обьектов
 export function buildPaginationSection(total, stringToSend) {
-  console.log("total", total)
+  console.log('total', total);
   totalPagesOn = total.data.total_results;
   lastPage = total.data.total_pages;
   itemsPages = 20;
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
-  if (totalPagesOn===0) {return}
-  if (stringToSend==="" || stringToSend===null || stringToSend===false || stringToSend===undefined) {
-  afterMovePaginationTranding(buildPagination);  
+  if (totalPagesOn <= 20 || total === undefined) {
+    return;
   }
-  else { afterMovePaginationSearch(buildPagination, stringToSend)}
+  if (
+    stringToSend === '' ||
+    stringToSend === null ||
+    stringToSend === false ||
+    stringToSend === undefined
+  ) {
+    afterMovePaginationTranding(buildPagination);
+  } else {
+    afterMovePaginationSearch(buildPagination, stringToSend);
+  }
 }
-export function buildPaginationSearch(total) {
-  console.log(total)
-  document.querySelector('#pagination-container').innerHTML = '';
-  totalPagesOn = total.data.total_results;
-  lastPage = total.data.total_pages;
-  itemsPages = 20;
-  if (totalPagesOn===0) {return}
-  newOptionsPagination(lastPage, totalPagesOn, itemsPages);
-  afterMovePaginationSearch(buildPagination);
-}
+
 export function buildPaginationLibrary(total) {
   document.querySelector('#pagination-container').innerHTML = '';
   totalPagesOn = total.length;
   itemsPages = 9;
-  lastPage = Math.ceil(totalPagesOn/itemsPages);
-  if (totalPagesOn===0) {return}
+  lastPage = Math.ceil(totalPagesOn / itemsPages);
+  if (totalPagesOn <= 9) {
+    return;
+  }
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
 }
