@@ -1,7 +1,8 @@
 .main-section {
     min-width: $mobile-bp;
     padding: 20px 20px 40px;
-    
+    flex-grow: 1;
+
     background-color: $modal-window-background-color;
 
     @media screen and (min-width: $tablet-bp) {
