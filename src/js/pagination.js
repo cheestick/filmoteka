@@ -95,7 +95,6 @@ export function buildPaginationSection(total, stringToSend) {
   totalPagesOn = total.data.total_results;
   lastPage = total.data.total_pages;
   itemsPages = 20;
-  // if (totalPagesOn<=20 || stringToSend===null || stringToSend===false || stringToSend===undefined) {return}
   if (
     stringToSend === '' ||
     stringToSend === null ||
