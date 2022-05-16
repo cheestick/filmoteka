@@ -92,22 +92,26 @@ function searchFilms(nextCurrentPage, searchFilmsName) {
 
 // получения обьектов
 export function buildPaginationSection(total, stringToSend) {
-  console.log('total', total);
   totalPagesOn = total.data.total_results;
   lastPage = total.data.total_pages;
   itemsPages = 20;
-  newOptionsPagination(lastPage, totalPagesOn, itemsPages);
-  if (totalPagesOn <= 20 || total === undefined) {
-    return;
-  }
+  // if (totalPagesOn<=20 || stringToSend===null || stringToSend===false || stringToSend===undefined) {return}
   if (
     stringToSend === '' ||
     stringToSend === null ||
     stringToSend === false ||
     stringToSend === undefined
   ) {
+    if (totalPagesOn <= 20) {
+      return;
+    }
+    newOptionsPagination(lastPage, totalPagesOn, itemsPages);
     afterMovePaginationTranding(buildPagination);
   } else {
+    if (totalPagesOn <= 20) {
+      return;
+    }
+    newOptionsPagination(lastPage, totalPagesOn, itemsPages);
     afterMovePaginationSearch(buildPagination, stringToSend);
   }
 }
