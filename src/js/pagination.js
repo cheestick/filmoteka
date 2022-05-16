@@ -97,6 +97,9 @@ export function buildPaginationSection(total, stringToSend) {
   lastPage = total.data.total_pages;
   itemsPages = 20;
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
+  if (totalPagesOn <= 20 || total === undefined) {
+    return;
+  }
   if (
     stringToSend === '' ||
     stringToSend === null ||
@@ -108,19 +111,14 @@ export function buildPaginationSection(total, stringToSend) {
     afterMovePaginationSearch(buildPagination, stringToSend);
   }
 }
-export function buildPaginationSearch(total) {
-  console.log(total);
-  document.querySelector('#pagination-container').innerHTML = '';
-  totalPagesOn = total.data.total_results;
-  lastPage = total.data.total_pages;
-  itemsPages = 20;
-  newOptionsPagination(lastPage, totalPagesOn, itemsPages);
-  afterMovePaginationSearch(buildPagination);
-}
+
 export function buildPaginationLibrary(total) {
   document.querySelector('#pagination-container').innerHTML = '';
   totalPagesOn = total.length;
   itemsPages = 9;
   lastPage = Math.ceil(totalPagesOn / itemsPages);
+  if (totalPagesOn <= 9) {
+    return;
+  }
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
 }
