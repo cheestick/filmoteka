@@ -102,3 +102,36 @@
     color: $header-text-color;
     background-color: $accent-color;
 }
+
+.message--empty {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.message__body {
+    display: flex;
+    height: 125px;
+}
+
+.message__text {
+    align-self: center;
+    padding: 0 20px 20px;
+    margin: 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.4;
+    color: $text-inective;
+    text-decoration: underline;
+    text-transform: uppercase;
+    text-align: right;
+    border-width: 3px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom, transparent, $text-inective) 1 100%;
+
+    @media screen and (min-width: $tablet-bp) {
+        padding: 0 25px 20px;
+        border-image: linear-gradient(to bottom, $text-inective, transparent) 1 100%;
+    }
+}
+

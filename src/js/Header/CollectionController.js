@@ -1,6 +1,6 @@
 import { formatGenresData, formatReleaseYearData, formatNumericalToFixed } from './InfoFormatter';
 import { buildPaginationLibrary, libraryFilms, buildPagination } from '../pagination';
-import {onLoadSpinner, offLoadSpinner} from '../spinner'
+import { onLoadSpinner, offLoadSpinner } from '../spinner';
 import { makeFilmCard } from '../card';
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 
@@ -33,8 +33,23 @@ function movieCardMarkup(movieInfo) {
     `;
 }
 
+function emptyLibraryMessageMarkup(message = 'Add something to you library') {
+  return `
+    <li class="message--empty">
+      <div class="message__body">
+        <h2 class="message__text">${message}</h2>
+      </div>
+    </li>
+  `;
+}
+
+const isCollectionEmpty = collection => collection?.length === 0;
+
 function createMovieCardCollectionMarkup(movieCollection) {
-  const movieCardCollectionMarkup = movieCollection.map(movie => movieCardMarkup(movie)).join('');
+  console.log(movieCollection);
+  const movieCardCollectionMarkup = isCollectionEmpty(movieCollection)
+    ? emptyLibraryMessageMarkup()
+    : movieCollection?.map(movie => movieCardMarkup(movie)).join('');
   return movieCardCollectionMarkup;
 }
 
@@ -43,12 +58,7 @@ function clearMovieCollectionContainer(collectionContainer) {
 }
 
 export function showMoievsCollectionOnPage(movieCollectionData, collectionContainer) {
-  shownMovieCollectionData(movieCollectionData);
   clearMovieCollectionContainer(collectionContainer);
-  // collectionContainer.insertAdjacentHTML(
-  //   'afterbegin',
-  //   createMovieCardCollectionMarkup(movieCollectionData),
-  // );
   myLibraryPagination(movieCollectionData);
 }
 
@@ -57,14 +67,17 @@ function myLibraryPagination(movieCollectionData) {
   let paginationApp = dataForPagination(movieCollectionData, 9);
   document
     .querySelector('.main-gallery-lisnichyi')
-    .insertAdjacentHTML('afterbegin', createMovieCardCollectionMarkup(paginationApp[0].results));
+    .insertAdjacentHTML('afterbegin', createMovieCardCollectionMarkup(paginationApp[0]?.results));
   buildPagination.on('afterMove', event => {
     let nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
     onLoadSpinner();
     document
-    .querySelector('.main-gallery-lisnichyi')
-    .insertAdjacentHTML('afterbegin', createMovieCardCollectionMarkup(paginationApp[nextCurrentPage-1].results));
+      .querySelector('.main-gallery-lisnichyi')
+      .insertAdjacentHTML(
+        'afterbegin',
+        createMovieCardCollectionMarkup(paginationApp[nextCurrentPage - 1].results),
+      );
     setTimeout(offLoadSpinner, 2000);
   });
 }
@@ -74,6 +87,8 @@ export const shownMovieCollectionData = movieCollectionData => movieCollectionDa
 const copyObject = object => JSON.parse(JSON.stringify(object));
 
 const dataForPagination = (data, numPagesFromBack) => {
+  if (isCollectionEmpty(data)) return [{ page: 1, total_pages: 0, total_results: 0, results: [] }];
+
   const pagData = [];
   for (let i = 0; i < data.length; i += numPagesFromBack) {
     pagData.push({
