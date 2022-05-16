@@ -3,8 +3,10 @@ import ourTeam from '../data/team.json';
 import svg from '../images/sprite.svg';
 import LocalStorageApi from './localStorageAPI.js';
 import { formatGenresData } from './Header/InfoFormatter';
-import { composeButtonText, changeButtonText, changeQueueText } from './AddToButton';
+import { composeButtonText, changeButtonText, willLibraryUpdated } from './AddToButton';
 import defaultImage from '../images/defaultImage.jpg';
+import { showMoievsCollectionOnPage } from './Header/CollectionController';
+import { REF } from './Header/HeaderRefs';
 
 const ROUT = { POSTER: 'https://image.tmdb.org/t/p/' };
 
@@ -64,6 +66,10 @@ function setAttributesToCloseModal() {
   document.querySelector('.modal-close-btn').removeEventListener('click', closeModal);
   document.querySelector('.backdrop').removeEventListener('click', closeModal);
   document.removeEventListener('keydown', onKeyPress);
+  // willLibraryUpdated('watched') &&
+  //   showMoievsCollectionOnPage(localApiStorageInstance.getFromWatched(), REF.CONTAINER);
+  // willLibraryUpdated('queue') &&
+  //   showMoievsCollectionOnPage(localApiStorageInstance.getFromQueue(), REF.CONTAINER);
 }
 
 function wasModalBackdropeOrCloseButtonClicked({ target }) {
@@ -158,14 +164,16 @@ function showFilmInfo(filmInfo) {
 function onModalButtonsClick(e) {
   e.stopPropagation();
   const filmFromModal = localApiStorageInstance.getFromModal();
-  if (e.target.dataset.button === 'watched') {
+  const { button } = e.target.dataset;
+  console.log(button);
+  if (button === 'watched') {
     localApiStorageInstance.filmIsPresentInWatched(filmFromModal)
       ? localApiStorageInstance.deleteFromWatched(filmFromModal)
       : localApiStorageInstance.saveToWatched(filmFromModal);
     changeButtonText.call(e.target);
   }
 
-  if (e.target.dataset.button === 'queue') {
+  if (button === 'queue') {
     localApiStorageInstance.filmIsPresentQueue(filmFromModal)
       ? localApiStorageInstance.deleteFromQueue(filmFromModal)
       : localApiStorageInstance.saveToQueue(filmFromModal);

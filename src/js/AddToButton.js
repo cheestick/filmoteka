@@ -38,6 +38,10 @@ function isMovieAlreadyStored(movieID, storageName) {
   return isStored;
 }
 
-export function isLibraryTabAcive() {
-  return document.querySelector;
+export function isThisTabActive(tabName) {
+  return tabName === REF.LIBRARY.dataset.activeTab ? true : false;
+}
+
+export function willLibraryUpdated(buttonType) {
+  return buttonType === REF.LIBRARY.dataset.activeTab;
 }
