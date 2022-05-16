@@ -4,6 +4,7 @@ import { onLoadSpinner, offLoadSpinner } from './spinner';
 import { refs, makeFilmCard } from './card';
 import axios from 'axios';
 import { shownMovieCollectionData } from '../js/Header/CollectionController';
+var debounce = require('lodash.debounce');
 let lastPage;
 let totalPagesOn;
 let itemsPages;
@@ -61,7 +62,7 @@ function afterMovePaginationTranding(buildPagination) {
         console.log(error);
         return;
       })
-      .finally(setTimeout(offLoadSpinner, 2000));
+      .finally(setTimeout(offLoadSpinner, 500));
   });
 }
 function afterMovePaginationSearch(buildPagination, searchFilmsName) {
@@ -75,7 +76,7 @@ function afterMovePaginationSearch(buildPagination, searchFilmsName) {
         console.log(error);
         return;
       })
-      .finally(setTimeout(offLoadSpinner, 2000));
+      .finally(setTimeout(offLoadSpinner, 500));
   });
 }
 
@@ -92,6 +93,7 @@ function searchFilms(nextCurrentPage, searchFilmsName) {
 
 // получения обьектов
 export function buildPaginationSection(total, stringToSend) {
+  document.querySelector('#pagination-container').innerHTML = '';
   totalPagesOn = total.data.total_results;
   lastPage = total.data.total_pages;
   itemsPages = 20;
@@ -126,7 +128,6 @@ export function buildPaginationLibrary(total) {
     cardTotalP = 9;
   }
 
-  console.log('cardTotalP=', cardTotalP);
   totalPagesOn = total.length;
   itemsPages = cardTotalP;
   lastPage = Math.ceil(totalPagesOn / itemsPages);
@@ -134,7 +135,7 @@ export function buildPaginationLibrary(total) {
     return;
   }
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
-  window.addEventListener('resize', function () {
+  window.addEventListener('resize', debounce(function () {
     if (window.matchMedia('(max-width: 768px)').matches) {
       cardTotalP = 4;
       lastPage = Math.ceil(totalPagesOn / cardTotalP);
@@ -154,5 +155,5 @@ export function buildPaginationLibrary(total) {
       newOptionsPagination(lastPage, totalPagesOn, cardTotalP);
       return cardTotalP;
     }
-  });
+  }, 500));
 }
