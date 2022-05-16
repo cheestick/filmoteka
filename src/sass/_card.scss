@@ -49,13 +49,16 @@
     }
     &:hover{
         animation: animateCard 3000ms infinite 250ms;
-        box-shadow: 0px 4px 4px 0px #00000040;
+        box-shadow: 0 0 5px 5px rgba(0,0,0,0.2);
     }
 }
 @keyframes animateCard {
-    50% {
-      transform: scale(1.1);
+    0% {
+      transform: scale(1);
     }
+    50% {
+        transform: scale(0.95);
+      }
     100% {
       transform: scale(1);
     }
