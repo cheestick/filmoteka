@@ -1,11 +1,8 @@
-import { searchForm, libraryTabs, controlsError } from './HeaderMarkup';
 import * as HeaderHandlers from './HeaderEventHandlers';
 import { isTheSameReferenceElement } from './HeaderEventHandlers';
 import TabController from './TabContorller';
 import SearchController from './SearchController';
 import { REF } from './HeaderRefs';
-
-// console.log(REF);
 
 class HeaderController {
   constructor() {
@@ -50,7 +47,6 @@ class HeaderController {
   }
 
   clearPageControls() {
-    // this.container?.firstElementChild?.remove();
     this.formAndTabsContainer.innerHTML = null;
   }
 
