@@ -64,13 +64,43 @@ export function showMoievsCollectionOnPage(movieCollectionData, collectionContai
 
 function myLibraryPagination(movieCollectionData) {
   buildPaginationLibrary(movieCollectionData);
-  let paginationApp = dataForPagination(movieCollectionData, 9);
+  let cardTotal;
+  if (window.innerWidth <= 768) {
+    cardTotal = 4;
+  } else if (window.innerWidth > 769 && window.innerWidth <= 1023) {
+    cardTotal = 8;
+  } else {
+    cardTotal = 9;
+  }
+  window.addEventListener('resize', function () {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      console.log('0-768');
+      cardTotal = 4;
+      console.log('cardTotal=', cardTotal);
+      return cardTotal;
+    } else if (
+      window.matchMedia('(max-width: 1024px)').matches &&
+      window.matchMedia('(min-width: 769px)').matches
+    ) {
+      cardTotal = 8;
+      console.log('1024-768');
+      console.log('cardTotal=', cardTotal);
+      return cardTotal;
+    } else {
+      console.log('1024+');
+      cardTotal = 9;
+      console.log('cardTotal=', cardTotal);
+      return cardTotal;
+    }
+  });
+
+  let paginationApp = dataForPagination(movieCollectionData, cardTotal);
   document
     .querySelector('.main-gallery-lisnichyi')
     .insertAdjacentHTML('afterbegin', createMovieCardCollectionMarkup(paginationApp[0].results));
-    if (paginationApp[0].total_results <= 9) {
-      return;
-    }
+  if (paginationApp[0].total_results <= 9) {
+    return;
+  }
   buildPagination.on('afterMove', event => {
     let nextCurrentPage = event.page;
     document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
@@ -82,6 +112,82 @@ function myLibraryPagination(movieCollectionData) {
         createMovieCardCollectionMarkup(paginationApp[nextCurrentPage - 1].results),
       );
     setTimeout(offLoadSpinner, 2000);
+  });
+  window.addEventListener('resize', function () {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      cardTotal = 4;
+      document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+      let paginationApp = dataForPagination(movieCollectionData, cardTotal);
+      document
+        .querySelector('.main-gallery-lisnichyi')
+        .insertAdjacentHTML(
+          'afterbegin',
+          createMovieCardCollectionMarkup(paginationApp[0].results),
+        );
+      buildPagination.on('afterMove', event => {
+        let nextCurrentPage = event.page;
+        document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+        onLoadSpinner();
+        document
+          .querySelector('.main-gallery-lisnichyi')
+          .insertAdjacentHTML(
+            'afterbegin',
+            createMovieCardCollectionMarkup(paginationApp[nextCurrentPage - 1].results),
+          );
+        setTimeout(offLoadSpinner, 2000);
+      });
+      return cardTotal;
+    } else if (
+      window.matchMedia('(max-width: 1023px)').matches &&
+      window.matchMedia('(min-width: 769px)').matches
+    ) {
+      cardTotal = 8;
+      document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+      let paginationApp = dataForPagination(movieCollectionData, cardTotal);
+      document
+        .querySelector('.main-gallery-lisnichyi')
+        .insertAdjacentHTML(
+          'afterbegin',
+          createMovieCardCollectionMarkup(paginationApp[0].results),
+        );
+      buildPagination.on('afterMove', event => {
+        let nextCurrentPage = event.page;
+        document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+        onLoadSpinner();
+        document
+          .querySelector('.main-gallery-lisnichyi')
+          .insertAdjacentHTML(
+            'afterbegin',
+            createMovieCardCollectionMarkup(paginationApp[nextCurrentPage - 1].results),
+          );
+        setTimeout(offLoadSpinner, 2000);
+      });
+      return cardTotal;
+    } else {
+      cardTotal = 9;
+
+      document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+      let paginationApp = dataForPagination(movieCollectionData, cardTotal);
+      document
+        .querySelector('.main-gallery-lisnichyi')
+        .insertAdjacentHTML(
+          'afterbegin',
+          createMovieCardCollectionMarkup(paginationApp[0].results),
+        );
+      buildPagination.on('afterMove', event => {
+        let nextCurrentPage = event.page;
+        document.querySelector('.main-gallery-lisnichyi').innerHTML = '';
+        onLoadSpinner();
+        document
+          .querySelector('.main-gallery-lisnichyi')
+          .insertAdjacentHTML(
+            'afterbegin',
+            createMovieCardCollectionMarkup(paginationApp[nextCurrentPage - 1].results),
+          );
+        setTimeout(offLoadSpinner, 2000);
+      });
+      return cardTotal;
+    }
   });
 }
 
