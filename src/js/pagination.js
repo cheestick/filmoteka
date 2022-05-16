@@ -97,6 +97,7 @@ export function buildPaginationSection(total, stringToSend) {
   lastPage = total.data.total_pages;
   itemsPages = 20;
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
+  if (totalPagesOn===0) {return}
   if (stringToSend==="" || stringToSend===null || stringToSend===false || stringToSend===undefined) {
   afterMovePaginationTranding(buildPagination);  
   }
@@ -108,6 +109,7 @@ export function buildPaginationSearch(total) {
   totalPagesOn = total.data.total_results;
   lastPage = total.data.total_pages;
   itemsPages = 20;
+  if (totalPagesOn===0) {return}
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
   afterMovePaginationSearch(buildPagination);
 }
@@ -116,5 +118,6 @@ export function buildPaginationLibrary(total) {
   totalPagesOn = total.length;
   itemsPages = 9;
   lastPage = Math.ceil(totalPagesOn/itemsPages);
+  if (totalPagesOn===0) {return}
   newOptionsPagination(lastPage, totalPagesOn, itemsPages);
 }
