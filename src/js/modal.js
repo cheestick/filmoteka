@@ -180,59 +180,63 @@ function showTeamInfo() {
   const m = ourTeam
     .map(({ name, position, photo, fb, tg, ld, gh }) => {
       return `
-        <li class='team-cards-item'>
-          <img class='team-member-photo' src='${photo}' alt='${name}' />
-          <h2 class="team-member-name">${name}</h2>
-          <p class="team-member-position">${position}</p>
-          <ul class="link-icon-list">
-          ${
-            fb &&
-            ` <li class="link-item">
-                <a href="${fb}" rel="noreferrer noopener" target="_blank">
-                  <svg class="link-icon">
-                    <use href="${svg}#facebook"></use>
+        <li class='team__cards-item'>
+          <img class='team__member-photo' src='${photo}' alt='${name}' />
+          <div class="team__member-wrapper">
+            <div class="team__member-info">
+              <h2 class="team__member-name">${name}</h2>
+              <p class="team__member-position">${position}</p>
+            </div>
+            <ul class="link__icon-list">
+            ${
+              fb &&
+              ` <li class="link__item">
+                  <a href="${fb}" rel="noreferrer noopener" target="_blank">
+                    <svg class="link__icon">
+                      <use href="${svg}#facebook"></use>
+                    </svg>
+                  </a>
+                </li>`
+            }
+            ${
+              ld &&
+              `<li class="link__item">
+                  <a href='${ld}' rel="noreferrer noopener" target="_blank">
+                  <svg class="link__icon">
+                    <use href='${svg}#linkedin'></use>
+                  </svg>
+                  </a>
+                </li>`
+            }
+            ${
+              gh &&
+              `<li class="link__item">
+                <a href='${gh}' rel="noreferrer noopener" target="_blank">
+                  <svg class="link__icon">
+                    <use href='${svg}#github'></use>
                   </svg>
                 </a>
               </li>`
-          }
-          ${
-            ld &&
-            `<li class="link-item">
-                <a href='${ld}' rel="noreferrer noopener" target="_blank">
-                <svg class='link-icon'>
-                  <use href='${svg}#linkedin'></use>
-                </svg>
+            }
+            ${
+              tg &&
+              `<li class="link__item">
+                <a href='${tg}' rel="noreferrer noopener" target="_blank">
+                  <svg class="link__icon">
+                    <use href='${svg}#telegram'></use>
+                  </svg>
                 </a>
               </li>`
-          }
-          ${
-            gh &&
-            `<li class="link-item">
-              <a href='${gh}' rel="noreferrer noopener" target="_blank">
-                <svg class='link-icon'>
-                  <use href='${svg}#github'></use>
-                </svg>
-              </a>
-            </li>`
-          }
-          ${
-            tg &&
-            `<li class="link-item">
-              <a href='${tg}' rel="noreferrer noopener" target="_blank">
-                <svg class='link-icon'>
-                  <use href='${svg}#telegram'></use>
-                </svg>
-              </a>
-            </li>`
-          }
-          </ul>
-        </li>`;
+            }
+            </ul>
+            </div>
+          </li>`;
     })
     .join('');
 
   document.querySelector('.modal-thumb').innerHTML = `
-    <div>
-      <h2 class="team-title">Our team</h2> 
-      <ul class="team-cards-list">${m}</ul>
+    <div class="team__wrapper">
+      <h2 class="team__title">Great thanks to our team</h2> 
+      <ul class="team__cards-list">${m}</ul>
     </div>`;
 }
