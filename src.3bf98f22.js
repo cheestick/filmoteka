@@ -130,4 +130,4 @@ module.exports="/filmoteka/sprite.1cc8fee3.svg";
 },{"./fetch":"spyz","../data/team.json":"Lvv1","../images/sprite.svg":"QAGW","./localStorageAPI.js":"Lspp","./Header/InfoFormatter":"gAAW","./AddToButton":"WHIX","../images/defaultImage.jpg":"hOkB","./Header/CollectionController":"c6Kb","./Header/HeaderRefs":"JCCm"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/Header/HeaderController"),require("./js/pagination"),require("./js/modal");var e=require("notiflix");e.Notify.init({distance:"150px",position:"center-top",timeout:1300,opacity:.95});
 },{"./sass/main.scss":"clu1","./js/Header/HeaderController":"dz0z","./js/pagination":"o8lo","./js/modal":"RSqK","notiflix":"cwzQ"}]},{},["Focm"], null)
-//# sourceMappingURL=/filmoteka/src.a4a2220b.js.map
+//# sourceMappingURL=/filmoteka/src.3bf98f22.js.map
