@@ -10,6 +10,8 @@ import {
 import defaultImage from '../images/defaultImage.jpg';
 import { onLoadSpinner, offLoadSpinner } from './spinner';
 import { buildPagination, buildPaginationSection, firstPage } from './pagination';
+import { Notify } from 'notiflix';
+
 const refs = {
   buildFilmGallery: document.querySelector('.buildFilmGallery'),
   filmsGalleyDiv: document.querySelector('.main-gallery-lisnichyi'),
@@ -58,6 +60,12 @@ export function onClick(event) {
   onLoadSpinner();
   filmsApiService
     .fetchArticles(stringToSend)
+    .then(res => {
+      if (res.data.results.length === 0) {
+        Notify.info('Nothing found!');
+      }
+      return res;
+    })
     .then(res => {
       makeFilmCard(res);
       buildPaginationSection(res, stringToSend);

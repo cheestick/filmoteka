@@ -105,7 +105,7 @@ function showFilmInfo(filmInfo) {
     poster_path,
   } = filmInfo.data;
 
-  console.log(id);
+  // console.log(id);
 
   const pathToSmallerImage = poster_path ? ROUT.POSTER + 'w342' + poster_path : defaultImage;
   const pathToLargerImage = poster_path ? ROUT.POSTER + 'w500' + poster_path : defaultImage;
@@ -169,7 +169,7 @@ function onModalButtonsClick(e) {
   e.stopPropagation();
   const filmFromModal = localApiStorageInstance.getFromModal();
   const { button } = e.target.dataset;
-  console.log(button);
+  // console.log(button);
   if (button === 'watched') {
     localApiStorageInstance.filmIsPresentInWatched(filmFromModal)
       ? localApiStorageInstance.deleteFromWatched(filmFromModal)

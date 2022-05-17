@@ -10,7 +10,7 @@ export default class FilmsApiService {
   async testFetch() {
     return fetchTest(`trending/movie/day${API_KEY}&page=1`).then(res => {
       if (!(res.status >= 200 && res.status < 300)) {
-        console.log(res);
+        // console.log(res);
         throw Error(res.statusText);
       }
       return res;

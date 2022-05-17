@@ -66,7 +66,7 @@ class TabController {
   fetchMyLibraryDataAndRender() {
     const myLibraryData =
       this.activeTab.dataset.tab === 'queue' ? LS.getFromQueue() : LS.getFromWatched();
-    console.log(myLibraryData);
+    // console.log(myLibraryData);
     showMoievsCollectionOnPage(myLibraryData, MOVIE_GALLERY_REF);
   }
 }
