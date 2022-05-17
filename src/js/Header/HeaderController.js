@@ -16,6 +16,13 @@ class HeaderController {
     this.showAndUpdateCurrentHeaderLook();
   }
 
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new HeaderController();
+    }
+    return this.instance;
+  }
+
   showAndUpdateCurrentHeaderLook() {
     this.setActiveHeaderPage();
     this.controller.showInParentContainer();
@@ -46,6 +53,10 @@ class HeaderController {
     this.currentHeaderPage.classList.add('active');
   }
 
+  getActiveHeaderPage() {
+    return this.currentHeaderPage;
+  }
+
   clearPageControls() {
     this.formAndTabsContainer.innerHTML = null;
   }
@@ -58,4 +69,5 @@ class HeaderController {
   }
 }
 
-export default new HeaderController();
+//you need only one header per site. so singleton comes here
+export const singleHeaderController = HeaderController.getInstance();
