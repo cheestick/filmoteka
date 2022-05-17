@@ -11,7 +11,7 @@ export function onClickStatic(event) {
     this.updateToMyLibraryControls();
 
   if (isTheSameReferenceElement(this.logoButton, clickedButton)) {
-    this.updateToSearchControls();
+    !isHomeButtonActive.call(this) && this.updateToSearchControls();
     onClick(event);
   }
 }
@@ -36,4 +36,8 @@ export function onSearchSubmit(event) {
 
 export function isTheSameReferenceElement(reference, incomingReference) {
   return reference === incomingReference ? true : false;
+}
+
+function isHomeButtonActive() {
+  return this.homeButton.classList.contains('active');
 }
