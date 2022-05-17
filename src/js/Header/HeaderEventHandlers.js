@@ -11,6 +11,7 @@ export function onClickStatic(event) {
     this.updateToMyLibraryControls();
 
   if (isTheSameReferenceElement(this.logoButton, clickedButton)) {
+    this.updateToSearchControls();
     onClick(event);
   }
 }
