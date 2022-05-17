@@ -22,6 +22,7 @@ class TabController {
     this.watchedTab = document.querySelector('.tab-watched');
     this.queueTab = document.querySelector('.tab-queue');
     this.activeTab = this.queueTab;
+    this.headerPageElement.dataset.activeTab = this.activeTab.dataset.tab;
     this.fetchMyLibraryDataAndRender();
   }
 
@@ -37,6 +38,7 @@ class TabController {
     this.queueTab = null;
     this.activeTab = null;
     this.onSwitchTab = null;
+    this.headerPageElement.dataset.activeTab = '';
   }
 
   addControllerHandlers() {
@@ -57,6 +59,7 @@ class TabController {
     this.activeTab.classList.remove('tab-active');
     this.activeTab = tab;
     this.activeTab.classList.add('tab-active');
+    this.headerPageElement.dataset.activeTab = this.activeTab.dataset.tab;
     this.fetchMyLibraryDataAndRender();
   }
 

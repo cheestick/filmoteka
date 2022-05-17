@@ -1,3 +1,4 @@
+import { REF } from './Header/HeaderRefs';
 import LocalStorageApi from './localStorageAPI';
 
 const TEXT_ADD_TO = 'add to';
@@ -35,4 +36,12 @@ function isMovieAlreadyStored(movieID, storageName) {
   console.log(isStored);
 
   return isStored;
+}
+
+export function isThisTabActive(tabName) {
+  return tabName === REF.LIBRARY.dataset.activeTab ? true : false;
+}
+
+export function willLibraryUpdated(buttonType) {
+  return buttonType === REF.LIBRARY.dataset.activeTab;
 }
