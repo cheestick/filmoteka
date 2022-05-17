@@ -69,7 +69,7 @@ export default class LocalStorageApi {
     const { id: checkingId } = value;
     try {
       const filmsFromWatched = this.getFromWatched();
-      console.log(filmsFromWatched);
+      // console.log(filmsFromWatched);
       const resultOfSearch = filmsFromWatched.find(({ id }) => id == checkingId);
       return resultOfSearch ? true : false;
     } catch (error) {

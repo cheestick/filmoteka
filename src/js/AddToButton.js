@@ -16,7 +16,7 @@ const dbFieldName = {
 const LocalStorage = new LocalStorageApi();
 
 export function composeButtonText(movieID, storageName) {
-  console.log(movieID, storageName);
+  // console.log(movieID, storageName);
   return isMovieAlreadyStored(movieID, storageName)
     ? `${TEXT_REMOVE_FROM} ${storageName}`
     : `${TEXT_ADD_TO} ${storageName}`;
@@ -35,7 +35,7 @@ function isMovieAlreadyStored(movieID, storageName) {
   if (storageName === dbFieldName.WATCHED) {
     isStored = LocalStorage.getFromWatched().find(movie => movie.id === movieID) ? true : false;
   }
-  console.log(isStored);
+  // console.log(isStored);
 
   return isStored;
 }
@@ -49,7 +49,7 @@ export function willLibraryCollectionUpdated(buttonType) {
 }
 
 export function showLibraryCollectionUpdates(activeTab = 'queue') {
-  console.log(header);
+  // console.log(header);
   header.updateControls(new TabController(REF.CONTAINER));
   if (activeTab === 'watched') {
     header.controller.switchToActiveTab(header.controller.watchedTab);
