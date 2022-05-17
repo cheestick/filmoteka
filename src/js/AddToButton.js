@@ -1,5 +1,7 @@
 import { REF } from './Header/HeaderRefs';
 import LocalStorageApi from './localStorageAPI';
+import { singleHeaderController as header } from './Header/HeaderController';
+import TabController from './Header/TabContorller';
 
 const TEXT_ADD_TO = 'add to';
 const TEXT_REMOVE_FROM = 'remove from';
@@ -42,6 +44,14 @@ export function isThisTabActive(tabName) {
   return tabName === REF.LIBRARY.dataset.activeTab ? true : false;
 }
 
-export function willLibraryUpdated(buttonType) {
+export function willLibraryCollectionUpdated(buttonType) {
   return buttonType === REF.LIBRARY.dataset.activeTab;
+}
+
+export function showLibraryCollectionUpdates(activeTab = 'queue') {
+  console.log(header);
+  header.updateControls(new TabController(REF.CONTAINER));
+  if (activeTab === 'watched') {
+    header.controller.switchToActiveTab(header.controller.watchedTab);
+  }
 }
